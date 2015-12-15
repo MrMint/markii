@@ -1,0 +1,23 @@
+{
+  "name": "MarkDOS",
+  "main": "index.js",
+  "version": "0.0.1",
+  "authors": [],
+  "description": "A musical melting pot.",
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests",
+    "assets/vendor"
+  ],
+  "dependencies": {
+    "normalize.css": "~3.0.3"
+  }
+}
