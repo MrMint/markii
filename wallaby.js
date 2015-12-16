@@ -6,9 +6,10 @@ var path = require('path');
 module.exports = function configWallaby(wallaby) {
 
   var babelCompiler = wallaby.compilers.babel({
-    babel: { babel },
+    babel: babel,
     // babel options
-    stage: 0,
+    // babel options
+    presets: ['es2015', 'react']
   });
 
   var webpackPostprocessor = wallabyWebpack({
@@ -40,9 +41,9 @@ module.exports = function configWallaby(wallaby) {
     compilers: {
       '**/*.js*': babelCompiler,
     },
-    testFramework: 'mocha@2.0.1',
+    testFramework: "mocha@2.0.1",
     postprocessor: webpackPostprocessor,
-    bootstrap: () => {
+    bootstrap: function () {
       // var mocha = wallaby.testFramework;
       // mocha.ui('bdd');
       // window.expect = chai.expect;
