@@ -1,16 +1,16 @@
 var wallabyWebpack = require('wallaby-webpack');
 var babel = require('babel-core');
-var webpack = require('webpack');
 var webpackConfig = require('./webpack.config.dev');
-var path = require('path');
 
 module.exports = function configWallaby(wallaby) {
 
+  // todo load the .babelrc instead to avoid duplication
+  // need to avoid the hotloading transform stuff?
   var babelCompiler = wallaby.compilers.babel({
-    babel: babel,
+    babel,
     // babel options
     // babel options
-    presets: ['es2015', 'react']
+    presets: ['es2015', 'react', 'stage-0'],
   });
 
   var webpackPostprocessor = wallabyWebpack(webpackConfig);
@@ -34,7 +34,7 @@ module.exports = function configWallaby(wallaby) {
     },
     testFramework: 'mocha@2.0.1',
     postprocessor: webpackPostprocessor,
-    bootstrap: function () {
+    bootstrap: function bootstrap() {
       // var mocha = wallaby.testFramework;
       // mocha.ui('bdd');
       // window.expect = chai.expect;

@@ -1,5 +1,16 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from './components/app';
+import App from './containers/app';
 
-render(<App />, document.getElementById('root'));
+const rootRoute = {
+  component: require('./components/layout/master').default,
+  childRoutes: [{
+    path: '/',
+    component: 'div',
+    childRoutes: [
+      require('./routes/login').default,
+    ],
+  }],
+};
+
+render(<App routes={rootRoute} />, document.getElementById('root'));

@@ -1,6 +1,6 @@
 # MarkDOS React Client
 ----------
-This is the react based markDOS application.
+This is the markDOS react/redux based web client application.
 
 
  ## Setup
