@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import 'normalize.css';
 
 export default class CoreLayout extends Component {
   static propTypes = {

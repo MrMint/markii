@@ -40,6 +40,7 @@
     "less-loader": "^2.2.2",
     "lru-memoize": "1.0.0",
     "material-ui": "^0.14.0-rc2",
+    "normalize.css": "^3.0.3",
     "normalizr": "^1.4.0",
     "raw-loader": "^0.5.1",
     "react": "^0.14.3",
