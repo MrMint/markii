@@ -10,7 +10,8 @@ module.exports = function configWallaby(wallaby) {
     babel,
     // babel options
     // babel options
-    presets: ['es2015', 'react', 'stage-0'],
+    "presets": ['stage-0', 'es2015', 'react'],
+    "plugins": [['transform-class-properties']],
   });
 
   var webpackPostprocessor = wallabyWebpack(webpackConfig);
