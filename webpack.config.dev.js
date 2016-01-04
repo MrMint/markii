@@ -46,10 +46,10 @@ module.exports = {
   ],
   },
   externals: {
-      'jsdom': 'window',
-      'cheerio': 'window',
-      'react/lib/ExecutionEnvironment': true,
-      'react/lib/ReactContext': true
+    'jsdom': 'window',
+    'cheerio': 'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true,
   },
   node: {
     fs: 'empty',

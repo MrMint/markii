@@ -5,21 +5,23 @@ import { List, ListItem } from 'material-ui';
 class Lobby extends Component {
   static propTypes = {
     rooms: React.PropTypes.array.isRequired,
+    children: React.PropTypes.object.isRequired,
   }
 
   render() {
-    const { rooms } = this.props;
+    const { rooms, children } = this.props;
     return (
+      children ?
+        children
+      :
       <List>
-        {
-          rooms.map((room, index) =>
+        {rooms.map(room =>
             <ListItem
-              key={index}
+              key={room.id}
               primaryText={room.name}
               secondaryText={room.currentlyPlaying}
             />
-          )
-        }
+          )}
       </List>
     );
   }
