@@ -27,7 +27,7 @@ const initialState = [
   },
 ];
 
-export default function encounters(state = initialState, action) {
+export default function rooms(state = initialState, action) {
   switch (action.type) {
     case types.ROOMS_REQUEST_SUCCESS:
       return action.rooms;

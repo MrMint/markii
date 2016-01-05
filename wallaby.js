@@ -22,7 +22,8 @@ module.exports = function configWallaby(wallaby) {
       // like done here https://github.com/wallabyjs/wallaby-react-todomvc-sample/blob/master/wallaby-babel.js
       { pattern: 'node_modules/react-tools/src/test/phantomjs-shims.js', instrument: false },
       // { pattern: 'node_modules/chai/chai.js', instrument: false},
-      { pattern: 'app/**/*.js*', load: false },
+      { pattern: 'app/**/*.js', load: false },
+      { pattern: 'app/**/*.jsx', load: false },
       { pattern: '!app/**/*spec.js*', load: false },
     ],
 

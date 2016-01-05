@@ -9,8 +9,8 @@ export default class YoutubePlayer extends Component {
   onReady = (event) => {
     // todo investigate why this doesn't work when not wrapped in a timeout
     setTimeout(() => {
-      event.target.playVideo();
-      event.target.seekTo(20);
+      // event.target.playVideo();
+      // event.target.seekTo(20);
     }, 10);
   }
 
@@ -20,7 +20,7 @@ export default class YoutubePlayer extends Component {
       height: '390',
       width: '640',
       // playerVars: { // https://developers.google.com/youtube/player_parameters
-      //   autoplay: 1,
+      //   loop: 1,
       // },
     };
 

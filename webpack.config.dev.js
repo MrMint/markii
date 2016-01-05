@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -18,6 +19,7 @@ module.exports = {
     new webpack.ProvidePlugin({
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
     }),
+    // new ExtractTextPlugin('css/[name].bundle.[hash].css', { allChunks: true }),
   ],
   resolve: {
     extensions: ['', '.js', '.jsx'],
@@ -29,7 +31,7 @@ module.exports = {
       include: path.join(__dirname, 'app'),
     }, {
       test: /\.css$/,
-      loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+      loader: 'style!css?modules&&importLoaders=1&localIdentName=[name]---[local]---[hash:base64:5]!postcss',
       include: __dirname,
     }, {
       test: /\.less$/,
@@ -56,4 +58,7 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
   },
+  postcss: [
+    require('postcss-modules-values'),
+  ],
 };
