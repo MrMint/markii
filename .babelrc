@@ -1,5 +1,6 @@
 {
-  "presets": ["react", "es2015", "stage-0"],
+  "presets": [ "es2015","react", "stage-0"],
+  "plugins": [["transform-class-properties"]],
   "env": {
     "development": {
       "plugins": [
@@ -11,6 +12,8 @@
           }, {
             "transform": "react-transform-catch-errors",
             "imports": ["react", "redbox-react"]
+          },{
+            "transform": "react-transform-render-visualizer"
           }]
         }]
       ]

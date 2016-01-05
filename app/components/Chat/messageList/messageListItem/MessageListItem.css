@@ -1,0 +1,14 @@
+.message {
+  padding: 5px;
+}
+
+.userName {
+  margin-right: 10px;
+}
+
+.text {
+}
+
+.timeSent{
+  float:right;
+}

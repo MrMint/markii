@@ -9,6 +9,8 @@ const rootRoute = {
     component: 'div',
     childRoutes: [
       require('./routes/login').default,
+      require('./routes/lobby').default,
+      require('./routes/room').default,
     ],
   }],
 };

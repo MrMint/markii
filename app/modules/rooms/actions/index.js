@@ -10,5 +10,5 @@ function requestRooms() {
 export function fetchRooms(page, quantityPerPage) {
   return dispatch => {
     dispatch(requestRooms());
-  }
+  };
 }

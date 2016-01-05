@@ -10,7 +10,8 @@ module.exports = function configWallaby(wallaby) {
     babel,
     // babel options
     // babel options
-    presets: ['es2015', 'react', 'stage-0'],
+    'presets': ['stage-0', 'es2015', 'react'],
+    'plugins': [['transform-class-properties']],
   });
 
   var webpackPostprocessor = wallabyWebpack(webpackConfig);
@@ -21,7 +22,8 @@ module.exports = function configWallaby(wallaby) {
       // like done here https://github.com/wallabyjs/wallaby-react-todomvc-sample/blob/master/wallaby-babel.js
       { pattern: 'node_modules/react-tools/src/test/phantomjs-shims.js', instrument: false },
       // { pattern: 'node_modules/chai/chai.js', instrument: false},
-      { pattern: 'app/**/*.js*', load: false },
+      { pattern: 'app/**/*.js', load: false },
+      { pattern: 'app/**/*.jsx', load: false },
       { pattern: '!app/**/*spec.js*', load: false },
     ],
 
