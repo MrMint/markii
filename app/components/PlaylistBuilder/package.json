@@ -1,0 +1,6 @@
+{
+  "name": "PlaylistBuilder",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./PlaylistBuilder.jsx"
+}
