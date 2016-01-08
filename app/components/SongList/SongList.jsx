@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { } from 'material-ui';
 import { VirtualScroll } from 'react-virtualized';
 
-export default class PlaylistSearchResults extends Component {
+export default class SongList extends Component {
   static propTypes = {
     songs: React.PropTypes.array.isRequired,
   }
@@ -16,6 +16,8 @@ export default class PlaylistSearchResults extends Component {
     const { songs } = this.props;
     return (
       <div>
+        {
+        (songs && songs.length > 0) ?
         <VirtualScroll
           width={300}
           height={300}
@@ -23,6 +25,8 @@ export default class PlaylistSearchResults extends Component {
           rowHeight={20}
           rowRenderer={this.renderSongRow}
         />
+        :  <div>No Results</div>
+        }
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { } from 'material-ui';
 import SongSearch from '../SongSearch';
-import PlaylistSearchResults from './PlaylistSearchResults';
+import SongList from '../SongList';
 import style from './PlaylistBuilder.css';
 
 export default class PlaylistBuilder extends Component {
@@ -15,7 +15,7 @@ export default class PlaylistBuilder extends Component {
     return (
       <div>
         <SongSearch onSearch={onSearch}/>
-        <PlaylistSearchResults songs={searchResults}/>
+        <SongList songs={searchResults}/>
       </div>
     );
   }

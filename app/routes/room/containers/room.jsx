@@ -16,6 +16,7 @@ class Room extends Component {
     room: React.PropTypes.object.isRequired,
     chat: React.PropTypes.array.isRequired,
     dispatch: React.PropTypes.func.isRequired,
+    search: React.PropTypes.array.isRequired,
   }
 
   onChatSendMessage = (text) => {
@@ -36,7 +37,7 @@ class Room extends Component {
   }
 
   render() {
-    const { chat, songs } = this.props;
+    const { chat, songs, search } = this.props;
     const sender = { name: 'User1' };
     return (
       <div>
@@ -46,7 +47,7 @@ class Room extends Component {
             sender={sender}
             onSend={this.onChatSendMessage}
           />
-        <PlaylistBuilder searchResults={songs} onSearch={this.onSearch}/>
+        <PlaylistBuilder searchResults={search} onSearch={this.onSearch}/>
       </div>
     );
   }
@@ -55,5 +56,5 @@ class Room extends Component {
 export default connect((state) => ({
   room: state.rooms[0],
   chat: state.chats,
-  songs: state.songs,
+  search: state.search,
 }))(Room);
