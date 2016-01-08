@@ -2,9 +2,9 @@
   "name": "MarkDOS",
   "version": "0.0.1",
   "description": "A musical melting pot.",
-  "main": "server.js",
+  "main": "./server/server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node ./server/server.js",
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
     "test": "NODE_ENV=test mocha --compilers js:babel/register --recursive",
