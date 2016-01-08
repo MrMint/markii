@@ -7,6 +7,7 @@ import Chat from '../../../components/chat';
 import PlaylistBuilder from '../../../components/PlaylistBuilder';
 import * as chatActions from '../../../modules/chat/actions';
 import * as MediaSources from '../../../components/MediaPlayer/constants';
+import * as searchActions from '../../../modules/search/actions';
 
 import { } from 'material-ui';
 
@@ -29,6 +30,11 @@ class Room extends Component {
     this.props.dispatch(chatActions.sendMessage(message, '0'));
   }
 
+  onSearch = (query) => {
+    const { dispatch } = this.props;
+    dispatch(searchActions.searchForSong(query));
+  }
+
   render() {
     const { chat, songs } = this.props;
     const sender = { name: 'User1' };
@@ -40,7 +46,7 @@ class Room extends Component {
             sender={sender}
             onSend={this.onChatSendMessage}
           />
-        <PlaylistBuilder searchResults={songs}/>
+        <PlaylistBuilder searchResults={songs} onSearch={this.onSearch}/>
       </div>
     );
   }
