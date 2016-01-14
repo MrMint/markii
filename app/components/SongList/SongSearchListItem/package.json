@@ -1,0 +1,6 @@
+{
+  "name": "SongSearchListItem",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./SongSearchListItem.jsx"
+}

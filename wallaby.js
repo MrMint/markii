@@ -1,6 +1,6 @@
 var wallabyWebpack = require('wallaby-webpack');
 var babel = require('babel-core');
-var webpackConfig = require('./webpack.config.dev');
+var webpackConfig = require('./build/webpack.config.dev');
 
 module.exports = function configWallaby(wallaby) {
 
@@ -8,7 +8,6 @@ module.exports = function configWallaby(wallaby) {
   // need to avoid the hotloading transform stuff?
   var babelCompiler = wallaby.compilers.babel({
     babel,
-    // babel options
     // babel options
     'presets': ['stage-0', 'es2015', 'react'],
     'plugins': [['transform-class-properties']],
