@@ -16,10 +16,19 @@ function receiveYoutubeSearchResults(results) {
   };
 }
 
+export function clearSongSearchResults() {
+  return {
+    type: types.SEARCH_SONG_CLEAR_RESULTS,
+  };
+}
+
 export function searchForSong(query) {
   return (dispatch) => {
     dispatch(searchYoutube());
     fetchSongsByKeyword(query)
-      .then(result => dispatch(receiveYoutubeSearchResults(result)));
+      .then(result => {
+        dispatch(clearSongSearchResults());
+        dispatch(receiveYoutubeSearchResults(result));
+      });
   };
 }

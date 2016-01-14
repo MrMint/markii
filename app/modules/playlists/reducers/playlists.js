@@ -11,7 +11,13 @@ const initialState = [
 export default function playlists(state = initialState, action) {
   switch (action.type) {
     case types.PLAYLISTS_REQUEST_SUCCESS:
-      return action.payload.playlists;
+      return [...action.payload.playlists];
+    case types.PLAYLISTS_ADD_SONG:
+      return state.map(playlist =>
+        playlist.id === action.payload.playlistId
+        ? { ...playlist, songs: [...playlist.songs, action.payload.songIndex] }
+        : playlist
+      );
     default:
       return state;
   }

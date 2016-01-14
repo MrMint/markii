@@ -4,28 +4,28 @@ import { VirtualScroll } from 'react-virtualized';
 
 export default class SongList extends Component {
   static propTypes = {
-    songs: React.PropTypes.array.isRequired,
+    children: React.PropTypes.node.isRequired,
+    rowHeight: React.PropTypes.number.isRequired,
   }
 
   renderSongRow = (index) => {
-    const { songs } = this.props;
-    return (<div>{songs[index].name}</div>);
+    const { children } = this.props;
+    return (children[index]);
   }
 
   render() {
-    const { songs } = this.props;
+    const { children, rowHeight } = this.props;
     return (
       <div>
         {
-        (songs && songs.length > 0) ?
+        children && children.length > 0 &&
         <VirtualScroll
           width={300}
           height={300}
-          rowsCount={songs.length}
-          rowHeight={20}
+          rowsCount={children.length}
+          rowHeight={rowHeight}
           rowRenderer={this.renderSongRow}
         />
-        :  <div>No Results</div>
         }
       </div>
     );

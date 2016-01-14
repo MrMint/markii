@@ -37,7 +37,7 @@ class Room extends Component {
   }
 
   render() {
-    const { chat, songs, search } = this.props;
+    const { chat, search } = this.props;
     const sender = { name: 'User1' };
     return (
       <div>
@@ -56,5 +56,5 @@ class Room extends Component {
 export default connect((state) => ({
   room: state.rooms[0],
   chat: state.chats,
-  search: state.search,
+  search: state.searchSongs,
 }))(Room);
