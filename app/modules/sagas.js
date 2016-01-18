@@ -1,4 +1,4 @@
-import { call, take, put, race, fork } from 'redux-saga';
+import { fork } from 'redux-saga';
 import { authentication } from './user/sagas/auth';
 
 

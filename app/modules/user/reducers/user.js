@@ -1,5 +1,3 @@
-import * as types from '../constants';
-import auth from '../sagas/auth';
 
 const initialState = {
   userId: '',
