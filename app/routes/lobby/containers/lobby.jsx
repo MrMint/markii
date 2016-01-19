@@ -6,7 +6,7 @@ class Lobby extends Component {
   static propTypes = {
     rooms: React.PropTypes.array.isRequired,
     children: React.PropTypes.object.isRequired,
-  }
+  };
 
   render() {
     const { rooms, children } = this.props;

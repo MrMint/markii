@@ -5,19 +5,19 @@ import style from './MessageList.css';
 export default class MessageList extends Component {
   static propTypes = {
     messages: React.PropTypes.array.isRequired,
-  }
+  };
 
   componentWillUpdate = () => {
     var node = this.refs.messageList;
     this.shouldScrollBottom = node.scrollTop + node.offsetHeight === node.scrollHeight;
-  }
+  };
 
   componentDidUpdate = () => {
     if (this.shouldScrollBottom) {
       var node = this.refs.messageList;
       node.scrollTop = node.scrollHeight;
     }
-  }
+  };
 
   render() {
     const { messages } = this.props;

@@ -28,7 +28,7 @@ export default class App extends Component {
     return (
       <DevTools />
     );
-  }
+  };
 
   renderRouter = () => {
     return (
@@ -36,7 +36,7 @@ export default class App extends Component {
         {this.props.routes}
       </Router>
     );
-  }
+  };
 
   render() {
     return (

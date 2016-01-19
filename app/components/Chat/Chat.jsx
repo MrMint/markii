@@ -8,11 +8,11 @@ export default class Chat extends Component {
     messages: React.PropTypes.array.isRequired,
     onSend: React.PropTypes.func.isRequired,
     sender: React.PropTypes.object.isRequired,
-  }
+  };
 
   internalOnSend = (onSend) => {
     onSend(this.refs.messageInput.getValue());
-  }
+  };
 
   render() {
     const { messages, onSend } = this.props;

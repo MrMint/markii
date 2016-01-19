@@ -6,7 +6,7 @@ import style from './PlaylistList.css';
 export default class PlaylistBuilder extends Component {
   static propTypes = {
     playlists: React.PropTypes.array.isRequired,
-  }
+  };
 
   render() {
     const { playlists } = this.props;

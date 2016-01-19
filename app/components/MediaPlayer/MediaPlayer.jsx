@@ -6,7 +6,7 @@ export default class MediaPlayer extends Component {
   static propTypes = {
     mediaSource: React.PropTypes.string.Required,
     url: React.PropTypes.string.Required,
-  }
+  };
 
   renderMedia = (mediaSource, url) => {
     switch (mediaSource) {
@@ -15,7 +15,7 @@ export default class MediaPlayer extends Component {
       default:
         return (<div>Error, unrecognized media source</div>);
     }
-  }
+  };
 
   render() {
     const { mediaSource, url } = this.props;

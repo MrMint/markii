@@ -4,11 +4,11 @@ import style from './MessageListItem.css';
 export default class MessageListItem extends Component {
   static propTypes = {
     message: React.PropTypes.object.isRequired,
-  }
+  };
 
   shouldComponentUpdate = (nextProps) => {
     return nextProps.message !== this.props.message;
-  }
+  };
 
   render() {
     const { message } = this.props;

@@ -5,13 +5,13 @@ import 'normalize.css';
 export default class CoreLayout extends Component {
   static propTypes = {
     children: React.PropTypes.object.isRequired,
-  }
+  };
 
   handleToggleNavClick = () => {
     if (this.refs.leftNav) {
       this.refs.leftNav.toggle();
     }
-  }
+  };
 
   render() {
     return (
