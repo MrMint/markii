@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router';
-import { syncReduxAndRouter } from 'redux-simple-router';
-import { createHistory } from 'history';
+import { Router, browserHistory } from 'react-router';
 import configureStore from '../store/configureStore';
 import DevTools from './DevTools';
 
@@ -14,10 +12,8 @@ import DevTools from './DevTools';
 injectTapEventPlugin();
 
 // Configure the store
-const store = configureStore();
-const history = createHistory();
+const store = configureStore(browserHistory);
 
-syncReduxAndRouter(history, store);
 export default class App extends Component {
 
   static propTypes = {
@@ -32,7 +28,7 @@ export default class App extends Component {
 
   renderRouter = () => {
     return (
-      <Router history={history}>
+      <Router history={browserHistory}>
         {this.props.routes}
       </Router>
     );

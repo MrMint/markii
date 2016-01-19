@@ -19,7 +19,7 @@ function* authorize(credentialsOrToken, refresh) {
 
 function* refreshLoop(token) {
   while (true) {
-    var newToken = yield call(authorize, true);
+    var newToken = yield call(auth.authorize, true);
     if (newToken === null) {
       return;
     }
