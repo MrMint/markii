@@ -1,8 +1,8 @@
 import { call, take, put, race } from 'redux-saga';
-import auth from '../../../utilities/auth';
-import { authorizeSuccess, authorizeFailure, logout } from '../actions';
-import { delay } from '../../../utilities';
 import { USER_SIGN_IN, USER_SIGN_OUT } from '../constants';
+import { authorizeSuccess, authorizeFailure, logout } from '../actions';
+import * as auth from '../../../utilities/auth';
+import { delay } from '../../../utilities';
 
 function* authorize(credentialsOrToken, refresh) {
   try {
@@ -31,7 +31,6 @@ function* refreshLoop(token) {
 export function* authentication() {
   // Check if we already have a token, if we do lets refresh right away
   let storedToken = yield call(auth.getStoredToken);
-  storedToken.expires_in = 0;
 
   while (true) {
     // If no token to start, wait for the user to login
