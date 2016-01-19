@@ -3,6 +3,7 @@ import { USER_SIGN_IN, USER_SIGN_OUT } from '../constants';
 import { authorizeSuccess, authorizeFailure, logout } from '../actions';
 import * as auth from '../../../utilities/auth';
 import { delay } from '../../../utilities';
+import { routeActions } from 'redux-simple-router'
 
 function* authorize(credentialsOrToken, refresh) {
   try {
@@ -55,6 +56,7 @@ export function* authentication() {
       if (tokenRefreshFailed) {
         yield put(logout);
       }
+      yield put(routeActions.push('/login'));
     }
   }
 }
