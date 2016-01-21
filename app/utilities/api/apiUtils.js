@@ -12,17 +12,14 @@ function parseJson(response) {
 }
 
 function fetch(url, method, credentials) {
-  let auth;
+  const params = { method };
   if (credentials.username && credentials.password) {
-    auth = { authorization: credentials.username + credentials.password };
+    params.auth = { authorization: credentials.username + credentials.password };
   } else {
-    auth = { bearer: credentials };
+    params.auth = { bearer: credentials };
   }
 
-  return fetch(url, {
-    method,
-    headers: auth,
-  })
+  return fetch(url, params)
   .then(checkStatus)
   .then(response => {
     if (method === 'get') {
