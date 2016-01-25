@@ -3,14 +3,19 @@ import { USER_SIGN_IN, USER_SIGN_OUT } from '../constants';
 import { authorizeSuccess, authorizeFailure, logout } from '../actions';
 import * as auth from '../../../utilities/auth';
 import { delay } from '../../../utilities';
-import { routeActions } from 'redux-simple-router'
+import { routeActions } from 'redux-simple-router';
 
 function* authorize(credentialsOrToken, refresh) {
   try {
-    const token = yield call(auth.authorize, credentialsOrToken, refresh);
-    yield call(auth.storeToken, token);
-    yield put(authorizeSuccess(token));
-    return token;
+    if (!refresh) {
+      const token = yield call(auth.authorizeWithCredentials,
+        credentialsOrToken.username,
+        credentialsOrToken.password);
+
+      yield call(auth.storeToken, token);
+      yield put(authorizeSuccess(token));
+      return token;
+    }
   } catch (e) {
     yield call(auth.storeToken, null);
     yield put(authorizeFailure(e));
@@ -20,7 +25,7 @@ function* authorize(credentialsOrToken, refresh) {
 
 function* refreshLoop(token) {
   while (true) {
-    var newToken = yield call(auth.authorize, true);
+    var newToken = yield authorize(token, true);
     if (newToken === null) {
       return;
     }
@@ -36,7 +41,7 @@ export function* authentication() {
   while (true) {
     // If no token to start, wait for the user to login
     if (!storedToken) {
-      const { username, password } = yield take(USER_SIGN_IN);
+      const { payload: { username, password } } = yield take(USER_SIGN_IN);
       storedToken = yield authorize({ username, password }, false);
       // Auth failed, wait for user to try and login again
       if (!storedToken) {

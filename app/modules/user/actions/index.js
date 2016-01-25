@@ -1,4 +1,4 @@
-import types from '../constants';
+import * as types from '../constants';
 
 export function login(username, password) {
   return {

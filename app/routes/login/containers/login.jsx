@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import LoginForm from './loginFormContainer';
+import { login } from '../../../modules/user/actions/index';
 
-export default class Login extends Component {
+class Login extends Component {
+
+  handleLoginSubmit = (data, dispatch) => {
+    dispatch(login(data.email, data.password));
+  };
 
   render() {
     return (
-        <div>Hello login</div>
+        <LoginForm
+          onSubmit={this.handleLoginSubmit}
+          header={"Login"}
+        />
     );
   }
 }
+
+export default connect((state) => ({
+}))(Login);
