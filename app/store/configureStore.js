@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 // import DevTools from '../containers/DevTools';
 import thunkMiddleware from 'redux-thunk';
 import sagaMiddleware from 'redux-saga';
-import { syncHistory } from 'redux-simple-router';
+import { syncHistory } from 'react-router-redux';
 import rootReducer from '../modules/reducers';
 import saga from '../modules/sagas';
 
