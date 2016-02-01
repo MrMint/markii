@@ -11,14 +11,16 @@ function parseJson(response) {
   return response.json();
 }
 
-function fetch(url, method, credentials) {
-  const params = { method };
-  if (credentials.username && credentials.password) {
-    params.auth = { authorization: credentials.username + credentials.password };
-  } else {
-    params.auth = { bearer: credentials };
-  }
+function fetchHelper(url, method, credentials) {
 
+  const params = { method };
+  if (credentials) {
+    if (credentials.username && credentials.password) {
+      params.auth = { authorization: credentials.username + credentials.password };
+    } else {
+      params.auth = { bearer: credentials };
+    }
+  }
   return fetch(url, params)
   .then(checkStatus)
   .then(response => {
@@ -26,15 +28,13 @@ function fetch(url, method, credentials) {
       return parseJson(response);
     }
     return response;
-  })
-  .then(response => { return response; })
-  .catch(response => { return response; });
+  });
 }
 
 export function get(url, credentials) {
-  return fetch(url, 'get', credentials);
+  return fetchHelper(url, 'get', credentials);
 }
 
 export function post(url, credentials) {
-  return fetch(url, 'post', credentials);
+  return fetchHelper(url, 'post', credentials);
 }
