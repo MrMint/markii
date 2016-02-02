@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 // Reducers
 import { routeReducer } from 'react-router-redux';
-import { reducer as formReducer } from 'redux-form';
+import { formReducer } from './form/reducers';
 import { rooms } from './rooms/reducers';
 import { chat } from './chat/reducers';
 import { playlists } from './playlists/reducers';
