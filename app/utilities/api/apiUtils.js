@@ -7,7 +7,7 @@ function checkStatus(response) {
   throw error;
 }
 
-function parseJson(response) {
+export function parseJson(response) {
   return response.json();
 }
 
@@ -22,13 +22,7 @@ function fetchHelper(url, method, credentials) {
     }
   }
   return fetch(url, params)
-  .then(checkStatus)
-  .then(response => {
-    if (method === 'get') {
-      return parseJson(response);
-    }
-    return response;
-  });
+  .then(checkStatus);
 }
 
 export function get(url, credentials) {

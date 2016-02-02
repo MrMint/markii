@@ -1,3 +1,4 @@
+import * as types from '../constants';
 
 const initialState = {
   userId: '',
@@ -8,6 +9,8 @@ const initialState = {
 
 export default function user(state = initialState, action) {
   switch (action.type) {
+    case types.USER_SIGN_OUT:
+      return initialState;
     default:
       return state;
   }

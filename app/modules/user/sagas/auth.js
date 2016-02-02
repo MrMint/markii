@@ -16,9 +16,10 @@ function* authorize(credentialsOrToken, refresh) {
       yield put(authorizeSuccess(token));
       return token;
     }
-  } catch (e) {
+    return null;
+  } catch (error) {
     yield call(auth.storeToken, null);
-    yield put(authorizeFailure(e));
+    yield put(authorizeFailure(error));
     return null;
   }
 }
@@ -29,7 +30,6 @@ function* refreshLoop(token) {
     if (newToken === null) {
       return;
     }
-
     yield call(delay, token.expires_in);
   }
 }
@@ -37,7 +37,6 @@ function* refreshLoop(token) {
 export function* authentication() {
   // Check if we already have a token, if we do lets refresh right away
   let storedToken = yield call(auth.getStoredToken);
-
   while (true) {
     // If no token to start, wait for the user to login
     if (!storedToken) {
@@ -50,18 +49,17 @@ export function* authentication() {
     }
 
     // Wait for the user to logout, or fail a refresh
-    const { signOutAction, tokenRefreshFailed } = yield race({
+    const { signOutAction } = yield race({
       signOutAction: take(USER_SIGN_OUT),
       tokenRefreshFailed: call(refreshLoop, storedToken),
     });
 
     // if the user logged out, clear token
-    if (signOutAction || tokenRefreshFailed) {
-      yield call(auth.storeToken, null);
-      if (tokenRefreshFailed) {
-        yield put(logout);
-      }
-      yield put(routeActions.push('/login'));
+    yield call(auth.storeToken, null);
+    storedToken = null;
+    if (!signOutAction) {
+      yield put(logout());
     }
+    yield put(routeActions.push('/login'));
   }
 }

@@ -17,7 +17,7 @@ class LoginFormContainer extends Component {
 
   handleKeyDown = (e) => {
     if (e.keyCode === 13 && e.shiftKey === false) {
-      handleSubmit(p.values);
+      // this.handleSubmit(p.values);
     }
   };
 
