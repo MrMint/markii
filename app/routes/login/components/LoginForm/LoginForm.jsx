@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { TextField, Paper, RaisedButton } from 'material-ui';
+import style from './LoginForm.css';
 
 export default class LoginForm extends Component {
   static propTypes = {
@@ -36,8 +37,10 @@ export default class LoginForm extends Component {
     } = this.props;
 
     return (
-        <div onKeyDown={handleKeyDown}>
-          <Paper>
+          <Paper
+            className={style.container}
+            onKeyDown={handleKeyDown}
+          >
             {header}
             <div>
               <TextField
@@ -58,7 +61,7 @@ export default class LoginForm extends Component {
                 errorText={passwordTouched ? passwordError : ''}
               />
             </div>
-            <div>
+            <div className={style.submitButton}>
               <RaisedButton
                 label="Login"
                 secondary
@@ -67,7 +70,6 @@ export default class LoginForm extends Component {
               />
             </div>
           </Paper>
-        </div>
       );
   }
 }
