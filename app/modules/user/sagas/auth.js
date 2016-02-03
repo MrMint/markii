@@ -25,27 +25,34 @@ function* authorize(credentialsOrToken, refresh) {
 }
 
 function* refreshLoop(token) {
+  /*eslint-disable */
   while (true) {
+  /*eslint-enable */
+    yield call(delay, token.expires_in * 1000);
     var newToken = yield authorize(token, true);
     if (newToken === null) {
       return;
     }
-    yield call(delay, token.expires_in);
   }
 }
 
 export function* authentication() {
   // Check if we already have a token, if we do lets refresh right away
   let storedToken = yield call(auth.getStoredToken);
+  /*eslint-disable */
   while (true) {
+  /*eslint-enable */
     // If no token to start, wait for the user to login
     if (!storedToken) {
-      const { payload: { username, password } } = yield take(USER_SIGN_IN);
+      const { payload: { username, password, redirect } } = yield take(USER_SIGN_IN);
       storedToken = yield authorize({ username, password }, false);
       // Auth failed, wait for user to try and login again
       if (!storedToken) {
         continue;
       }
+      yield put(routeActions.push(redirect ? redirect : '/'));
+    } else {
+      yield put(authorizeSuccess(storedToken));
     }
 
     // Wait for the user to logout, or fail a refresh

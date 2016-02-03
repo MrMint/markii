@@ -1,11 +1,12 @@
 import * as types from '../constants';
 
-export function login(username, password) {
+export function login(username, password, redirect) {
   return {
     type: types.USER_SIGN_IN,
     payload: {
       username,
       password,
+      redirect,
     },
   };
 }
