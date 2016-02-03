@@ -79,6 +79,7 @@
     "sinon": "git+https://github.com/sinonjs/sinon.git",
     "socket.io-client": "^1.4.5",
     "style-loader": "^0.13.0",
+    "stylelint-config-standard": "^3.0.0",
     "url-loader": "^0.5.7",
     "uuid": "^2.0.1",
     "wallaby-webpack": "0.0.11",
