@@ -16,7 +16,7 @@ app.use(require('webpack-hot-middleware')(compiler));
 app.get('/token', function(req, res) {
   var token = {
     token: 'asdfadfoweijfwq;oefin',
-    expires_in: 64000,
+    expires_in: 30,
   };
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(token));

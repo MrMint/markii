@@ -1,5 +1,5 @@
 import { UserAuthWrapper as userAuthWrapper } from 'redux-auth-wrapper';
-import { routeActions } from 'react-router-redux'
+import { routeActions } from 'react-router-redux';
 import * as constants from './constants';
 import localforage from 'localforage';
 import * as authApi from '../api/authApi';
@@ -14,6 +14,16 @@ export function getStoredToken() {
 
 export function authorizeWithCredentials(username, password) {
   return authApi.getToken(username, password);
+}
+
+export function isTokenExpired(token) {
+  const d = new Date();
+  return d.getDate() >= token.expires_on;
+}
+
+export function secondsUntilTokenExpires(token) {
+  const d = new Date();
+  return token.expires_on - (d.getTime() / 1000);
 }
 
 export const userIsAuthenticated = userAuthWrapper({

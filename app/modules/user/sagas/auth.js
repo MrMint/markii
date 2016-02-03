@@ -28,7 +28,7 @@ function* refreshLoop(token) {
   /*eslint-disable */
   while (true) {
   /*eslint-enable */
-    yield call(delay, token.expires_in * 1000);
+    yield call(delay, auth.secondsUntilTokenExpires(token) * 1000);
     var newToken = yield authorize(token, true);
     if (newToken === null) {
       return;
