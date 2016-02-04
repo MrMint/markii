@@ -10,7 +10,7 @@ export default class PlaylistBuilder extends Component {
     playlists: React.PropTypes.array.isRequired,
     searchResults: React.PropTypes.array.isRequired,
     onSearch: React.PropTypes.func.isRequired,
-  }
+  };
 
   render() {
     const { searchResults, onSearch, playlists } = this.props;

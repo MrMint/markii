@@ -17,7 +17,7 @@ class Room extends Component {
     chat: React.PropTypes.array.isRequired,
     dispatch: React.PropTypes.func.isRequired,
     search: React.PropTypes.array.isRequired,
-  }
+  };
 
   onChatSendMessage = (text) => {
     const message = {
@@ -29,12 +29,12 @@ class Room extends Component {
       timeSent: '2:53pm',
     };
     this.props.dispatch(chatActions.sendMessage(message, '0'));
-  }
+  };
 
   onSearch = (query) => {
     const { dispatch } = this.props;
     dispatch(searchActions.searchForSong(query));
-  }
+  };
 
   render() {
     const { chat, search } = this.props;

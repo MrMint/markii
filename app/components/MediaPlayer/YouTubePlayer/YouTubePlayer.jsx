@@ -4,7 +4,7 @@ import YouTube from 'react-youtube';
 export default class YoutubePlayer extends Component {
   static propTypes = {
     url: React.PropTypes.string.Required,
-  }
+  };
 
   onReady = (event) => {
     // todo investigate why this doesn't work when not wrapped in a timeout
@@ -12,7 +12,7 @@ export default class YoutubePlayer extends Component {
       // event.target.playVideo();
       // event.target.seekTo(20);
     }, 10);
-  }
+  };
 
   render() {
     const { url } = this.props;

@@ -1,3 +1,5 @@
+import { userIsAuthenticated } from '../../utilities/auth';
+
 export default {
   path: 'room',
 
@@ -11,7 +13,7 @@ export default {
 
   getComponent(location, cb) {
     require.ensure([], (require) => {
-      cb(null, require('./containers/room').default);
+      cb(null, userIsAuthenticated(require('./containers/room').default));
     });
   },
 };

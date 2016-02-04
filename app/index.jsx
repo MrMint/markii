@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import App from './containers/app';
 
 const rootRoute = {
-  component: require('./components/layout/master').default,
+  component: require('./containers/layout/master').default,
   childRoutes: [{
     path: '/',
     component: 'div',

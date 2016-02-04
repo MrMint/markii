@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { TextField, RaisedButton, Checkbox } from 'material-ui';
 
@@ -17,7 +16,7 @@ const asyncValidate = (values/*, dispatch */) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (['john', 'paul', 'george', 'ringo'].includes(values.roomName)) {
-        reject({roomName: 'That username is taken'});
+        reject({ roomName: 'That username is taken' });
       } else {
         resolve();
       }
@@ -46,7 +45,7 @@ class CreateRoomForm extends Component {
     error: React.PropTypes.string,
     resetForm: React.PropTypes.func.isRequired,
     submitting: React.PropTypes.bool.isRequired,
-  }
+  };
 
   render() {
     const {

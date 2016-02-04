@@ -12,7 +12,7 @@ const DevTools = createDevTools(
     toggleVisibilityKey="ctrl-h"
     changePositionKey="ctrl-q"
   >
-    <FilterableLogMonitor theme="tomorrow" />
+    <FilterableLogMonitor />
   </DockMonitor>
 );
 

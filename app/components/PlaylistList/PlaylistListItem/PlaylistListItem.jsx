@@ -6,7 +6,7 @@ export default class PlaylistBuilder extends Component {
   static propTypes = {
     name: React.PropTypes.string.isRequired,
     songCount: React.PropTypes.string.isRequired,
-  }
+  };
 
   render() {
     const { name, songCount } = this.props;
