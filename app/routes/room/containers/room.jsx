@@ -18,18 +18,20 @@ class Room extends Component {
     chat: React.PropTypes.array.isRequired,
     dispatch: React.PropTypes.func.isRequired,
     search: React.PropTypes.array.isRequired,
+    senderName: React.PropTypes.object.isRequired,
   };
 
   onChatSendMessage = (text) => {
+    const { dispatch, senderName } = this.props;
     const message = {
       id: uuid.v4(),
       sender: {
-        name: 'test',
+        name: senderName,
       },
       text,
-      timeSent: '2:53pm',
+      timeSent: (new Date()).getTime(),
     };
-    this.props.dispatch(chatActions.sendMessage(message, '0'));
+    dispatch(chatActions.sendMessage(message, '0'));
   };
 
   onSearch = (query) => {
@@ -39,13 +41,11 @@ class Room extends Component {
 
   render() {
     const { chat, search } = this.props;
-    const sender = { name: 'User1' };
     return (
       <div>
         <MediaPlayer mediaSource={MediaSources.YOUTUBE} url="cVYvozAWPtc"/>
           <Chat
             messages={chat[0].messages}
-            sender={sender}
             onSend={this.onChatSendMessage}
           />
         <PlaylistBuilder searchResults={search} onSearch={this.onSearch}/>
@@ -53,9 +53,10 @@ class Room extends Component {
     );
   }
 }
-// 	AIzaSyC3rjN8jBZ3V1Ib8Rio6_kp-WbnootXx_8
+
 export default connect((state) => ({
   room: state.rooms[0],
   chat: state.chats,
   search: state.searchSongs,
+  senderName: state.user.username,
 }))(Room);
