@@ -8,6 +8,7 @@ import PlaylistBuilder from '../../../components/PlaylistBuilder';
 import * as chatActions from '../../../modules/chat/actions';
 import * as MediaSources from '../../../components/MediaPlayer/constants';
 import * as searchActions from '../../../modules/search/actions';
+import * as source from '../../../components/mediaPlayer/constants';
 
 import { } from 'material-ui';
 
@@ -33,7 +34,7 @@ class Room extends Component {
 
   onSearch = (query) => {
     const { dispatch } = this.props;
-    dispatch(searchActions.searchForSong(query));
+    dispatch(searchActions.searchForMedia(query, [source.YOUTUBE]));
   };
 
   render() {

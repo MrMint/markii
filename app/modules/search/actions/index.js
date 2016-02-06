@@ -7,9 +7,9 @@ function searchYoutube() {
   };
 }
 
-function receiveYoutubeSearchResults(results) {
+export function receiveMediaResults(results) {
   return {
-    type: types.SEARCH_YOUTUBE_REQUEST_SUCCESS,
+    type: types.SEARCH_MEDIA_REQUEST_SUCCESS,
     payload: {
       results,
     },
@@ -22,13 +22,12 @@ export function clearSongSearchResults() {
   };
 }
 
-export function searchForSong(query) {
-  return (dispatch) => {
-    dispatch(searchYoutube());
-    fetchSongsByKeyword(query)
-      .then(result => {
-        dispatch(clearSongSearchResults());
-        dispatch(receiveYoutubeSearchResults(result));
-      });
+export function searchForMedia(query, sources) {
+  return {
+    type: types.SEARCH_MEDIA_REQUEST,
+    payload: {
+      query,
+      sources,
+    },
   };
 }
