@@ -1,3 +1,5 @@
+import { b64EncodeUnicode } from '../index';
+
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -16,9 +18,11 @@ function fetchHelper(url, method, credentials) {
   const params = { method };
   if (credentials) {
     if (credentials.username && credentials.password) {
-      params.auth = { authorization: credentials.username + credentials.password };
+      params.headers = {
+        authorization: b64EncodeUnicode(`${credentials.username}:${credentials.password}`),
+      };
     } else {
-      params.auth = { bearer: credentials };
+      params.headers = { bearer: credentials };
     }
   }
   return fetch(url, params)
