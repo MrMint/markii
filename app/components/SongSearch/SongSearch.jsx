@@ -6,12 +6,16 @@ export default class SongSearch extends Component {
     onSearch: React.PropTypes.func.isRequired,
   };
 
-  render() {
+  onSearchWrapper = () => {
     const { onSearch } = this.props;
+    onSearch(this.refs.searchInput.getValue());
+  };
+
+  render() {
     return (
       <div>
-        <TextField />
-        <FlatButton onTouchTap={onSearch} label="Search"/>
+        <TextField ref="searchInput"/>
+        <FlatButton onTouchTap={this.onSearchWrapper} label="Search"/>
       </div>
     );
   }
