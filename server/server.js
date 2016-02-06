@@ -8,7 +8,7 @@ var compiler = webpack(config);
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
-  publicPath: config.output.publicPath
+  publicPath: config.output.publicPath,
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));
@@ -16,7 +16,7 @@ app.use(require('webpack-hot-middleware')(compiler));
 app.get('/token', function(req, res) {
   var token = {
     token: 'asdfadfoweijfwq;oefin',
-    expires_in: 30,
+    expires_in: 3000,
   };
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(token));

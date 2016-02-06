@@ -16,11 +16,14 @@ export function parseJson(response) {
 function fetchHelper(url, method, credentials) {
 
   const params = { method };
+  // todo refactor credentials, this is gross
   if (credentials) {
     if (credentials.username && credentials.password) {
       params.headers = {
         authorization: b64EncodeUnicode(`${credentials.username}:${credentials.password}`),
       };
+    } else if (credentials.key) {
+      params.headers = { key: credentials.key };
     } else {
       params.headers = { bearer: credentials };
     }
