@@ -4,9 +4,13 @@ import LoginForm from './loginFormContainer';
 import { login } from '../../../modules/user/actions/index';
 
 class Login extends Component {
+  static propTypes = {
+    redirect: React.PropTypes.object,
+  };
 
   handleLoginSubmit = (data, dispatch) => {
-    dispatch(login(data.email, data.password));
+    const { redirect } = this.props;
+    dispatch(login(data.email, data.password, redirect));
   };
 
   render() {
@@ -20,4 +24,5 @@ class Login extends Component {
 }
 
 export default connect((state) => ({
+  redirect: state.routing.location.query.redirect,
 }))(Login);
