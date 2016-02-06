@@ -4,7 +4,7 @@ import {
 } from './constants';
 import { get, parseJson } from './apiUtils';
 import uuid from 'uuid';
-import { YOUTUBE } from '../../components/mediaPlayer/constants';
+import { YOUTUBE } from '../../components/MediaPlayer/constants';
 
 const parseSearchResults = (results) => {
   return results.items.map(result => {

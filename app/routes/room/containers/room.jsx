@@ -8,7 +8,7 @@ import PlaylistBuilder from '../../../components/PlaylistBuilder';
 import * as chatActions from '../../../modules/chat/actions';
 import * as MediaSources from '../../../components/MediaPlayer/constants';
 import * as searchActions from '../../../modules/search/actions';
-import * as source from '../../../components/mediaPlayer/constants';
+import * as source from '../../../components/MediaPlayer/constants';
 
 import { } from 'material-ui';
 
