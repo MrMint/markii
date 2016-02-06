@@ -16,9 +16,11 @@ function fetchHelper(url, method, credentials) {
   const params = { method };
   if (credentials) {
     if (credentials.username && credentials.password) {
-      params.auth = { authorization: credentials.username + credentials.password };
+      params.headers = {
+        authorization: `${credentials.username}:${credentials.password}`,
+      };
     } else {
-      params.auth = { bearer: credentials };
+      params.headers = { bearer: credentials };
     }
   }
   return fetch(url, params)
