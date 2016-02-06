@@ -1,5 +1,4 @@
 import * as types from '../constants';
-import { fetchSongsByKeyword } from '../../../utilities/api/songApi';
 
 function searchYoutube() {
   return {
@@ -16,9 +15,9 @@ export function receiveMediaResults(results) {
   };
 }
 
-export function clearSongSearchResults() {
+export function clearMediaSearchResults() {
   return {
-    type: types.SEARCH_SONG_CLEAR_RESULTS,
+    type: types.SEARCH_MEDIA_CLEAR_RESULTS,
   };
 }
 

@@ -1,7 +1,7 @@
 import { take, put, race, cancel, fork, join } from 'redux-saga';
 import { SEARCH_MEDIA_REQUEST } from '../constants';
 import { search as searchYoutubeApi } from '../../../utilities/api/youtubeApi';
-import { receiveMediaResults } from '../actions';
+import { receiveMediaResults, clearMediaSearchResults } from '../actions';
 
 function* searchYoutube(query) {
   return yield searchYoutubeApi(query);
@@ -33,6 +33,7 @@ export function* songSearch() {
 
     // Dispatch the results or cancel search tasks and requery
     if (results) {
+      yield put(clearMediaSearchResults());
       yield put(receiveMediaResults(results.concat.apply([], results)));
       query = undefined;
     } else {
