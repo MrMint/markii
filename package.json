@@ -29,6 +29,7 @@
     "chai-enzyme": "^0.3.0",
     "cheerio": "^0.20.0",
     "css-loader": "^0.23.1",
+    "date-fns": "^0.17.0",
     "dirty-chai": "^1.2.2",
     "enzyme": "^1.5.0",
     "eslint": "^1.10.3",
