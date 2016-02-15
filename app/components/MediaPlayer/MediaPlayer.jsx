@@ -4,8 +4,8 @@ import YoutubePlayer from './youtubePlayer';
 
 export default class MediaPlayer extends Component {
   static propTypes = {
-    mediaSource: React.PropTypes.string.Required,
-    url: React.PropTypes.string.Required,
+    mediaSource: React.PropTypes.string.isRequired,
+    url: React.PropTypes.string.isRequired,
   };
 
   renderMedia = (mediaSource, url) => {
