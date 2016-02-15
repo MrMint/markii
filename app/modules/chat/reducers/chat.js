@@ -27,7 +27,7 @@ export default function chats(state = initialState, action) {
   switch (action.type) {
     case types.CHAT_SEND_MESSAGE:
       return state.map(chat =>
-        chat.id === action.payload.roomId
+        chat.id === action.payload.chatId
         ? { ...chat, messages: [...chat.messages, action.payload.message] }
         : chat);
     default:
