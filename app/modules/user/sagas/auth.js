@@ -50,7 +50,7 @@ export function* authentication() {
       if (!storedToken) {
         continue;
       }
-      yield put(routeActions.push(redirect ? redirect : '/'));
+      yield put(routeActions.push(redirect || '/'));
     } else {
       yield put(authorizeSuccess(storedToken));
     }
