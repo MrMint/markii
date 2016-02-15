@@ -1,7 +1,7 @@
 import { userIsAuthenticated } from '../../utilities/auth';
 
 export default {
-  path: 'room',
+  path: ':roomSlug',
 
   getComponent(location, cb) {
     require.ensure([], (require) => {
