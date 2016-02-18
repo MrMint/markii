@@ -1,4 +1,4 @@
-import { fork } from 'redux-saga';
+import { fork } from 'redux-saga/effects';
 import { authentication } from './user/sagas/auth';
 import { songSearch } from './search/sagas/search';
 

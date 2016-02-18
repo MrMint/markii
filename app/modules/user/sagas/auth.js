@@ -1,4 +1,4 @@
-import { call, take, put, race } from 'redux-saga';
+import { call, take, put, race } from 'redux-saga/effects';
 import { USER_SIGN_IN, USER_SIGN_OUT } from '../constants';
 import { authorizeSuccess, authorizeFailure, logout } from '../actions';
 import * as auth from '../../../utilities/auth';
