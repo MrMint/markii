@@ -18,7 +18,7 @@ class Room extends Component {
     chats: React.PropTypes.array.isRequired,
     dispatch: React.PropTypes.func.isRequired,
     search: React.PropTypes.array.isRequired,
-    senderName: React.PropTypes.object.isRequired,
+    senderName: React.PropTypes.string.isRequired,
     params: React.PropTypes.object.isRequired,
   };
 
