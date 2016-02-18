@@ -1,5 +1,6 @@
-export const API_BASE_URL = 'http://localhost:3000';
+export const API_BASE_URL = 'http://localhost:3000/api';
 export const API_GET_TOKEN_URL = `${API_BASE_URL}/token`;
+export const API_USER_URL = `${API_BASE_URL}/user`;
 
 export const YOUTUBE_BASE_URL = 'https://www.googleapis.com/youtube/v3';
 export const YOUTUBE_SEARCH_URL = `${YOUTUBE_BASE_URL}/search`;
