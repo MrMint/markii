@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { List, ListItem } from 'material-ui';
+import { List } from 'material-ui';
+import RoomListItem from '../../../components/RoomListItem';
+import { routeActions } from 'react-router-redux';
 
 class Lobby extends Component {
   static propTypes = {
     rooms: React.PropTypes.array.isRequired,
-    children: React.PropTypes.object.isRequired,
+    children: React.PropTypes.object,
+    dispatch: React.PropTypes.func.isRequired,
+  };
+
+  handleListItemTouchTap = (slug) => {
+    this.props.dispatch(routeActions.push(`${slug}`));
   };
 
   render() {
     const { rooms, children } = this.props;
     return (
-      children ?
-        children
-      :
+      children ||
       <List>
         {rooms.map(room =>
-            <ListItem
-              key={room.id}
-              primaryText={room.name}
-              secondaryText={room.currentlyPlaying}
+            <RoomListItem
+              roomId={room.id}
+              name={room.name}
+              slug={room.slug}
+              currentlyPlaying={room.currentlyPlaying}
+              onClick={this.handleListItemTouchTap}
             />
           )}
       </List>

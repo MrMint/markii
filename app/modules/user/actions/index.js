@@ -34,3 +34,30 @@ export function authorizeFailure(error) {
     },
   };
 }
+
+export function getUserDetails(token) {
+  return {
+    type: types.USER_GET_DETAILS,
+    payload: {
+      token,
+    },
+  };
+}
+
+export function getUserDetailsSuccess(user) {
+  return {
+    type: types.USER_GET_DETAILS_SUCCESS,
+    payload: {
+      user,
+    },
+  };
+}
+
+export function getUserDetailsFailure(error) {
+  return {
+    type: types.USER_GET_DETAILS_FAILURE,
+    payload: {
+      error,
+    },
+  };
+}

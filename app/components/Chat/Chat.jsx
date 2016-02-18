@@ -7,20 +7,20 @@ export default class Chat extends Component {
   static propTypes = {
     messages: React.PropTypes.array.isRequired,
     onSend: React.PropTypes.func.isRequired,
-    sender: React.PropTypes.object.isRequired,
   };
 
-  internalOnSend = (onSend) => {
+  internalOnSend = () => {
+    const { onSend } = this.props;
     onSend(this.refs.messageInput.getValue());
   };
 
   render() {
-    const { messages, onSend } = this.props;
+    const { messages } = this.props;
     return (
       <div className={style.container}>
         <MessageList messages={messages} />
         <TextField ref="messageInput"/>
-        <FlatButton label="Send" onTouchTap={this.internalOnSend.bind(this, onSend)}/>
+        <FlatButton label="Send" onTouchTap={this.internalOnSend}/>
       </div>
     );
   }

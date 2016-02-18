@@ -13,8 +13,16 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.get('/token', function(req, res) {
-  var token = {
+app.get('/api/user', function(req, res) {
+  const user = {
+    username: 'Mr.Mint',
+  };
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify(user));
+});
+
+app.get('/api/token', function(req, res) {
+  const token = {
     token: 'asdfadfoweijfwq;oefin',
     expires_in: 3000,
   };

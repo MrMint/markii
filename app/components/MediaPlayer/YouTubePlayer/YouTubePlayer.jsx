@@ -3,7 +3,7 @@ import YouTube from 'react-youtube';
 
 export default class YoutubePlayer extends Component {
   static propTypes = {
-    url: React.PropTypes.string.Required,
+    url: React.PropTypes.string.isRequired,
   };
 
   onReady = (event) => {

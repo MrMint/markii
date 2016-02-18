@@ -1,4 +1,4 @@
-import { call, take, put, race } from 'redux-saga';
+import { call, take, put, race } from 'redux-saga/effects';
 import { USER_SIGN_IN, USER_SIGN_OUT } from '../constants';
 import { authorizeSuccess, authorizeFailure, logout } from '../actions';
 import * as auth from '../../../utilities/auth';
@@ -50,7 +50,7 @@ export function* authentication() {
       if (!storedToken) {
         continue;
       }
-      yield put(routeActions.push(redirect ? redirect : '/'));
+      yield put(routeActions.push(redirect || '/'));
     } else {
       yield put(authorizeSuccess(storedToken));
     }
@@ -67,6 +67,5 @@ export function* authentication() {
     if (!signOutAction) {
       yield put(logout());
     }
-    yield put(routeActions.push('/login'));
   }
 }

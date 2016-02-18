@@ -1,15 +1,7 @@
 import { userIsAuthenticated } from '../../utilities/auth';
 
 export default {
-  path: 'room',
-
-  // getChildRoutes(location, cb) {
-  //   require.ensure([], (require) => {
-  //     cb(null, [
-  //       // require('./routes/create').default,
-  //     ]);
-  //   });
-  // },
+  path: ':roomSlug',
 
   getComponent(location, cb) {
     require.ensure([], (require) => {

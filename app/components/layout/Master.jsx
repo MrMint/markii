@@ -20,11 +20,9 @@ export default class Master extends Component {
 
   handleClose = () => this.setState({ open: false });
 
-  closeNavWrapper = (handleTouchTap) => {
-    return () => {
-      this.handleClose();
-      handleTouchTap();
-    };
+  closeNavWrapper = (handleTouchTap) => () => {
+    this.handleClose();
+    handleTouchTap();
   };
 
   render() {

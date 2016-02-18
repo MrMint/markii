@@ -13,13 +13,13 @@ describe('chats reducer', () => {
         name: 'testSenderName',
       },
       text: 'testText',
-      timeSent: '9:42pm',
+      timeSent: (new Date()).getTime(),
     };
 
     var result = chatsReducer(initialState, {
       type: types.CHAT_SEND_MESSAGE,
       payload: {
-        roomId: '0',
+        chatId: '0',
         message,
       },
     });

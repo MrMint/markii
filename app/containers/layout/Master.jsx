@@ -8,7 +8,7 @@ export default class MasterContainer extends Component {
 
   static propTypes = {
     dispatch: React.PropTypes.func.isRequired,
-    children: React.PropTypes.array.isRequired,
+    children: React.PropTypes.object.isRequired,
   };
 
   handleLoginTouchTap = () => {
@@ -37,5 +37,4 @@ export default class MasterContainer extends Component {
   }
 }
 
-export default connect((state) => ({
-}))(MasterContainer);
+export default connect(() => ({}))(MasterContainer);

@@ -1,4 +1,4 @@
-import { take, put, race, cancel, fork, join } from 'redux-saga';
+import { take, put, race, cancel, fork, join } from 'redux-saga/effects';
 import { SEARCH_MEDIA_REQUEST } from '../constants';
 import { search as searchYoutubeApi } from '../../../utilities/api/youtubeApi';
 import { receiveMediaResults, clearMediaSearchResults } from '../actions';

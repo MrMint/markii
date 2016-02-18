@@ -14,22 +14,25 @@ import { } from 'material-ui';
 
 class Room extends Component {
   static propTypes = {
-    room: React.PropTypes.object.isRequired,
-    chat: React.PropTypes.array.isRequired,
+    rooms: React.PropTypes.array.isRequired,
+    chats: React.PropTypes.array.isRequired,
     dispatch: React.PropTypes.func.isRequired,
     search: React.PropTypes.array.isRequired,
+    senderName: React.PropTypes.string.isRequired,
+    params: React.PropTypes.object.isRequired,
   };
 
   onChatSendMessage = (text) => {
+    const { dispatch, senderName } = this.props;
     const message = {
       id: uuid.v4(),
       sender: {
-        name: 'test',
+        name: senderName,
       },
       text,
-      timeSent: '2:53pm',
+      timeSent: (new Date()).getTime(),
     };
-    this.props.dispatch(chatActions.sendMessage(message, '0'));
+    dispatch(chatActions.sendMessage(message, this.chat.id));
   };
 
   onSearch = (query) => {
@@ -37,15 +40,25 @@ class Room extends Component {
     dispatch(searchActions.searchForMedia(query, [source.YOUTUBE]));
   };
 
+  // TODO Move room and chat getter logic into a selector using reselect lib
+  get room() {
+    const { rooms, params: { roomSlug } } = this.props;
+    return rooms.find(room => room.slug === roomSlug);
+  }
+
+  get chat() {
+    const { chats } = this.props;
+    return chats[this.room.chatId];
+  }
+
   render() {
-    const { chat, search } = this.props;
-    const sender = { name: 'User1' };
+    const { search } = this.props;
+    const chat = this.chat;
     return (
       <div>
         <MediaPlayer mediaSource={MediaSources.YOUTUBE} url="cVYvozAWPtc"/>
           <Chat
-            messages={chat[0].messages}
-            sender={sender}
+            messages={chat.messages}
             onSend={this.onChatSendMessage}
           />
         <PlaylistBuilder searchResults={search} onSearch={this.onSearch}/>
@@ -53,9 +66,10 @@ class Room extends Component {
     );
   }
 }
-// 	AIzaSyC3rjN8jBZ3V1Ib8Rio6_kp-WbnootXx_8
+
 export default connect((state) => ({
-  room: state.rooms[0],
-  chat: state.chats,
+  rooms: state.rooms,
+  chats: state.chats,
   search: state.searchSongs,
+  senderName: state.user.username,
 }))(Room);
