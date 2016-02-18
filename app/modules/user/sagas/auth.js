@@ -67,6 +67,5 @@ export function* authentication() {
     if (!signOutAction) {
       yield put(logout());
     }
-    yield put(routeActions.push('/login'));
   }
 }
