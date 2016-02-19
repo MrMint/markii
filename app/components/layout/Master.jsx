@@ -38,6 +38,7 @@ export default class Master extends Component {
         <LeftNav ref="leftNav"
           docked={false}
           open={this.state.open}
+          onRequestChange={this.handleClose}
         >
           <MenuItem onTouchTap={this.closeNavWrapper(onLoginTouchTap)}>Login</MenuItem>
           <MenuItem onTouchTap={this.closeNavWrapper(onLobbyTouchTap)}>Lobby</MenuItem>
