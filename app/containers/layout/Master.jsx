@@ -19,8 +19,8 @@ export default class MasterContainer extends Component {
     this.props.dispatch(logout());
   };
 
-  handleRoomTouchTap = () => {
-    this.props.dispatch(routeActions.push('/room'));
+  handleLobbyTouchTap = () => {
+    this.props.dispatch(routeActions.push('/lobby'));
   };
 
   render() {
@@ -29,7 +29,7 @@ export default class MasterContainer extends Component {
       <Master
         onLoginTouchTap={this.handleLoginTouchTap}
         onLogoutTouchTap={this.handleLogoutTouchTap}
-        onRoomTouchTap={this.handleRoomTouchTap}
+        onLobbyTouchTap={this.handleLobbyTouchTap}
       >
         {children}
       </Master>

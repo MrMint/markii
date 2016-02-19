@@ -7,7 +7,7 @@ export default class Master extends Component {
     children: React.PropTypes.object.isRequired,
     onLoginTouchTap: React.PropTypes.func.isRequired,
     onLogoutTouchTap: React.PropTypes.func.isRequired,
-    onRoomTouchTap: React.PropTypes.func.isRequired,
+    onLobbyTouchTap: React.PropTypes.func.isRequired,
     title: React.PropTypes.string.isRequired,
   };
 
@@ -28,7 +28,7 @@ export default class Master extends Component {
   render() {
     const { onLoginTouchTap,
       onLogoutTouchTap,
-      onRoomTouchTap } = this.props;
+      onLobbyTouchTap } = this.props;
     return (
       <div>
         <AppBar
@@ -38,9 +38,10 @@ export default class Master extends Component {
         <LeftNav ref="leftNav"
           docked={false}
           open={this.state.open}
+          onRequestChange={this.handleClose}
         >
           <MenuItem onTouchTap={this.closeNavWrapper(onLoginTouchTap)}>Login</MenuItem>
-          <MenuItem onTouchTap={this.closeNavWrapper(onRoomTouchTap)}>Room</MenuItem>
+          <MenuItem onTouchTap={this.closeNavWrapper(onLobbyTouchTap)}>Lobby</MenuItem>
           <MenuItem onTouchTap={this.closeNavWrapper(onLogoutTouchTap)}>Logout</MenuItem>
         </LeftNav>
         {this.props.children}
