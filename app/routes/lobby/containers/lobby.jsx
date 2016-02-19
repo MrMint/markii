@@ -12,7 +12,7 @@ class Lobby extends Component {
   };
 
   handleListItemTouchTap = (slug) => {
-    this.props.dispatch(routeActions.push(`${slug}`));
+    this.props.dispatch(routeActions.push(`/r/${slug}`));
   };
 
   render() {
