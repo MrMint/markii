@@ -4,6 +4,8 @@ import SongSearch from '../SongSearch';
 import SongList from '../SongList';
 import PlaylistList from '../PlaylistList';
 import style from './PlaylistBuilder.css';
+import SongSearchListItem from '../SongList/SongSearchListItem';
+import * as mediaSources from '../MediaPlayer/constants';
 
 export default class PlaylistBuilder extends Component {
   static propTypes = {
@@ -18,11 +20,16 @@ export default class PlaylistBuilder extends Component {
       <div className={style.container}>
         <PlaylistList playlists={playlists} />
         <SongSearch onSearch={onSearch}/>
-        <SongList rowHeight={20}>
+        <SongList rowHeight={30}>
           {
             searchResults && searchResults.length > 0 ?
             searchResults.map(result =>
-              <div>{result.name}</div>
+              <SongSearchListItem
+                key={result.id}
+                title={result.name}
+                source={result.source}
+                thumbnail={result.thumbnail}
+              />
             )
             : <div>No Results</div>
           }
