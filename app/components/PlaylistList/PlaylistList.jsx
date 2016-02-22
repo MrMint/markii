@@ -3,7 +3,7 @@ import { } from 'material-ui';
 import PlaylistListItem from './PlaylistListItem';
 import style from './PlaylistList.css';
 
-export default class PlaylistBuilder extends Component {
+export default class PlaylistList extends Component {
   static propTypes = {
     playlists: React.PropTypes.array.isRequired,
   };

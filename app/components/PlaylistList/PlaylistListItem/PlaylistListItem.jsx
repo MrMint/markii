@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { } from 'material-ui';
 import style from './PlaylistListItem.css';
 
-export default class PlaylistBuilder extends Component {
+export default class PlaylistItem extends Component {
   static propTypes = {
     name: React.PropTypes.string.isRequired,
     songCount: React.PropTypes.string.isRequired,

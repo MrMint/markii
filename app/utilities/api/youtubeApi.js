@@ -19,7 +19,7 @@ const parseSearchResults = (results) => {
 };
 
 export function search(query) {
-  var url = `${YOUTUBE_SEARCH_URL}?part=snippet&q=${query}&key=${YOUTUBE_API_KEY}`;
+  var url = `${YOUTUBE_SEARCH_URL}?part=snippet&q=${query}&maxResults=50&key=${YOUTUBE_API_KEY}`;
   return get(url, { key: YOUTUBE_API_KEY })
     .then(parseJson)
     .then(parseSearchResults);

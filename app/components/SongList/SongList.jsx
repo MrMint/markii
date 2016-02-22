@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { } from 'material-ui';
-import { VirtualScroll } from 'react-virtualized';
+import { AutoSizer, VirtualScroll } from 'react-virtualized';
 
 export default class SongList extends Component {
   static propTypes = {
@@ -16,18 +16,18 @@ export default class SongList extends Component {
   render() {
     const { children, rowHeight } = this.props;
     return (
-      <div>
-        {
-        children && children.length > 0 &&
-        <VirtualScroll
-          width={300}
-          height={300}
-          rowsCount={children.length}
-          rowHeight={rowHeight}
-          rowRenderer={this.renderSongRow}
-        />
-        }
-      </div>
+      <AutoSizer>
+        {({ height, width }) => (
+          children && children.length > 0 &&
+          <VirtualScroll
+            width={width}
+            height={height}
+            rowsCount={children.length}
+            rowHeight={rowHeight}
+            rowRenderer={this.renderSongRow}
+          />
+        )}
+      </AutoSizer>
     );
   }
 }

@@ -5,6 +5,7 @@ import uuid from 'uuid';
 import MediaPlayer from '../../../components/MediaPlayer';
 import Chat from '../../../components/chat';
 import PlaylistBuilder from '../../../components/PlaylistBuilder';
+import { addSongToPlaylist } from '../../../modules/playlists/actions';
 import * as chatActions from '../../../modules/chat/actions';
 import * as MediaSources from '../../../components/MediaPlayer/constants';
 import * as searchActions from '../../../modules/search/actions';
@@ -20,6 +21,7 @@ class Room extends Component {
     search: React.PropTypes.array.isRequired,
     senderName: React.PropTypes.string.isRequired,
     params: React.PropTypes.object.isRequired,
+    playlists: React.PropTypes.array.isRequired,
   };
 
   onChatSendMessage = (text) => {
@@ -40,6 +42,11 @@ class Room extends Component {
     dispatch(searchActions.searchForMedia(query, [source.YOUTUBE]));
   };
 
+  onAddSongToPlaylist = (song, playlistId) => {
+    const { dispatch } = this.props;
+    dispatch(addSongToPlaylist({ ...song, id: uuid.v4() }, playlistId));
+  }
+
   // TODO Move room and chat getter logic into a selector using reselect lib
   get room() {
     const { rooms, params: { roomSlug } } = this.props;
@@ -52,7 +59,7 @@ class Room extends Component {
   }
 
   render() {
-    const { search } = this.props;
+    const { search, playlists } = this.props;
     const chat = this.chat;
     return (
       <div>
@@ -61,7 +68,12 @@ class Room extends Component {
             messages={chat.messages}
             onSend={this.onChatSendMessage}
           />
-        <PlaylistBuilder searchResults={search} onSearch={this.onSearch}/>
+        <PlaylistBuilder
+          searchResults={search}
+          onSearch={this.onSearch}
+          playlists={playlists}
+          onAddSongToPlaylist={this.onAddSongToPlaylist}
+        />
       </div>
     );
   }
@@ -72,4 +84,5 @@ export default connect((state) => ({
   chats: state.chats,
   search: state.searchSongs,
   senderName: state.user.username,
+  playlists: state.playlists,
 }))(Room);

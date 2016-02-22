@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import App from './containers/app';
 import Lobby from './routes/lobby/containers/lobby';
+import 'react-virtualized/styles.css';
 
 const rootRoute = {
   childRoutes: [{

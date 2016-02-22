@@ -12,6 +12,8 @@ const initialState = [
 
 export default function songs(state = initialState, action) {
   switch (action.type) {
+    case types.SONG_ADD:
+      return [...state, action.payload.song];
     default:
       return state;
   }

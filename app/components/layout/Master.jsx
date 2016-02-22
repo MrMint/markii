@@ -30,7 +30,7 @@ export default class Master extends Component {
       onLogoutTouchTap,
       onLobbyTouchTap } = this.props;
     return (
-      <div>
+      <div style={{ paddingBottom: '80px' }}>
         <AppBar
           title="Mark II"
           onLeftIconButtonTouchTap={this.handleToggle}

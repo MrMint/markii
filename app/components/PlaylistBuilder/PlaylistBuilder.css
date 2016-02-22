@@ -1,4 +1,9 @@
 .container {
-  width:350px;
-  height: 500px;
+
+}
+
+.songResults {
+  width: 700px;
+  height: 600px;
+  overflow-x: hidden;
 }
