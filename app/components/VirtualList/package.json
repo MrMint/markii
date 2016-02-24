@@ -1,0 +1,6 @@
+{
+  "name": "VirtualList",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./VirtualList.jsx"
+}

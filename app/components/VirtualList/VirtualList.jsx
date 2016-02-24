@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { } from 'material-ui';
 import { AutoSizer, VirtualScroll } from 'react-virtualized';
 
-export default class SongList extends Component {
+export default class VirtualList extends Component {
   static propTypes = {
     children: React.PropTypes.node.isRequired,
     rowHeight: React.PropTypes.number.isRequired,

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { } from 'material-ui';
 import SongSearch from '../SongSearch';
-import SongList from '../SongList';
+import VirtualList from '../VirtualList';
 import PlaylistList from '../PlaylistList';
 import styles from './PlaylistBuilder.css';
-import SongSearchListItem from '../SongList/SongSearchListItem';
+import SongSearchListItem from '../SongSearchListItem';
 
 export default class PlaylistBuilder extends Component {
   static propTypes = {
@@ -24,25 +24,29 @@ export default class PlaylistBuilder extends Component {
 
     return (
       <div className={styles.container}>
-        <PlaylistList playlists={playlists} />
-        <SongSearch onSearch={onSearch} />
-        <div className={styles.songResults}>
-          <SongList rowHeight={81}>
-            {
-              searchResults && searchResults.length > 0 ?
-              searchResults.map(result =>
-                <SongSearchListItem
-                  key={result.id}
-                  title={result.name}
-                  source={result.source}
-                  thumbnail={result.thumbnail}
-                  playlists={playlists}
-                  onAddSongToPlaylist={onAddSongToPlaylist}
-                />
-              )
-              : <div>No Results</div>
-            }
-          </SongList>
+        <div className={styles.playlistList}>
+          <PlaylistList playlists={playlists} />
+        </div>
+        <div className={styles.search}>
+          <SongSearch className={styles.searchBar} onSearch={onSearch} />
+          <div className={styles.songResults}>
+            <VirtualList rowHeight={81}>
+                {
+                  searchResults && searchResults.length > 0 ?
+                  searchResults.map(result =>
+                    <SongSearchListItem
+                      key={result.id}
+                      title={result.name}
+                      source={result.source}
+                      thumbnail={result.thumbnail}
+                      playlists={playlists}
+                      onAddSongToPlaylist={onAddSongToPlaylist}
+                    />
+                  )
+                  : <div>No Results</div>
+                }
+              </VirtualList>
+          </div>
         </div>
       </div>
     );

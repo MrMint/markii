@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { SelectField, MenuItem } from 'material-ui';
-import * as sources from '../../MediaPlayer/constants';
+import * as sources from '../MediaPlayer/constants';
 import styles from './SongSearchListItem.css';
 import { FaYoutube } from 'react-icons/lib/fa';
 
@@ -46,6 +46,7 @@ export default class SongSearchListItem extends Component {
           { this.renderSourceIcon(source) }
         </div>
         { // TODO these selectfields are killing performance, investigate
+          // https://github.com/callemall/material-ui/issues/2859
           playlists &&
           <div className={styles.right}>
             <SelectField onChange={this.handleChange} fullWidth>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { } from 'material-ui';
-import style from './PlaylistListItem.css';
+import styles from './PlaylistListItem.css';
 
-export default class PlaylistItem extends Component {
+export default class PlaylistListItem extends Component {
   static propTypes = {
     name: React.PropTypes.string.isRequired,
     songCount: React.PropTypes.string.isRequired,
@@ -11,7 +11,7 @@ export default class PlaylistItem extends Component {
   render() {
     const { name, songCount } = this.props;
     return (
-      <div>
+      <div className={styles.row}>
         <div>{name}</div>
         <div>{songCount}</div>
       </div>
