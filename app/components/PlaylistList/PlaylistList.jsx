@@ -17,6 +17,8 @@ export default class PlaylistList extends Component {
       {
         playlists.map(playlist =>
           <PlaylistListItem
+            key={playlist.id}
+            id={playlist.id}
             name={playlist.name}
             soungCount={playlist.songs.length}
           />)

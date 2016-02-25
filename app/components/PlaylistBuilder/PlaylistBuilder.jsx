@@ -36,6 +36,7 @@ export default class PlaylistBuilder extends Component {
                   searchResults.map(result =>
                     <SongSearchListItem
                       key={result.id}
+                      id={result.id}
                       title={result.name}
                       source={result.source}
                       thumbnail={result.thumbnail}
