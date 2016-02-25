@@ -12,6 +12,7 @@ class PlaylistListItem extends Component {
     isOver: React.PropTypes.bool.isRequired,
     canDrop: React.PropTypes.bool.isRequired,
     connectDropTarget: React.PropTypes.func.isRequired,
+    canAddSong: React.PropTypes.func.isRequired,
   };
 
   render() {
@@ -27,7 +28,7 @@ class PlaylistListItem extends Component {
 }
 
 const playlistListItemTarget = {
-  canDrop: () => true,
+  canDrop: (props) => props.canAddSong(),
   drop: (props) => {
     return {
       id: props.id,

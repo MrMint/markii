@@ -11,6 +11,10 @@ import * as MediaSources from '../../../components/MediaPlayer/constants';
 import * as searchActions from '../../../modules/search/actions';
 import * as source from '../../../components/MediaPlayer/constants';
 
+import { playlistContainsMedia } from '../../../utilities/playlist';
+
+import R from 'ramda';
+
 import { } from 'material-ui';
 
 class Room extends Component {
@@ -22,6 +26,7 @@ class Room extends Component {
     senderName: React.PropTypes.string.isRequired,
     params: React.PropTypes.object.isRequired,
     playlists: React.PropTypes.array.isRequired,
+    songs: React.PropTypes.array.isRequired,
   };
 
   onChatSendMessage = (text) => {
@@ -45,7 +50,17 @@ class Room extends Component {
   onAddSongToPlaylist = (song, playlistId) => {
     const { dispatch } = this.props;
     dispatch(addSongToPlaylist({ ...song, id: uuid.v4() }, playlistId));
-  }
+  };
+
+  canAddSongToPlaylist = (mediaSource, sourceId, playlistId) => {
+    const { songs, playlists } = this.props;
+    return playlistContainsMedia(
+      mediaSource,
+      sourceId,
+      R.find(playlist => playlist.id === playlistId)(playlists),
+      songs
+    );
+  };
 
   // TODO Move room and chat getter logic into a selector using reselect lib
   get room() {
@@ -73,6 +88,7 @@ class Room extends Component {
           onSearch={this.onSearch}
           playlists={playlists}
           onAddSongToPlaylist={this.onAddSongToPlaylist}
+          canAddSongToPlaylist={this.canAddSongToPlaylist}
         />
       </div>
     );
@@ -85,4 +101,5 @@ export default connect((state) => ({
   search: state.searchSongs,
   senderName: state.user.username,
   playlists: state.playlists,
+  songs: stats.songs,
 }))(Room);

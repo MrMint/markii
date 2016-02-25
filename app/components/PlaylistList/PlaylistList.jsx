@@ -7,10 +7,11 @@ import style from './PlaylistList.css';
 export default class PlaylistList extends Component {
   static propTypes = {
     playlists: React.PropTypes.array.isRequired,
+    canAddSong: React.PropTypes.func.isRequired,
   };
 
   render() {
-    const { playlists } = this.props;
+    const { playlists, canAddSong } = this.props;
     return (
       playlists ?
       <VirtualList rowHeight={51}>
@@ -21,6 +22,7 @@ export default class PlaylistList extends Component {
             id={playlist.id}
             name={playlist.name}
             soungCount={playlist.songs.length}
+            canAddSong={canAddSong}
           />)
       }
       </VirtualList>
