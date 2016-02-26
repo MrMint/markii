@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { } from 'material-ui';
 import PlaylistListItem from './PlaylistListItem';
-import VirtualList from '../VirtualList';
 import style from './PlaylistList.css';
 
 export default class PlaylistList extends Component {
@@ -14,18 +13,18 @@ export default class PlaylistList extends Component {
     const { playlists, canAddSong } = this.props;
     return (
       playlists ?
-      <VirtualList rowHeight={51}>
+      <div>
       {
         playlists.map(playlist =>
           <PlaylistListItem
             key={playlist.id}
             id={playlist.id}
             name={playlist.name}
-            soungCount={playlist.songs.length}
+            songCount={playlist.songs.length}
             canAddSong={canAddSong}
           />)
       }
-      </VirtualList>
+      </div>
       : <div>No playlists :(</div>
     );
   }
