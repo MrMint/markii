@@ -7,6 +7,7 @@ module.exports = {
   entry: [
     'webpack-hot-middleware/client',
     'babel-polyfill',
+    'react-addons-perf',
     './app/index.jsx',
   ],
   output: {
@@ -54,6 +55,7 @@ module.exports = {
       test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
       loader: 'file-loader',
     },
+    { test: require.resolve('react-addons-perf'), loader: 'expose?Perf' },
   ],
   },
   externals: {
