@@ -12,6 +12,7 @@ export default class PlaylistBuilder extends Component {
     searchResults: React.PropTypes.array.isRequired,
     onSearch: React.PropTypes.func.isRequired,
     onAddSongToPlaylist: React.PropTypes.func.isRequired,
+    canAddSongToPlaylist: React.PropTypes.func.isRequired,
   };
 
   render() {
@@ -20,12 +21,16 @@ export default class PlaylistBuilder extends Component {
       onSearch,
       playlists,
       onAddSongToPlaylist,
+      canAddSongToPlaylist,
     } = this.props;
 
     return (
       <div className={styles.container}>
         <div className={styles.playlistList}>
-          <PlaylistList playlists={playlists} />
+          <PlaylistList
+            playlists={playlists}
+            canAddSong={canAddSongToPlaylist}
+          />
         </div>
         <div className={styles.search}>
           <SongSearch className={styles.searchBar} onSearch={onSearch} />
@@ -39,6 +44,7 @@ export default class PlaylistBuilder extends Component {
                       id={result.id}
                       title={result.name}
                       source={result.source}
+                      sourceId={result.sourceId}
                       thumbnail={result.thumbnail}
                       playlists={playlists}
                       onAddSongToPlaylist={onAddSongToPlaylist}

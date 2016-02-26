@@ -11,6 +11,7 @@ class SongSearchListItem extends Component {
     id: React.PropTypes.string.isRequired,
     title: React.PropTypes.string.isRequired,
     source: React.PropTypes.string.isRequired,
+    sourceId: React.PropTypes.string.isRequired,
     thumbnail: React.PropTypes.string.isRequired,
     playlists: React.PropTypes.array.isRequired,
     onAddSongToPlaylist: React.PropTypes.func.isRequired,
@@ -23,9 +24,10 @@ class SongSearchListItem extends Component {
       title,
       source,
       thumbnail,
+      sourceId,
       onAddSongToPlaylist,
     } = this.props;
-    onAddSongToPlaylist({ name: title, source, thumbnail }, value);
+    onAddSongToPlaylist({ name: title, source, thumbnail, sourceId }, value);
   }
 
   renderSourceIcon = (source) => {
@@ -43,7 +45,6 @@ class SongSearchListItem extends Component {
       source,
       thumbnail,
       playlists,
-      isDragging,
       connectDragSource,
     } = this.props;
 
@@ -80,11 +81,12 @@ class SongSearchListItem extends Component {
 
 const songSearchListItemSource = {
   beginDrag: (props) => {
-    const item = { id: props.id };
+    const { id, source, sourceId } = props;
+    const item = { id, source, sourceId };
     return item;
   },
 
-  endDrag: (props, monitor, component) => {
+  endDrag: (props, monitor) => {
     if (!monitor.didDrop()) {
       return;
     }
@@ -94,9 +96,10 @@ const songSearchListItemSource = {
       title,
       source,
       thumbnail,
+      sourceId,
       onAddSongToPlaylist,
     } = props;
-    onAddSongToPlaylist({ name: title, source, thumbnail }, dropResult.id);
+    onAddSongToPlaylist({ name: title, source, thumbnail, sourceId }, dropResult.id);
   },
 };
 

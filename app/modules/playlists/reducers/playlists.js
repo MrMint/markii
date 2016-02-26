@@ -4,12 +4,12 @@ const initialState = [
   {
     id: '0f17d275-3dd7-4311-bba1-75918fc8f001',
     name: 'Best of Miku 2015',
-    songs: [0, 1],
+    songs: [0],
   },
   {
     id: '0f17d275-3dd7-4311-bba1-7591f334f001',
     name: 'Best of Miku 2014',
-    songs: [0, 1],
+    songs: [0],
   },
 ];
 

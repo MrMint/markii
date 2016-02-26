@@ -54,7 +54,7 @@ class Room extends Component {
 
   canAddSongToPlaylist = (mediaSource, sourceId, playlistId) => {
     const { songs, playlists } = this.props;
-    return playlistContainsMedia(
+    return !playlistContainsMedia(
       mediaSource,
       sourceId,
       R.find(playlist => playlist.id === playlistId)(playlists),
@@ -78,7 +78,7 @@ class Room extends Component {
     const chat = this.chat;
     return (
       <div>
-        <MediaPlayer mediaSource={MediaSources.YOUTUBE} url="cVYvozAWPtc"/>
+        <MediaPlayer mediaSource={MediaSources.YOUTUBE} url="cVYvozAWPtc" />
           <Chat
             messages={chat.messages}
             onSend={this.onChatSendMessage}
@@ -101,5 +101,5 @@ export default connect((state) => ({
   search: state.searchSongs,
   senderName: state.user.username,
   playlists: state.playlists,
-  songs: stats.songs,
+  songs: state.songs,
 }))(Room);
