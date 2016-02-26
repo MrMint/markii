@@ -5,11 +5,11 @@ import { login } from '../../../modules/user/actions/index';
 
 class Login extends Component {
   static propTypes = {
-    redirect: React.PropTypes.object,
+    location: React.PropTypes.object,
   };
 
   handleLoginSubmit = (data, dispatch) => {
-    const { redirect } = this.props;
+    const { redirect } = this.props.location.query;
     dispatch(login(data.email, data.password, redirect));
   };
 
@@ -23,6 +23,4 @@ class Login extends Component {
   }
 }
 
-export default connect((state) => ({
-  redirect: state.routing.location.query.redirect,
-}))(Login);
+export default connect()(Login);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext as dragDropContext } from 'react-dnd';
 import configureStore from '../store/configureStore';
@@ -14,7 +15,8 @@ import DevTools from './DevTools';
 injectTapEventPlugin();
 
 // Configure the store
-const store = configureStore(browserHistory);
+const store = configureStore();
+const history = syncHistoryWithStore(browserHistory, store);
 
 class App extends Component {
 
@@ -25,7 +27,7 @@ class App extends Component {
   renderDevTools = () => <DevTools />
 
   renderRouter = () =>
-    <Router history={browserHistory}>
+    <Router history={history}>
       {this.props.routes}
     </Router>
 

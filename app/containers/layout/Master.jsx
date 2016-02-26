@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Master from '../../components/layout/Master';
 import { connect } from 'react-redux';
-import { routeActions } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 import { logout } from '../../modules/user/actions';
 
 export default class MasterContainer extends Component {
@@ -12,7 +12,7 @@ export default class MasterContainer extends Component {
   };
 
   handleLoginTouchTap = () => {
-    this.props.dispatch(routeActions.push('/login'));
+    browserHistory.push('/login');
   };
 
   handleLogoutTouchTap = () => {
@@ -20,7 +20,7 @@ export default class MasterContainer extends Component {
   };
 
   handleLobbyTouchTap = () => {
-    this.props.dispatch(routeActions.push('/lobby'));
+    browserHistory.push('/lobby');
   };
 
   render() {
