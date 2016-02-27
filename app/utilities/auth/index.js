@@ -28,6 +28,5 @@ export function secondsUntilTokenExpires(token) {
 
 export const userIsAuthenticated = userAuthWrapper({
   authSelector: state => state.user,
-  redirectAction: routerActions.replace,
   wrapperDisplayName: 'UserIsAuthenticated',
 });
