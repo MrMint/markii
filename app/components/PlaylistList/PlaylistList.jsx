@@ -3,25 +3,29 @@ import { } from 'material-ui';
 import PlaylistListItem from './PlaylistListItem';
 import style from './PlaylistList.css';
 
-export default class PlaylistBuilder extends Component {
+export default class PlaylistList extends Component {
   static propTypes = {
     playlists: React.PropTypes.array.isRequired,
+    canAddSong: React.PropTypes.func.isRequired,
   };
 
   render() {
-    const { playlists } = this.props;
+    const { playlists, canAddSong } = this.props;
     return (
+      playlists ?
       <div>
-        {
-          playlists ?
-          playlists.map(playlist =>
-            <PlaylistListItem
-              name={playlist.name}
-              soungCount={playlist.songs.length}
-            />)
-            : <div>No playlists :(</div>
-        }
+      {
+        playlists.map(playlist =>
+          <PlaylistListItem
+            key={playlist.id}
+            id={playlist.id}
+            name={playlist.name}
+            songCount={playlist.songs.length}
+            canAddSong={canAddSong}
+          />)
+      }
       </div>
+      : <div>No playlists :(</div>
     );
   }
 }

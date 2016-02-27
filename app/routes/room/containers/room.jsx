@@ -5,10 +5,15 @@ import uuid from 'uuid';
 import MediaPlayer from '../../../components/MediaPlayer';
 import Chat from '../../../components/chat';
 import PlaylistBuilder from '../../../components/PlaylistBuilder';
+import { addSongToPlaylist } from '../../../modules/playlists/actions';
 import * as chatActions from '../../../modules/chat/actions';
 import * as MediaSources from '../../../components/MediaPlayer/constants';
 import * as searchActions from '../../../modules/search/actions';
 import * as source from '../../../components/MediaPlayer/constants';
+
+import { playlistContainsMedia } from '../../../utilities/playlist';
+
+import R from 'ramda';
 
 import { } from 'material-ui';
 
@@ -20,6 +25,8 @@ class Room extends Component {
     search: React.PropTypes.array.isRequired,
     senderName: React.PropTypes.string.isRequired,
     params: React.PropTypes.object.isRequired,
+    playlists: React.PropTypes.array.isRequired,
+    songs: React.PropTypes.array.isRequired,
   };
 
   onChatSendMessage = (text) => {
@@ -40,6 +47,23 @@ class Room extends Component {
     dispatch(searchActions.searchForMedia(query, [source.YOUTUBE]));
   };
 
+  onAddSongToPlaylist = (song, playlistId) => {
+    const { dispatch } = this.props;
+    dispatch(addSongToPlaylist({ ...song, id: uuid.v4() }, playlistId));
+  };
+
+  canAddSongToPlaylist = (mediaSource, sourceId, playlistOrId) => {
+    const { songs, playlists } = this.props;
+    return !playlistContainsMedia(
+      mediaSource,
+      sourceId,
+      R.is(Object, playlistOrId)
+        ? playlistOrId
+        : R.find(playlist => playlist.id === playlistOrId)(playlists),
+      songs
+    );
+  };
+
   // TODO Move room and chat getter logic into a selector using reselect lib
   get room() {
     const { rooms, params: { roomSlug } } = this.props;
@@ -52,16 +76,22 @@ class Room extends Component {
   }
 
   render() {
-    const { search } = this.props;
+    const { search, playlists } = this.props;
     const chat = this.chat;
     return (
       <div>
-        <MediaPlayer mediaSource={MediaSources.YOUTUBE} url="cVYvozAWPtc"/>
+        <MediaPlayer mediaSource={MediaSources.YOUTUBE} url="cVYvozAWPtc" />
           <Chat
             messages={chat.messages}
             onSend={this.onChatSendMessage}
           />
-        <PlaylistBuilder searchResults={search} onSearch={this.onSearch}/>
+        <PlaylistBuilder
+          searchResults={search}
+          onSearch={this.onSearch}
+          playlists={playlists}
+          onAddSongToPlaylist={this.onAddSongToPlaylist}
+          canAddSongToPlaylist={this.canAddSongToPlaylist}
+        />
       </div>
     );
   }
@@ -72,4 +102,6 @@ export default connect((state) => ({
   chats: state.chats,
   search: state.searchSongs,
   senderName: state.user.username,
+  playlists: state.playlists,
+  songs: state.songs,
 }))(Room);

@@ -7,6 +7,7 @@ module.exports = {
   entry: [
     'webpack-hot-middleware/client',
     'babel-polyfill',
+    'react-addons-perf',
     './app/index.jsx',
   ],
   output: {
@@ -33,7 +34,11 @@ module.exports = {
     }, {
       test: /\.css$/,
       loader: 'style!css?modules&&importLoaders=1&localIdentName=[name]---[local]---[hash:base64:5]!postcss',
-      // include: path.join(__dirname, '../app'),
+      include: path.join(__dirname, '../app'),
+    }, {
+      test: /\.css$/,
+      loader: 'style!css',
+      include: path.join(__dirname, '../node_modules'),
     }, {
       test: /\.less$/,
       loader: 'style!css!less',
@@ -46,6 +51,11 @@ module.exports = {
       test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
       loader: 'url-loader?limit=10000&minetype=application/font-woff',
     },
+    {
+      test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      loader: 'file-loader',
+    },
+    { test: require.resolve('react-addons-perf'), loader: 'expose?Perf' },
   ],
   },
   externals: {

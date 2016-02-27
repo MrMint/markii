@@ -1,9 +1,9 @@
 import { call, take, put, race } from 'redux-saga/effects';
 import { USER_SIGN_IN, USER_SIGN_OUT } from '../constants';
+import { browserHistory } from 'react-router';
 import { authorizeSuccess, authorizeFailure, logout } from '../actions';
 import * as auth from '../../../utilities/auth';
 import { delay } from '../../../utilities';
-import { routeActions } from 'react-router-redux';
 
 function* authorize(credentialsOrToken, refresh) {
   try {
@@ -50,7 +50,7 @@ export function* authentication() {
       if (!storedToken) {
         continue;
       }
-      yield put(routeActions.push(redirect || '/'));
+      yield call(browserHistory.push, redirect || '/');
     } else {
       yield put(authorizeSuccess(storedToken));
     }

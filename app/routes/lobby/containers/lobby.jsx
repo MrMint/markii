@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { List } from 'material-ui';
 import RoomListItem from '../../../components/RoomListItem';
-import { routeActions } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 
 class Lobby extends Component {
   static propTypes = {
@@ -12,7 +12,7 @@ class Lobby extends Component {
   };
 
   handleListItemTouchTap = (slug) => {
-    this.props.dispatch(routeActions.push(`/r/${slug}`));
+    browserHistory.push(`/r/${slug}`);
   };
 
   render() {

@@ -1,5 +1,5 @@
 import { UserAuthWrapper as userAuthWrapper } from 'redux-auth-wrapper';
-import { routeActions } from 'react-router-redux';
+import { routerActions } from 'react-router-redux';
 import * as constants from './constants';
 import localforage from 'localforage';
 import * as authApi from '../api/authApi';
@@ -28,6 +28,5 @@ export function secondsUntilTokenExpires(token) {
 
 export const userIsAuthenticated = userAuthWrapper({
   authSelector: state => state.user,
-  redirectAction: routeActions.replace,
   wrapperDisplayName: 'UserIsAuthenticated',
 });

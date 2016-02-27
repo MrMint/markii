@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 // Reducers
-import { routeReducer } from 'react-router-redux';
+import { routerReducer } from 'react-router-redux';
 import { formReducer } from './form/reducers';
 import { rooms } from './rooms/reducers';
 import { chat } from './chat/reducers';
@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
   playlists,
   songs,
   searchSongs,
-  routing: routeReducer,
+  routing: routerReducer,
   form: formReducer,
 });
 

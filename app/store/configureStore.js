@@ -2,7 +2,6 @@ import { createStore, applyMiddleware, compose } from 'redux';
 // import DevTools from '../containers/DevTools';
 import thunkMiddleware from 'redux-thunk';
 import sagaMiddleware from 'redux-saga';
-import { syncHistory } from 'react-router-redux';
 import rootReducer from '../modules/reducers';
 import saga from '../modules/sagas';
 
@@ -13,18 +12,14 @@ function withDevTools(middleware) {
   return compose(middleware, devTools);
 }
 
-export default function configureStore(history, initialState) {
-  const routerMiddleware = syncHistory(history);
-
+export default function configureStore(initialState) {
   let middleware = applyMiddleware(
     thunkMiddleware,
-    routerMiddleware,
     sagaMiddleware(saga),
   );
 
   middleware = withDevTools(middleware);
   const store = middleware(createStore)(rootReducer, initialState);
-  routerMiddleware.listenForReplays(store);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

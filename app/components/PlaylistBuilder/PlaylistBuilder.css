@@ -1,4 +1,25 @@
 .container {
-  width:350px;
-  height: 500px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 800px;
+}
+
+.search {
+  flex: 4;
+}
+
+.searchBar {
+}
+
+.songResults {
+  height: 600px;
+  overflow-x: hidden;
+  flex: 1;
+}
+
+.playlistList {
+  height: 600px;
+  overflow-x: hidden;
+  flex: 1;
 }
