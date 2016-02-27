@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { } from 'material-ui';
 import SongSearch from '../SongSearch';
-import VirtualList from '../VirtualList';
 import PlaylistList from '../PlaylistList';
 import styles from './PlaylistBuilder.css';
 import SongSearchListItem from '../SongSearchListItem';

@@ -100,7 +100,7 @@ class SongSearchListItem extends Component {
                 />)
                 )(playlists)
               }
-            </ SelectField>
+            </SelectField>
           </div>
         }
       </div>

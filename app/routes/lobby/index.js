@@ -1,3 +1,5 @@
+import { userIsAuthenticated } from '../../utilities/auth';
+
 export default {
   path: 'lobby',
 
@@ -11,7 +13,7 @@ export default {
 
   getComponent(location, cb) {
     require.ensure([], (require) => {
-      cb(null, require('./containers/lobby').default);
+      cb(null, userIsAuthenticated(require('./containers/lobby').default));
     });
   },
 };
