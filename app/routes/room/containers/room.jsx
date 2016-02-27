@@ -52,12 +52,14 @@ class Room extends Component {
     dispatch(addSongToPlaylist({ ...song, id: uuid.v4() }, playlistId));
   };
 
-  canAddSongToPlaylist = (mediaSource, sourceId, playlistId) => {
+  canAddSongToPlaylist = (mediaSource, sourceId, playlistOrId) => {
     const { songs, playlists } = this.props;
     return !playlistContainsMedia(
       mediaSource,
       sourceId,
-      R.find(playlist => playlist.id === playlistId)(playlists),
+      R.is(Object, playlistOrId)
+        ? playlistOrId
+        : R.find(playlist => playlist.id === playlistOrId)(playlists),
       songs
     );
   };

@@ -35,24 +35,21 @@ export default class PlaylistBuilder extends Component {
         <div className={styles.search}>
           <SongSearch className={styles.searchBar} onSearch={onSearch} />
           <div className={styles.songResults}>
-            <VirtualList rowHeight={81}>
+            <div>
                 {
                   searchResults && searchResults.length > 0 ?
                   searchResults.map(result =>
                     <SongSearchListItem
                       key={result.id}
-                      id={result.id}
-                      title={result.name}
-                      source={result.source}
-                      sourceId={result.sourceId}
-                      thumbnail={result.thumbnail}
+                      song={result}
                       playlists={playlists}
+                      canAddSongToPlaylist={canAddSongToPlaylist}
                       onAddSongToPlaylist={onAddSongToPlaylist}
                     />
                   )
                   : <div>No Results</div>
                 }
-              </VirtualList>
+              </div>
           </div>
         </div>
       </div>
