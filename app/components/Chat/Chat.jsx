@@ -9,18 +9,37 @@ export default class Chat extends Component {
     onSend: React.PropTypes.func.isRequired,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      messageInputValue: '',
+    };
+  }
+
   internalOnSend = () => {
     const { onSend } = this.props;
-    onSend(this.refs.messageInput.getValue());
+    const { messageInputValue } = this.state;
+    onSend(messageInputValue);
+    this.setState({ messageInputValue: '' });
   };
+
+  handleMessageInputChange = (event) => {
+    this.setState({
+      messageInputValue: event.target.value,
+    });
+  }
 
   render() {
     const { messages } = this.props;
+    const { messageInputValue } = this.state;
     return (
       <div className={style.container}>
         <MessageList messages={messages} />
-        <TextField ref="messageInput"/>
-        <FlatButton label="Send" onTouchTap={this.internalOnSend}/>
+        <TextField
+          value={messageInputValue}
+          onChange={this.handleMessageInputChange}
+        />
+        <FlatButton label="Send" onTouchTap={this.internalOnSend} />
       </div>
     );
   }
