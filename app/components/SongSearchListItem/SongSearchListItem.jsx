@@ -29,9 +29,14 @@ class SongSearchListItem extends Component {
 
       const findPlaylist = R.curry((id, playlist) => playlist.id === id);
       const { song: { source, sourceId }, canAddSongToPlaylist } = nextProps;
-      const hasCanAddSongChanged = (a, b) =>
-        canAddSongToPlaylist(source, sourceId, a)
-        !== canAddSongToPlaylist(source, sourceId, b);
+      const hasCanAddSongChanged = (a, b) => {
+        if (a && b) {
+          return canAddSongToPlaylist(source, sourceId, a)
+          !== canAddSongToPlaylist(source, sourceId, b);
+        }
+        // We created a new playlist, rerender
+        return true;
+      };
 
       // If the ability to add this song to a playlist has changed, rerender
       if (R.any(playlist =>
