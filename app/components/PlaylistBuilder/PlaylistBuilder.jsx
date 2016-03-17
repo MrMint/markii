@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { } from 'material-ui';
+import { RaisedButton, TextField } from 'material-ui';
 import SongSearch from '../SongSearch';
 import PlaylistList from '../PlaylistList';
 import styles from './PlaylistBuilder.css';
@@ -12,7 +12,26 @@ export default class PlaylistBuilder extends Component {
     onSearch: React.PropTypes.func.isRequired,
     onAddSongToPlaylist: React.PropTypes.func.isRequired,
     canAddSongToPlaylist: React.PropTypes.func.isRequired,
+    onCreatePlaylist: React.PropTypes.func.isRequired,
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      playlistNameInputValue: '',
+    };
+  }
+
+  handleCreatePlaylist = () => {
+    const { onCreatePlaylist } = this.props;
+    const { playlistNameInputValue } = this.state;
+    onCreatePlaylist(playlistNameInputValue);
+    this.setState({ playlistNameInputValue: '' });
+  }
+
+  handlePlaylistNameInputChange = (event) => {
+    this.setState({ playlistNameInputValue: event.target.value });
+  }
 
   render() {
     const {
@@ -22,6 +41,7 @@ export default class PlaylistBuilder extends Component {
       onAddSongToPlaylist,
       canAddSongToPlaylist,
     } = this.props;
+    const { playlistNameInputValue } = this.state;
 
     return (
       <div className={styles.container}>
@@ -30,6 +50,11 @@ export default class PlaylistBuilder extends Component {
             playlists={playlists}
             canAddSong={canAddSongToPlaylist}
           />
+        <TextField
+          value={playlistNameInputValue}
+          onChange={this.handlePlaylistNameInputChange}
+        />
+        <RaisedButton label="Create" onTouchTap={this.handleCreatePlaylist} />
         </div>
         <div className={styles.search}>
           <SongSearch className={styles.searchBar} onSearch={onSearch} />

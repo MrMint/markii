@@ -12,7 +12,7 @@ export default class PlaylistList extends Component {
   render() {
     const { playlists, canAddSong } = this.props;
     return (
-      playlists ?
+      playlists.length ?
       <div>
       {
         playlists.map(playlist =>
