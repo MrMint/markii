@@ -7,10 +7,11 @@ export default class PlaylistList extends Component {
   static propTypes = {
     playlists: React.PropTypes.array.isRequired,
     canAddSong: React.PropTypes.func.isRequired,
+    onPlaylistListItemSelected: React.PropTypes.func.isRequired,
   };
 
   render() {
-    const { playlists, canAddSong } = this.props;
+    const { playlists, canAddSong, onPlaylistListItemSelected } = this.props;
     return (
       playlists.length ?
       <div>
@@ -22,6 +23,7 @@ export default class PlaylistList extends Component {
             name={playlist.name}
             songCount={playlist.songs.length}
             canAddSong={canAddSong}
+            onPlaylistListItemSelected={onPlaylistListItemSelected}
           />)
       }
       </div>

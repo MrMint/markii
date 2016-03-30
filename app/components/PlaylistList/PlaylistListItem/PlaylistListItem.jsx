@@ -13,6 +13,7 @@ class PlaylistListItem extends Component {
     canDrop: React.PropTypes.bool.isRequired,
     connectDropTarget: React.PropTypes.func.isRequired,
     canAddSong: React.PropTypes.func.isRequired,
+    onPlaylistListItemSelected: React.PropTypes.func.isRequired,
   };
 
   class = () => {
@@ -29,10 +30,15 @@ class PlaylistListItem extends Component {
     return styles.row;
   };
 
+  handleOnClick = () => {
+    const { id, onPlaylistListItemSelected } = this.props;
+    onPlaylistListItemSelected(id);
+  }
+
   render() {
     const { name, songCount, connectDropTarget } = this.props;
     return connectDropTarget(
-      <div className={ this.class() }>
+      <div className={ this.class() } onClick={this.handleOnClick}>
         <div>{name}</div>
         <div>{songCount}</div>
       </div>

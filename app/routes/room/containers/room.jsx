@@ -81,7 +81,7 @@ class Room extends Component {
   }
 
   render() {
-    const { search, playlists } = this.props;
+    const { search, playlists, songs } = this.props;
     const chat = this.chat;
     return (
       <div>
@@ -94,6 +94,7 @@ class Room extends Component {
           searchResults={search}
           onSearch={this.onSearch}
           playlists={playlists}
+          songs={songs}
           onAddSongToPlaylist={this.onAddSongToPlaylist}
           canAddSongToPlaylist={this.canAddSongToPlaylist}
           onCreatePlaylist={this.onCreatePlaylist}
