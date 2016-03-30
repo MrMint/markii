@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
-
 import MediaPlayer from '../../../components/MediaPlayer';
 import Chat from '../../../components/chat';
 import PlaylistBuilder from '../../../components/PlaylistBuilder';
-import { addSongToPlaylist } from '../../../modules/playlists/actions';
+import { addSongToPlaylist, createPlaylist } from '../../../modules/playlists/actions';
 import * as chatActions from '../../../modules/chat/actions';
 import * as MediaSources from '../../../components/MediaPlayer/constants';
 import * as searchActions from '../../../modules/search/actions';
 import * as source from '../../../components/MediaPlayer/constants';
-
 import { playlistContainsMedia } from '../../../utilities/playlist';
-
 import R from 'ramda';
-
 import { } from 'material-ui';
 
 class Room extends Component {
@@ -52,6 +48,15 @@ class Room extends Component {
     dispatch(addSongToPlaylist({ ...song, id: uuid.v4() }, playlistId));
   };
 
+  onCreatePlaylist = (playlistName) => {
+    const { dispatch } = this.props;
+    dispatch(createPlaylist({
+      id: uuid.v4(),
+      name: playlistName,
+      songs: [],
+    }));
+  }
+
   canAddSongToPlaylist = (mediaSource, sourceId, playlistOrId) => {
     const { songs, playlists } = this.props;
     return !playlistContainsMedia(
@@ -76,21 +81,23 @@ class Room extends Component {
   }
 
   render() {
-    const { search, playlists } = this.props;
+    const { search, playlists, songs } = this.props;
     const chat = this.chat;
     return (
       <div>
         <MediaPlayer mediaSource={MediaSources.YOUTUBE} url="cVYvozAWPtc" />
-          <Chat
-            messages={chat.messages}
-            onSend={this.onChatSendMessage}
-          />
+        <Chat
+          messages={chat.messages}
+          onSend={this.onChatSendMessage}
+        />
         <PlaylistBuilder
           searchResults={search}
           onSearch={this.onSearch}
           playlists={playlists}
+          songs={songs}
           onAddSongToPlaylist={this.onAddSongToPlaylist}
           canAddSongToPlaylist={this.canAddSongToPlaylist}
+          onCreatePlaylist={this.onCreatePlaylist}
         />
       </div>
     );

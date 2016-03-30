@@ -19,3 +19,12 @@ export function addSongIndexToPlaylist(songIndex, playlistId) {
     },
   };
 }
+
+export function createPlaylist(playlist) {
+  return {
+    type: types.PLAYLISTS_CREATE,
+    payload: {
+      playlist,
+    },
+  };
+}

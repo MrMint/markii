@@ -9,7 +9,7 @@ const initialState = [
   {
     id: '0f17d275-3dd7-4311-bba1-7591f334f001',
     name: 'Best of Miku 2014',
-    songs: [0],
+    songs: [],
   },
 ];
 
@@ -23,6 +23,8 @@ export default function playlists(state = initialState, action) {
         ? { ...playlist, songs: [...playlist.songs, action.payload.songIndex] }
         : playlist
       );
+    case types.PLAYLISTS_CREATE:
+      return [...state, action.payload.playlist];
     default:
       return state;
   }

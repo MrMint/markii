@@ -7,5 +7,4 @@ export function playlistContainsMedia(mediaSource, sourceId, playlist, songs) {
     sourceId,
     R.map(songIndex => songs[songIndex])(playlist.songs)
   );
-
 }
