@@ -6,8 +6,9 @@ import Chat from '../../../components/chat';
 import PlaylistBuilder from '../../../components/PlaylistBuilder';
 import { addSongToPlaylist, createPlaylist } from '../../../modules/playlists/actions';
 import * as chatActions from '../../../modules/chat/actions';
-import * as MediaSources from '../../../components/MediaPlayer/constants';
 import * as searchActions from '../../../modules/search/actions';
+import * as queueActions from '../../../modules/queue/actions';
+import * as MediaSources from '../../../components/MediaPlayer/constants';
 import * as source from '../../../components/MediaPlayer/constants';
 import { playlistContainsMedia } from '../../../utilities/playlist';
 import R from 'ramda';
@@ -23,6 +24,11 @@ class Room extends Component {
     params: React.PropTypes.object.isRequired,
     playlists: React.PropTypes.array.isRequired,
     songs: React.PropTypes.array.isRequired,
+    playing: React.PropTypes.object,
+  };
+
+  onPushSongToQueue = (songId) => {
+    this.props.dispatch(queueActions.pushSong(songId));
   };
 
   onChatSendMessage = (text) => {
@@ -80,12 +86,22 @@ class Room extends Component {
     return chats[this.room.chatId];
   }
 
+  get playingSong() {
+    const { playing, songs } = this.props;
+    return songs[playing.song];
+  }
+
   render() {
     const { search, playlists, songs } = this.props;
     const chat = this.chat;
+    const playingSong = this.playingSong;
+
     return (
       <div>
-        <MediaPlayer mediaSource={MediaSources.YOUTUBE} url="cVYvozAWPtc" />
+        <MediaPlayer
+          mediaSource={playingSong.source}
+          url={playingSong.sourceId}
+        />
         <Chat
           messages={chat.messages}
           onSend={this.onChatSendMessage}
@@ -111,4 +127,5 @@ export default connect((state) => ({
   senderName: state.user.username,
   playlists: state.playlists,
   songs: state.songs,
+  playing: state.playing,
 }))(Room);
