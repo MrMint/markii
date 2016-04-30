@@ -64,7 +64,7 @@ export default class RoomLeftDock extends Component {
           onChange={this.handlePlaylistNameInputChange}
         />
         <RaisedButton label="Create" onTouchTap={this.handleCreatePlaylist} />
-        </div>
+      </div>
     );
   }
 }

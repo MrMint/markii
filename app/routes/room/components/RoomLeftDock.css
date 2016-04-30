@@ -1,5 +1,6 @@
 .playlistList {
   width:200px;
-flex-shrink: 0;
+  flex-shrink: 0;
   overflow-x: hidden;
+  background-color: #2e3136;
 }
