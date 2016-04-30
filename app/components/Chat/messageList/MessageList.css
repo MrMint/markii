@@ -1,5 +1,5 @@
 .container{
   overflow-y: scroll;
-  height: 350px;
-  width: 350px;
+  height: 100%;
+  width: 100%;
 }

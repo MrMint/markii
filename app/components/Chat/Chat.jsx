@@ -35,11 +35,13 @@ export default class Chat extends Component {
     return (
       <div className={style.container}>
         <MessageList messages={messages} />
-        <TextField
-          value={messageInputValue}
-          onChange={this.handleMessageInputChange}
-        />
-        <FlatButton label="Send" onTouchTap={this.internalOnSend} />
+        <div>
+          <TextField
+            value={messageInputValue}
+            onChange={this.handleMessageInputChange}
+          />
+          <FlatButton label="Send" onTouchTap={this.internalOnSend} />
+        </div>
       </div>
     );
   }

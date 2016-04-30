@@ -4,6 +4,7 @@ import uuid from 'uuid';
 import MediaPlayer from '../../../components/MediaPlayer';
 import Chat from '../../../components/chat';
 import PlaylistBuilder from '../../../components/PlaylistBuilder';
+import RoomLeftDock from '../components/RoomLeftDock';
 import { addSongToPlaylist, createPlaylist } from '../../../modules/playlists/actions';
 import * as chatActions from '../../../modules/chat/actions';
 import * as searchActions from '../../../modules/search/actions';
@@ -12,7 +13,7 @@ import * as MediaSources from '../../../components/MediaPlayer/constants';
 import * as source from '../../../components/MediaPlayer/constants';
 import { playlistContainsMedia } from '../../../utilities/playlist';
 import R from 'ramda';
-import { } from 'material-ui';
+import styles from './room.css';
 
 class Room extends Component {
   static propTypes = {
@@ -97,24 +98,33 @@ class Room extends Component {
     const playingSong = this.playingSong;
 
     return (
-      <div>
-        <MediaPlayer
-          mediaSource={playingSong.source}
-          url={playingSong.sourceId}
-        />
-        <Chat
-          messages={chat.messages}
-          onSend={this.onChatSendMessage}
-        />
-        <PlaylistBuilder
-          searchResults={search}
-          onSearch={this.onSearch}
+      <div className={styles.container}>
+        <RoomLeftDock
           playlists={playlists}
-          songs={songs}
-          onAddSongToPlaylist={this.onAddSongToPlaylist}
           canAddSongToPlaylist={this.canAddSongToPlaylist}
           onCreatePlaylist={this.onCreatePlaylist}
         />
+        <div className={styles.mainContent}>
+          <MediaPlayer
+            mediaSource={playingSong.source}
+            url={playingSong.sourceId}
+          />
+          <PlaylistBuilder
+            searchResults={search}
+            onSearch={this.onSearch}
+            playlists={playlists}
+            songs={songs}
+            onAddSongToPlaylist={this.onAddSongToPlaylist}
+            canAddSongToPlaylist={this.canAddSongToPlaylist}
+            onCreatePlaylist={this.onCreatePlaylist}
+          />
+        </div>
+        <div className={styles.rightContainer}>
+          <Chat
+            messages={chat.messages}
+            onSend={this.onChatSendMessage}
+          />
+        </div>
       </div>
     );
   }

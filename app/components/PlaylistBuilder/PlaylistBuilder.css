@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: stretch;
   width: 800px;
 }
 
@@ -13,12 +13,6 @@
 }
 
 .songResults {
-  height: 600px;
-  overflow-x: hidden;
-  flex: 1;
-}
-
-.playlistList {
   height: 600px;
   overflow-x: hidden;
   flex: 1;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { } from 'material-ui';
 import PlaylistListItem from './PlaylistListItem';
-import style from './PlaylistList.css';
+import styles from './PlaylistList.css';
 
 export default class PlaylistList extends Component {
   static propTypes = {
@@ -14,7 +14,7 @@ export default class PlaylistList extends Component {
     const { playlists, canAddSong, onPlaylistListItemSelected } = this.props;
     return (
       playlists.length ?
-      <div>
+      <div className={styles.playlistsContainer}>
       {
         playlists.map(playlist =>
           <PlaylistListItem

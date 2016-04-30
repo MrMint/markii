@@ -25,24 +25,6 @@ export default class PlaylistBuilder extends Component {
     };
   }
 
-  handleCreatePlaylist = () => {
-    const { onCreatePlaylist } = this.props;
-    const { playlistNameInputValue } = this.state;
-    onCreatePlaylist(playlistNameInputValue);
-    this.setState({ playlistNameInputValue: '' });
-  }
-
-  handlePlaylistNameInputChange = (event) => {
-    this.setState({ playlistNameInputValue: event.target.value });
-  }
-
-  handlePlaylistListItemSelected = (playlistId) => {
-    const { playlists } = this.props;
-    this.setState({
-      selectedPlaylist: R.find(playlist => playlist.id === playlistId)(playlists),
-    });
-  }
-
   handleSearch = (query) => {
     const { onSearch } = this.props;
     this.setState({ selectedPlaylist: null });
@@ -105,35 +87,9 @@ export default class PlaylistBuilder extends Component {
   }
 
   render() {
-    const {
-      playlists,
-      canAddSongToPlaylist,
-    } = this.props;
-    const { playlistNameInputValue, selectedPlaylist } = this.state;
 
     return (
       <div className={styles.container}>
-        <div className={styles.playlistList}>
-          {
-            selectedPlaylist &&
-            <div
-              className={styles.playlistListSearchResults}
-              onClick={this.handleShowSearchResults}
-            >
-              Search Results
-            </div>
-          }
-          <PlaylistList
-            playlists={playlists}
-            canAddSong={canAddSongToPlaylist}
-            onPlaylistListItemSelected={this.handlePlaylistListItemSelected}
-          />
-        <TextField
-          value={playlistNameInputValue}
-          onChange={this.handlePlaylistNameInputChange}
-        />
-        <RaisedButton label="Create" onTouchTap={this.handleCreatePlaylist} />
-        </div>
         <div className={styles.search}>
           <SongSearch className={styles.searchBar} onSearch={this.handleSearch} />
           <div className={styles.songResults}>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AppBar, LeftNav, MenuItem } from 'material-ui';
 import 'normalize.css';
+import styles from './Master.css';
 
 export default class Master extends Component {
   static propTypes = {
@@ -30,7 +31,7 @@ export default class Master extends Component {
       onLogoutTouchTap,
       onLobbyTouchTap } = this.props;
     return (
-      <div style={{ paddingBottom: '80px' }}>
+      <div className={styles.container}>
         <AppBar
           title="Mark II"
           onLeftIconButtonTouchTap={this.handleToggle}
