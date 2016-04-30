@@ -1,14 +1,20 @@
 .message {
-  padding: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 3px;
 }
 
 .userName {
-  margin-right: 10px;
+  margin-right: 2px;
+  color:#fff;
 }
 
 .text {
+  color: #bfbfbf
 }
 
 .timeSent{
   float:right;
+  color: #727272;
+  font-size: 12px;
 }

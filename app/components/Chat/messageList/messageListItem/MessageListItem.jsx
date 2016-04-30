@@ -14,9 +14,9 @@ export default class MessageListItem extends Component {
 
     return (
       <div className={style.message}>
+        <span className={style.timeSent}>{format(message.timeSent, 'h:mma')}</span>
         <span className={style.userName}>{message.sender.name}:</span>
         <span className={style.text}>{message.text}</span>
-        <span className={style.timeSent}>{format(message.timeSent, 'h:mma')}</span>
       </div>
     );
   }

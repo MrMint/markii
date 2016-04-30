@@ -4,3 +4,9 @@
   overflow-x: hidden;
   background-color: #2e3136;
 }
+
+.textInputWrapper {
+  padding: 5px;
+  box-sizing: border-box;
+  overflow: hidden;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MessageList from './MessageList';
 import { TextField, FlatButton } from 'material-ui';
-import style from './Chat.css';
+import styles from './Chat.css';
 
 export default class Chat extends Component {
   static propTypes = {
@@ -33,9 +33,9 @@ export default class Chat extends Component {
     const { messages } = this.props;
     const { messageInputValue } = this.state;
     return (
-      <div className={style.container}>
+      <div className={styles.container}>
         <MessageList messages={messages} />
-        <div>
+        <div className={styles.inputContainer}>
           <TextField
             value={messageInputValue}
             onChange={this.handleMessageInputChange}

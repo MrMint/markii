@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PlaylistList from '../../../components/PlaylistList';
 import styles from './RoomLeftDock.css';
-import { TextField, RaisedButton } from 'material-ui';
+import { TextField, FlatButton } from 'material-ui';
 import R from 'ramda';
 
 export default class RoomLeftDock extends Component {
@@ -59,11 +59,24 @@ export default class RoomLeftDock extends Component {
           canAddSong={canAddSongToPlaylist}
           onPlaylistListItemSelected={this.handlePlaylistListItemSelected}
         />
-        <TextField
-          value={playlistNameInputValue}
-          onChange={this.handlePlaylistNameInputChange}
-        />
-        <RaisedButton label="Create" onTouchTap={this.handleCreatePlaylist} />
+        <div className={styles.textInputWrapper}>
+          <TextField
+            style={{width:'80%'}}
+            value={playlistNameInputValue}
+            onChange={this.handlePlaylistNameInputChange}
+            hintText="Playlist name..."
+          />
+
+          <FlatButton
+            style={{
+              width:'20%',
+              minWidth: '0px',
+              height:'34px'
+            }}
+            label="+"
+            onTouchTap={this.handleCreatePlaylist}
+          />
+        </div>
       </div>
     );
   }

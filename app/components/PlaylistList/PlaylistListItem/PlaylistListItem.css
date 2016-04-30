@@ -3,8 +3,9 @@
   height: 50px;
   flex-direction: row;
   align-items: center;
+  color:#727272;
   padding: 0 25px;
-  border-bottom: 1px solid #e0e0e0;
+  /*border-bottom: 1px solid #e0e0e0;*/
 }
 
 .canDrop {
