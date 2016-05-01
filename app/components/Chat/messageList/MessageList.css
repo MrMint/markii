@@ -1,4 +1,6 @@
 .container{
+  overflow-x: hidden;
+  word-wrap: normal;
   overflow-y: auto;
   height: 100%;
   width: 100%;

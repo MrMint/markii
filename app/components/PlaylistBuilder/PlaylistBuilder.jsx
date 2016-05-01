@@ -4,6 +4,7 @@ import SongSearch from '../SongSearch';
 import PlaylistList from '../PlaylistList';
 import styles from './PlaylistBuilder.css';
 import SongSearchListItem from '../SongSearchListItem';
+import { Scrollbars } from 'react-custom-scrollbars';
 import R from 'ramda';
 
 export default class PlaylistBuilder extends Component {
@@ -90,14 +91,10 @@ export default class PlaylistBuilder extends Component {
 
     return (
       <div className={styles.container}>
-        <div className={styles.search}>
           <SongSearch className={styles.searchBar} onSearch={this.handleSearch} />
-          <div className={styles.songResults}>
-            <div>
+          <Scrollbars className={styles.songResults}>
               { this.renderSongs() }
-            </div>
-          </div>
-        </div>
+          </Scrollbars>
       </div>
     );
   }

@@ -4,8 +4,10 @@
   flex-direction: row;
   align-items: center;
   padding: 0 25px;
-  background-color: #fff;
-  border-bottom: 1px solid #e0e0e0;
+  background-color: #36393E;
+  border-bottom: 1px solid #1e2124;
+  flex-shrink: 0;
+  color: #bfbfbf;
 }
 
 .thumbnail {
@@ -34,9 +36,12 @@
 }
 
 .center {
-  flex: 2;
+  flex: 3;
 }
 
 .right {
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }

@@ -44,6 +44,7 @@ export default class Master extends Component {
       <MuiThemeProvider muiTheme={darkMuiTheme}>
         <div className={styles.container}>
         <AppBar
+          className={styles.appBar}
           title="Mark II"
           onLeftIconButtonTouchTap={this.handleToggle}
         />

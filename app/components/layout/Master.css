@@ -7,3 +7,8 @@ body {
   flex-direction: column;
   height:100%;
 }
+
+.appBar {
+  flex-shrink: 0;
+  background-color: #673AB7 !important;
+}
