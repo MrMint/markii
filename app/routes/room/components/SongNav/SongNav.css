@@ -10,3 +10,11 @@
   box-sizing: border-box;
   overflow: hidden;
 }
+
+.playlistListSearchResults {
+  display: flex;
+  height: 50px;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 25px;
+}

@@ -69,7 +69,10 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
   },
-  postcss: [
-    require('postcss-modules-values'),
-  ],
+  postcss: function () {
+    return [
+      require('postcss-import'),
+      require('postcss-cssnext'),
+    ];
+  },
 };

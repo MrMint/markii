@@ -1,3 +1,5 @@
+@import '../colors.css';
+
 body {
   overflow: hidden;
 }
@@ -5,10 +7,19 @@ body {
 .container {
   display: flex;
   flex-direction: column;
+  color: var(--color-text-primary);
   height:100%;
 }
 
 .appBar {
   flex-shrink: 0;
-  background-color: #673AB7 !important;
+  background-color: var(--color-primary-dark) !important;
+}
+
+.appBar button div svg{
+  fill: var(--color-accent) !important;
+}
+
+.appBar h1 {
+  color: var(--color-text-secondary) !important;
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MessageList from './MessageList';
-import { TextField, FlatButton } from 'material-ui';
+import { TextField, FlatButton, RaisedButton } from 'material-ui';
+import Divider from 'material-ui/Divider';
 import styles from './Chat.css';
 
 export default class Chat extends Component {
@@ -35,12 +36,20 @@ export default class Chat extends Component {
     return (
       <div className={styles.container}>
         <MessageList messages={messages} />
-        <div className={styles.inputContainer}>
-          <TextField
-            value={messageInputValue}
-            onChange={this.handleMessageInputChange}
-          />
-          <FlatButton label="Send" onTouchTap={this.internalOnSend} />
+        <div className={styles.bottomContainer}>
+          <Divider style={{marginLeft: '10px', marginRight: '10px'}}/>
+          <div className={styles.inputContainer}>
+            <TextField
+              value={messageInputValue}
+              onChange={this.handleMessageInputChange}
+              hintText="Get chatting..."
+            />
+            <RaisedButton
+              style={{marginLeft: '2px', marginTop: '-3px'}}
+              primary
+              label="Send"
+              onTouchTap={this.internalOnSend} />
+          </div>
         </div>
       </div>
     );

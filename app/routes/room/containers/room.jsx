@@ -4,7 +4,8 @@ import uuid from 'uuid';
 import MediaPlayer from '../../../components/MediaPlayer';
 import Chat from '../../../components/chat';
 import PlaylistBuilder from '../../../components/PlaylistBuilder';
-import RoomLeftDock from '../components/RoomLeftDock';
+import RoomNav from '../components/RoomNav';
+import SongNav from '../components/SongNav';
 import { addSongToPlaylist, createPlaylist } from '../../../modules/playlists/actions';
 import * as chatActions from '../../../modules/chat/actions';
 import * as searchActions from '../../../modules/search/actions';
@@ -99,7 +100,8 @@ class Room extends Component {
 
     return (
       <div className={styles.container}>
-        <RoomLeftDock
+        <RoomNav />
+        <SongNav
           playlists={playlists}
           canAddSongToPlaylist={this.canAddSongToPlaylist}
           onCreatePlaylist={this.onCreatePlaylist}

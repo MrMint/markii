@@ -6,6 +6,12 @@
   flex-shrink: 1;
 }
 
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
 .searchBar {
   padding-left: 10px;
 }
@@ -15,14 +21,4 @@
   flex-direction: column;
   overflow-x: hidden;
   overflow-y: auto;
-}
-
-.playlistListSearchResults {
-  display: flex;
-  height: 50px;
-  flex-direction: row;
-  align-items: center;
-  padding: 0 25px;
-  background-color: #fff;
-  border-bottom: 1px solid #e0e0e0;
 }

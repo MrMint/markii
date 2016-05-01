@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import PlaylistList from '../../../components/PlaylistList';
-import styles from './RoomLeftDock.css';
+import PlaylistList from '../../../../components/PlaylistList';
+import SongNavItem from '../../../../components/SongNavItem';
+import styles from './SongNav.css';
 import { TextField, FlatButton } from 'material-ui';
 import R from 'ramda';
 
-export default class RoomLeftDock extends Component {
+export default class SongNav extends Component {
   static propTypes = {
     playlists: React.PropTypes.array.isRequired,
     canAddSongToPlaylist: React.PropTypes.func.isRequired,
@@ -37,6 +38,10 @@ export default class RoomLeftDock extends Component {
     this.setState({ playlistNameInputValue: '' });
   }
 
+  handleShowSearchResults = () => {
+    this.setState({ selectedPlaylist: null });
+  }
+
   render() {
     const { playlists, canAddSongToPlaylist } = this.props;
     const { playlistNameInputValue, selectedPlaylist } = this.state;
@@ -44,16 +49,8 @@ export default class RoomLeftDock extends Component {
     return (
 
       <div className={styles.playlistList}>
-        {
-          selectedPlaylist &&
-          <div
-            className={styles.playlistListSearchResults}
-            onClick={this.handleShowSearchResults}
-          >
-            Search Results
-          </div>
-        }
-
+        <SongNavItem primaryText="Search" isActive />
+        <SongNavItem primaryText="Queue" />
         <PlaylistList
           playlists={playlists}
           canAddSong={canAddSongToPlaylist}

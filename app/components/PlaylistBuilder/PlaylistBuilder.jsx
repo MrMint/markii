@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { RaisedButton, TextField } from 'material-ui';
+import { RaisedButton, TextField, Divider } from 'material-ui';
 import SongSearch from '../SongSearch';
 import PlaylistList from '../PlaylistList';
 import styles from './PlaylistBuilder.css';
@@ -30,10 +30,6 @@ export default class PlaylistBuilder extends Component {
     const { onSearch } = this.props;
     this.setState({ selectedPlaylist: null });
     onSearch(query);
-  }
-
-  handleShowSearchResults = () => {
-    this.setState({ selectedPlaylist: null });
   }
 
   renderSong = (song, playlists, canAddSongToPlaylist, onAddSongToPlaylist) =>
@@ -91,10 +87,13 @@ export default class PlaylistBuilder extends Component {
 
     return (
       <div className={styles.container}>
+        <div className={styles.searchContainer}>
           <SongSearch className={styles.searchBar} onSearch={this.handleSearch} />
-          <Scrollbars className={styles.songResults}>
-              { this.renderSongs() }
-          </Scrollbars>
+          <Divider style={{marginLeft: '10px', marginRight: '10px'}}/>
+        </div>
+        <Scrollbars className={styles.songResults}>
+            { this.renderSongs() }
+        </Scrollbars>
       </div>
     );
   }

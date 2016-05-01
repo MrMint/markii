@@ -1,3 +1,5 @@
+@import '../colors.css';
+
 .row {
   display: flex;
   height: 80px;
@@ -20,7 +22,7 @@
 }
 
 .source {
-  color: rgb(246, 0, 0);
+  color: var(--color-red-dark);
   float: right;
   height: 40px;
   width: 40px;
