@@ -1,35 +1,24 @@
 .container {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 800px;
+  flex-direction: column;
+  align-items: stretch;
+  flex-grow: 1;
+  flex-shrink: 1;
 }
 
-.search {
-  flex: 4;
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
 }
 
 .searchBar {
+  padding-left: 10px;
 }
 
 .songResults {
-  height: 600px;
-  overflow-x: hidden;
-  flex: 1;
-}
-
-.playlistList {
-  height: 600px;
-  overflow-x: hidden;
-  flex: 1;
-}
-
-.playlistListSearchResults {
   display: flex;
-  height: 50px;
-  flex-direction: row;
-  align-items: center;
-  padding: 0 25px;
-  background-color: #fff;
-  border-bottom: 1px solid #e0e0e0;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
 }

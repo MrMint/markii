@@ -1,0 +1,17 @@
+.container {
+  height:100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottomContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputContainer {
+  padding: 10px;
+  padding-bottom: 5px;
+  display: flex;
+  align-items: center;
+}

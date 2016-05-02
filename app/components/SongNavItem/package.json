@@ -1,0 +1,6 @@
+{
+  "name": "SongNavItem",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./SongNavItem.jsx"
+}

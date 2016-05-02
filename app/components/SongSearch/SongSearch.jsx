@@ -4,6 +4,7 @@ import { TextField, FlatButton } from 'material-ui';
 export default class SongSearch extends Component {
   static propTypes = {
     onSearch: React.PropTypes.func.isRequired,
+    className: React.PropTypes.string,
   };
 
   onSearchWrapper = () => {
@@ -12,9 +13,10 @@ export default class SongSearch extends Component {
   };
 
   render() {
+    const { className } = this.props;
     return (
-      <div>
-        <TextField ref="searchInput"/>
+      <div className={className}>
+        <TextField ref="searchInput" hintText="Song name..."/>
         <FlatButton onTouchTap={this.onSearchWrapper} label="Search"/>
       </div>
     );

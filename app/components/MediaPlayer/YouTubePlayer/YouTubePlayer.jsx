@@ -17,8 +17,9 @@ export default class YoutubePlayer extends Component {
   render() {
     const { url } = this.props;
     const opts = {
-      height: '390',
-      width: '640',
+      width:'100%',
+      height: '360px',
+      // width: '640',
       // playerVars: { // https://developers.google.com/youtube/player_parameters
       //   loop: 1,
       // },

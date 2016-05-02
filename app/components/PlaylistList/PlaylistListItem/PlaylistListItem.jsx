@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { DropTarget } from 'react-dnd';
 import { SONG_SEARCH_LIST_ITEM } from '../../../utilities/constants/dragTypes';
-import { } from 'material-ui';
+import MenuItem from 'material-ui/MenuItem';
 import styles from './PlaylistListItem.css';
+import SongNavItem from '../../SongNavItem';
 
 class PlaylistListItem extends Component {
   static propTypes = {
@@ -27,7 +28,6 @@ class PlaylistListItem extends Component {
     if (isOver) {
       return styles.canNotDrop;
     }
-    return styles.row;
   };
 
   handleOnClick = () => {
@@ -39,8 +39,7 @@ class PlaylistListItem extends Component {
     const { name, songCount, connectDropTarget } = this.props;
     return connectDropTarget(
       <div className={ this.class() } onClick={this.handleOnClick}>
-        <div>{name}</div>
-        <div>{songCount}</div>
+        <SongNavItem primaryText={name} rightBadge={songCount} />
       </div>
     );
   }

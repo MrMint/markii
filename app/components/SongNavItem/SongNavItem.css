@@ -1,0 +1,33 @@
+@import '../colors.css';
+
+.container {
+  position: relative;
+  display: flex;
+  color:#727272;
+  flex-shrink: 0;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.container:hover {
+  color: var(--color-text-primary);
+}
+
+.active {
+  composes: container;
+  justify-content: flex-start;
+  color: var(--color-text-primary);
+  background-color: var(--color-background-dark);
+}
+
+.active::before {
+  content: '';
+  width: 5px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  position: absolute;
+  background-color: var(--color-accent);
+}

@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
-import { AppBar, LeftNav, MenuItem } from 'material-ui';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
 import 'normalize.css';
+import styles from './Master.css';
+
+const darkMuiTheme = getMuiTheme(darkBaseTheme);
 
 export default class Master extends Component {
   static propTypes = {
@@ -26,16 +34,21 @@ export default class Master extends Component {
   };
 
   render() {
-    const { onLoginTouchTap,
+    const {
+      onLoginTouchTap,
       onLogoutTouchTap,
-      onLobbyTouchTap } = this.props;
+      onLobbyTouchTap,
+    } = this.props;
+
     return (
-      <div style={{ paddingBottom: '80px' }}>
+      <MuiThemeProvider muiTheme={darkMuiTheme}>
+        <div className={styles.container}>
         <AppBar
+          className={styles.appBar}
           title="Mark II"
           onLeftIconButtonTouchTap={this.handleToggle}
         />
-        <LeftNav ref="leftNav"
+        <Drawer ref="leftNav"
           docked={false}
           open={this.state.open}
           onRequestChange={this.handleClose}
@@ -43,9 +56,10 @@ export default class Master extends Component {
           <MenuItem onTouchTap={this.closeNavWrapper(onLoginTouchTap)}>Login</MenuItem>
           <MenuItem onTouchTap={this.closeNavWrapper(onLobbyTouchTap)}>Lobby</MenuItem>
           <MenuItem onTouchTap={this.closeNavWrapper(onLogoutTouchTap)}>Logout</MenuItem>
-        </LeftNav>
+        </Drawer>
         {this.props.children}
-      </div>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }

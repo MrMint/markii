@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SelectField, MenuItem } from 'material-ui';
+import { Popover, Menu, MenuItem, FlatButton } from 'material-ui';
 import { DragSource as dragSource } from 'react-dnd';
 import * as sources from '../MediaPlayer/constants';
 import { SONG_SEARCH_LIST_ITEM } from '../../utilities/constants/dragTypes';
@@ -15,11 +15,24 @@ class SongSearchListItem extends Component {
     isDragging: React.PropTypes.bool.isRequired,
     connectDragSource: React.PropTypes.func.isRequired,
     canAddSongToPlaylist: React.PropTypes.func.isRequired,
+    onPreview: React.PropTypes.func.isRequired,
   };
 
-  shouldComponentUpdate = (nextProps) => {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      open: false,
+    };
+  }
+
+  shouldComponentUpdate = (nextProps, nextState) => {
     // If the song has changed, rerender
     if (nextProps.song !== this.props.song) return true;
+
+    // If the state has changed, rerender
+    if (nextState.open !== this.state.open) return true;
+    if (nextState.anchorEl !== this.state.anchorEl) return true
 
     if (nextProps.playlists !== this.props.playlists) {
       const diff = R.without(this.props.playlists, nextProps.playlists);
@@ -49,7 +62,23 @@ class SongSearchListItem extends Component {
     return false;
   };
 
-  handleChange = (event, index, value) => {
+  handleTouchTap = (event) => {
+    // This prevents ghost click.
+    event.preventDefault();
+
+    this.setState({
+      open: true,
+      anchorEl: event.currentTarget,
+    });
+  }
+
+  handleRequestClose = () => {
+    this.setState({
+      open: false,
+    });
+  };
+
+  handleTouchTapAddToPlaylist = (event, value) => {
     const {
       song,
       onAddSongToPlaylist,
@@ -70,6 +99,11 @@ class SongSearchListItem extends Component {
     }
   }
 
+  handleOnPreview = () => {
+    const { onPreview, song } = this.props;
+    onPreview(song.id);
+  }
+
   render() {
     const {
       song,
@@ -77,6 +111,8 @@ class SongSearchListItem extends Component {
       connectDragSource,
       canAddSongToPlaylist,
     } = this.props;
+
+    const { open, anchorEl } = this.state;
 
     return connectDragSource(
       <div className={styles.row}>
@@ -86,26 +122,33 @@ class SongSearchListItem extends Component {
         <div className={styles.center}>
           <div className={styles.title}>{song.name}</div>
         </div>
-        <div className={styles.right}>
-          { this.renderSourceIcon(song.source) }
-        </div>
-        { // TODO these selectfields are killing performance, investigate
-          // https://github.com/callemall/material-ui/issues/2859
-          playlists &&
+        {
           <div className={styles.right}>
-            <SelectField onChange={this.handleChange} fullWidth>
+            <FlatButton label="Preview" onTouchTap={this.handleOnPreview}/>
+            <FlatButton label="Add" onTouchTap={this.handleTouchTap}/>
+            <Popover
+              open={open}
+              anchorEl={anchorEl}
+              anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+              targetOrigin={{horizontal: 'left', vertical: 'top'}}
+              onRequestClose={this.handleRequestClose}
+            >
+              <Menu
+                onChange={this.handleTouchTapAddToPlaylist}
+              >
               {
-                R.pipe(R.filter(
-                  playlist => canAddSongToPlaylist(song.source, song.sourceId, playlist)
-                ), R.map(playlist =>
-                <MenuItem
-                  value={playlist.id}
-                  key={playlist.id}
-                  primaryText={playlist.name}
-                />)
+                R.map(playlist =>
+                  <MenuItem
+                    value={playlist.id}
+                    key={playlist.id}
+                    primaryText={playlist.name}
+                    checked={!canAddSongToPlaylist(song.source, song.sourceId, playlist)}
+                  />
                 )(playlists)
               }
-            </SelectField>
+              </Menu>
+            </Popover>
+            { this.renderSourceIcon(song.source) }
           </div>
         }
       </div>
