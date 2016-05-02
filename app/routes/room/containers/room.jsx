@@ -65,6 +65,11 @@ class Room extends Component {
     }));
   }
 
+  handleOnPreview = (songId) => {
+    const { dispatch } = this.props;
+    dispatch(queueActions.pushSong(songId));
+  }
+
   canAddSongToPlaylist = (mediaSource, sourceId, playlistOrId) => {
     const { songs, playlists } = this.props;
     return !playlistContainsMedia(
@@ -119,6 +124,7 @@ class Room extends Component {
             onAddSongToPlaylist={this.onAddSongToPlaylist}
             canAddSongToPlaylist={this.canAddSongToPlaylist}
             onCreatePlaylist={this.onCreatePlaylist}
+            onPreview={this.handleOnPreview}
           />
         </div>
         <div className={styles.rightContainer}>

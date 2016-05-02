@@ -15,6 +15,7 @@ class SongSearchListItem extends Component {
     isDragging: React.PropTypes.bool.isRequired,
     connectDragSource: React.PropTypes.func.isRequired,
     canAddSongToPlaylist: React.PropTypes.func.isRequired,
+    onPreview: React.PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -98,6 +99,11 @@ class SongSearchListItem extends Component {
     }
   }
 
+  handleOnPreview = () => {
+    const { onPreview, song } = this.props;
+    onPreview(song.id);
+  }
+
   render() {
     const {
       song,
@@ -117,8 +123,8 @@ class SongSearchListItem extends Component {
           <div className={styles.title}>{song.name}</div>
         </div>
         {
-          playlists &&
           <div className={styles.right}>
+            <FlatButton label="Preview" onTouchTap={this.handleOnPreview}/>
             <FlatButton label="Add" onTouchTap={this.handleTouchTap}/>
             <Popover
               open={open}
@@ -127,9 +133,9 @@ class SongSearchListItem extends Component {
               targetOrigin={{horizontal: 'left', vertical: 'top'}}
               onRequestClose={this.handleRequestClose}
             >
-                <Menu
-                  onChange={this.handleTouchTapAddToPlaylist}
-                >
+              <Menu
+                onChange={this.handleTouchTapAddToPlaylist}
+              >
               {
                 R.map(playlist =>
                   <MenuItem
@@ -140,7 +146,7 @@ class SongSearchListItem extends Component {
                   />
                 )(playlists)
               }
-                </Menu>
+              </Menu>
             </Popover>
             { this.renderSourceIcon(song.source) }
           </div>

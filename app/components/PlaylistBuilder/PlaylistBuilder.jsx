@@ -16,6 +16,7 @@ export default class PlaylistBuilder extends Component {
     onAddSongToPlaylist: React.PropTypes.func.isRequired,
     canAddSongToPlaylist: React.PropTypes.func.isRequired,
     onCreatePlaylist: React.PropTypes.func.isRequired,
+    onPreview: React.PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -32,14 +33,19 @@ export default class PlaylistBuilder extends Component {
     onSearch(query);
   }
 
-  renderSong = (song, playlists, canAddSongToPlaylist, onAddSongToPlaylist) =>
-    <SongSearchListItem
-      key={song.id}
-      song={song}
-      playlists={playlists}
-      canAddSongToPlaylist={canAddSongToPlaylist}
-      onAddSongToPlaylist={onAddSongToPlaylist}
-    />
+  renderSong = (song, playlists, canAddSongToPlaylist, onAddSongToPlaylist) => {
+    const { onPreview } = this.props;
+    return (
+      <SongSearchListItem
+        key={song.id}
+        song={song}
+        playlists={playlists}
+        canAddSongToPlaylist={canAddSongToPlaylist}
+        onAddSongToPlaylist={onAddSongToPlaylist}
+        onPreview={onPreview}
+      />
+    );
+  }
 
   renderPlaylistSongs = () => {
     const { selectedPlaylist } = this.state;
