@@ -19,7 +19,7 @@ export function pushSong(songId) {
 
 export function enqueueSong(songId) {
   return {
-    type: QUEUE_PUSH,
+    type: QUEUE_ENQUEUE,
     payload: { songId },
   };
 }

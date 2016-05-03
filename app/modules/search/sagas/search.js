@@ -1,7 +1,9 @@
-import { take, put, race, cancel, fork, join } from 'redux-saga/effects';
+import { take, put, race, cancel, fork, join, select } from 'redux-saga/effects';
 import { SEARCH_MEDIA_REQUEST } from '../constants';
 import { search as searchYoutubeApi } from '../../../utilities/api/youtubeApi';
 import { receiveMediaResults, clearMediaSearchResults } from '../actions';
+import { addSongs } from '../../songs/actions';
+import R from 'ramda';
 
 function* searchYoutube(query) {
   return yield searchYoutubeApi(query);
@@ -33,8 +35,15 @@ export function* songSearch() {
 
     // Dispatch the results or cancel search tasks and requery
     if (results) {
+      const { songs } = yield select();
+      const songIndex = songs.length;
+      const resultsFlat = R.flatten(results);
+      const songIds = R.range(songIndex, songIndex + resultsFlat.length);
+
+      yield put(addSongs(resultsFlat));
       yield put(clearMediaSearchResults());
-      yield put(receiveMediaResults(results.concat.apply([], results)));
+      yield put(receiveMediaResults(songIds));
+
       query = undefined;
     } else {
       searchTasks.forEach(cancel);

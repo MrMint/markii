@@ -98,8 +98,13 @@ class Room extends Component {
     return songs[playing.song];
   }
 
+  get searchSongs() {
+    const { search, songs } = this.props;
+    return R.map(index => songs[index])(search);
+  }
+
   render() {
-    const { search, playlists, songs } = this.props;
+    const { playlists, songs } = this.props;
     const chat = this.chat;
     const playingSong = this.playingSong;
 
@@ -117,7 +122,7 @@ class Room extends Component {
             url={playingSong.sourceId}
           />
           <PlaylistBuilder
-            searchResults={search}
+            searchResults={this.searchSongs}
             onSearch={this.onSearch}
             playlists={playlists}
             songs={songs}
