@@ -36,9 +36,8 @@ export function* songSearch() {
     // Dispatch the results or cancel search tasks and requery
     if (results) {
       const { songs } = yield select();
-      const songIndex = songs.length;
       const resultsFlat = R.flatten(results);
-      const songIds = R.range(songIndex, songIndex + resultsFlat.length);
+      const songIds = R.map(song => song.id)(resultsFlat);
 
       yield put(addSongs(resultsFlat));
       yield put(clearMediaSearchResults());

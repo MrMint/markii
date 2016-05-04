@@ -10,11 +10,11 @@ export function addSongToPlaylist(song, playlistId) {
   };
 }
 
-export function addSongIndexToPlaylist(songIndex, playlistId) {
+export function addSongIdToPlaylist(songId, playlistId) {
   return {
-    type: types.PLAYLISTS_ADD_SONG_INDEX,
+    type: types.PLAYLISTS_ADD_SONG_ID,
     payload: {
-      songIndex,
+      songId,
       playlistId,
     },
   };

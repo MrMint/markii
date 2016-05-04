@@ -1,7 +1,7 @@
 import R from 'ramda';
 import * as types from '../constants';
 
-const initialState = [0];
+const initialState = ['0f17d275-3dd7-4311-bba1-75918fc8f001'];
 
 export default function playlists(state = initialState, action) {
   switch (action.type) {

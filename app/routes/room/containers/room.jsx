@@ -51,9 +51,9 @@ class Room extends Component {
     dispatch(searchActions.searchForMedia(query, [source.YOUTUBE]));
   };
 
-  onAddSongToPlaylist = (song, playlistId) => {
+  handleOnAddSongToPlaylist = (song, playlistId) => {
     const { dispatch } = this.props;
-    dispatch(addSongToPlaylist({ ...song, id: uuid.v4() }, playlistId));
+    dispatch(addSongToPlaylist(song, playlistId));
   };
 
   onCreatePlaylist = (playlistName) => {
@@ -95,12 +95,12 @@ class Room extends Component {
 
   get playingSong() {
     const { playing, songs } = this.props;
-    return songs[playing.song];
+    return songs.get(playing.song);
   }
 
   get searchSongs() {
     const { search, songs } = this.props;
-    return R.map(index => songs[index])(search);
+    return R.map(id => songs.get(id))(search);
   }
 
   render() {
@@ -126,7 +126,7 @@ class Room extends Component {
             onSearch={this.onSearch}
             playlists={playlists}
             songs={songs}
-            onAddSongToPlaylist={this.onAddSongToPlaylist}
+            onAddSongToPlaylist={this.handleOnAddSongToPlaylist}
             canAddSongToPlaylist={this.canAddSongToPlaylist}
             onCreatePlaylist={this.onCreatePlaylist}
             onPreview={this.handleOnPreview}

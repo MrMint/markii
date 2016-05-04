@@ -5,16 +5,17 @@ import {
 import { get, parseJson } from './apiUtils';
 import uuid from 'uuid';
 import { YOUTUBE } from '../../components/MediaPlayer/constants';
+import { Song } from '../../modules/songs/types';
 
 const parseSearchResults = (results) => {
   return results.items.map(result => {
-    return {
+    return Song({
       id: uuid.v4(),
       name: result.snippet.title,
       source: YOUTUBE,
       sourceId: result.id.videoId,
       thumbnail: result.snippet.thumbnails.default.url,
-    };
+    });
   });
 };
 

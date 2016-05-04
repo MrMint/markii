@@ -2,20 +2,18 @@ import { takeEvery } from 'redux-saga';
 import { put, fork, select } from 'redux-saga/effects';
 import { addSong } from '../actions';
 import { PLAYLISTS_ADD_SONG } from '../../playlists/constants';
-import { addSongIndexToPlaylist } from '../../playlists/actions';
+import { addSongToPlaylist } from '../../playlists/actions';
 
-function* addSongToPlaylist(action) {
+function* handleAddSongToPlaylist(action) {
   const { song, playlistId } = action.payload;
   yield put(addSong(song));
-  const { songs } = yield select();
-  const songIndex = songs.length - 1;
-  yield put(addSongIndexToPlaylist(songIndex, playlistId));
+  yield put(addSongToPlaylist(song, playlistId));
 }
 
 function* watchAddSongToPlaylist() {
-  yield takeEvery(PLAYLISTS_ADD_SONG, addSongToPlaylist);
+  yield takeEvery(PLAYLISTS_ADD_SONG, handleAddSongToPlaylist);
 }
 
 export default function* songsSaga() {
-  yield fork(watchAddSongToPlaylist);
+  // yield fork(watchAddSongToPlaylist);
 }
