@@ -10,6 +10,7 @@ import { addSongToPlaylist, createPlaylist } from '../../../modules/playlists/ac
 import * as chatActions from '../../../modules/chat/actions';
 import * as searchActions from '../../../modules/search/actions';
 import * as queueActions from '../../../modules/queue/actions';
+import * as playingActions from '../../../modules/playing/actions';
 import * as MediaSources from '../../../components/MediaPlayer/constants';
 import * as source from '../../../components/MediaPlayer/constants';
 import { playlistContainsMedia } from '../../../utilities/playlist';
@@ -66,8 +67,10 @@ class Room extends Component {
   }
 
   handleOnPreview = (songId) => {
-    const { dispatch } = this.props;
-    dispatch(queueActions.pushSong(songId));
+    const { dispatch, playing } = this.props;
+    dispatch(queueActions.pushSong(playing.songId));
+    dispatch(playingActions.setSong(songId));
+    dispatch(playingActions.startPlaying());
   }
 
   canAddSongToPlaylist = (mediaSource, sourceId, playlistOrId) => {
@@ -95,7 +98,7 @@ class Room extends Component {
 
   get playingSong() {
     const { playing, songs } = this.props;
-    return songs.get(playing.song);
+    return songs.get(playing.songId);
   }
 
   get searchSongs() {

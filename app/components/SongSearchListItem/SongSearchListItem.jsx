@@ -32,10 +32,10 @@ class SongSearchListItem extends Component {
 
     // If the state has changed, rerender
     if (nextState.open !== this.state.open) return true;
-    if (nextState.anchorEl !== this.state.anchorEl) return true
+    if (nextState.anchorEl !== this.state.anchorEl) return true;
 
     if (nextProps.playlists !== this.props.playlists) {
-      const diff = R.without(this.props.playlists, nextProps.playlists);
+      const diff = R.without(this.props.playlists.toJS(), nextProps.playlists.toJS());
 
       // If none of the playlists are different, do not rerender
       if (R.isEmpty(diff)) return false;
@@ -148,7 +148,7 @@ class SongSearchListItem extends Component {
               }
               </Menu>
             </Popover>
-            { this.renderSourceIcon(song.source) }
+            {this.renderSourceIcon(song.source)}
           </div>
         }
       </div>

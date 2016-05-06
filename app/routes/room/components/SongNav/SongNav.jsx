@@ -47,7 +47,6 @@ export default class SongNav extends Component {
     const { playlistNameInputValue, selectedPlaylist } = this.state;
 
     return (
-
       <div className={styles.playlistList}>
         <SongNavItem primaryText="Search" isActive />
         <SongNavItem primaryText="Queue" />
