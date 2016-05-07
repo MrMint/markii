@@ -1,0 +1,29 @@
+@import "../colors.css";
+
+.container {
+  display: flex;
+  height: 55px;
+  overflow: hidden;
+  width:100%;
+  background-color: var(--color-background-dark)
+}
+
+.containerItemFlex {
+  height: 100%;
+  flex-shrink: 0;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.seekbarContainer {
+  composes: containerItemFlex;
+}
+
+.playControlsContainer {
+  composes: containerItemFlex;
+}
+
+.volumeContainer {
+  composes: containerItemFlex;
+}

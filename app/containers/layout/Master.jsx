@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { logout } from '../../modules/user/actions';
 
-export default class MasterContainer extends Component {
+class MasterContainer extends Component {
 
   static propTypes = {
     dispatch: React.PropTypes.func.isRequired,
     children: React.PropTypes.object.isRequired,
+    playing: React.PropTypes.object.isRequired,
   };
 
   handleLoginTouchTap = () => {
@@ -24,12 +25,13 @@ export default class MasterContainer extends Component {
   };
 
   render() {
-    const { children } = this.props;
+    const { children, playing } = this.props;
     return (
       <Master
         onLoginTouchTap={this.handleLoginTouchTap}
         onLogoutTouchTap={this.handleLogoutTouchTap}
         onLobbyTouchTap={this.handleLobbyTouchTap}
+        playing={playing}
       >
         {children}
       </Master>
@@ -37,4 +39,6 @@ export default class MasterContainer extends Component {
   }
 }
 
-export default connect(() => ({}))(MasterContainer);
+export default connect((state) => ({
+  playing: state.playing,
+}))(MasterContainer);

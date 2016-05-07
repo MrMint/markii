@@ -1,4 +1,4 @@
-import { take, put, race, cancel, fork, join, select } from 'redux-saga/effects';
+import { take, put, race, cancel, fork, join } from 'redux-saga/effects';
 import { SEARCH_MEDIA_REQUEST } from '../constants';
 import { search as searchYoutubeApi } from '../../../utilities/api/youtubeApi';
 import { receiveMediaResults, clearMediaSearchResults } from '../actions';
@@ -35,7 +35,6 @@ export function* songSearch() {
 
     // Dispatch the results or cancel search tasks and requery
     if (results) {
-      const { songs } = yield select();
       const resultsFlat = R.flatten(results);
       const songIds = R.map(song => song.id)(resultsFlat);
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
 import MediaPlayer from '../../../components/MediaPlayer';
-import Chat from '../../../components/chat';
+import Chat from '../../../components/Chat';
 import PlaylistBuilder from '../../../components/PlaylistBuilder';
 import RoomNav from '../components/RoomNav';
 import SongNav from '../components/SongNav';
@@ -11,7 +11,6 @@ import * as chatActions from '../../../modules/chat/actions';
 import * as searchActions from '../../../modules/search/actions';
 import * as queueActions from '../../../modules/queue/actions';
 import * as playingActions from '../../../modules/playing/actions';
-import * as MediaSources from '../../../components/MediaPlayer/constants';
 import * as source from '../../../components/MediaPlayer/constants';
 import { playlistContainsMedia } from '../../../utilities/playlist';
 import R from 'ramda';
@@ -85,6 +84,16 @@ class Room extends Component {
     );
   };
 
+  handleTimeUpdate = (time) => {
+    const { dispatch } = this.props;
+    dispatch(playingActions.setPlayTime(time));
+  }
+
+  handleDuration = (duration) => {
+    const { dispatch } = this.props;
+    dispatch(playingActions.setDuration(duration));
+  }
+
   // TODO Move room and chat getter logic into a selector using reselect lib
   get room() {
     const { rooms, params: { roomSlug } } = this.props;
@@ -107,7 +116,7 @@ class Room extends Component {
   }
 
   render() {
-    const { playlists, songs } = this.props;
+    const { playlists, songs, playing } = this.props;
     const chat = this.chat;
     const playingSong = this.playingSong;
 
@@ -123,6 +132,9 @@ class Room extends Component {
           <MediaPlayer
             mediaSource={playingSong.source}
             url={playingSong.sourceId}
+            isPlaying={playing.isPlaying}
+            onTimeUpdate={this.handleTimeUpdate}
+            onDuration={this.handleDuration}
           />
           <PlaylistBuilder
             searchResults={this.searchSongs}
