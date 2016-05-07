@@ -17,7 +17,8 @@ export default class MediaControl extends Component {
         </div>
         <div className={styles.seekbarContainer}>
           <SeekBar
-            percentProgress={playTime / duration * 100}
+            playTime={playTime}
+            duration={duration}
           />
         </div>
         <div className={styles.volumeContainer}>asdf
