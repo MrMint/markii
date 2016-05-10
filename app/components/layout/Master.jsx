@@ -19,6 +19,8 @@ export default class Master extends Component {
     onLobbyTouchTap: React.PropTypes.func.isRequired,
     title: React.PropTypes.string.isRequired,
     playing: React.PropTypes.object.isRequired,
+    onPlay: React.PropTypes.func.isRequired,
+    onPause: React.PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -41,6 +43,8 @@ export default class Master extends Component {
       onLogoutTouchTap,
       onLobbyTouchTap,
       playing,
+      onPlay,
+      onPause,
     } = this.props;
 
     return (
@@ -66,6 +70,8 @@ export default class Master extends Component {
             isPlaying={playing.isPlaying}
             playTime={playing.time}
             duration={playing.duration}
+            onPlay={onPlay}
+            onPause={onPause}
           />
         </div>
       </MuiThemeProvider>

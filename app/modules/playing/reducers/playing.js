@@ -3,7 +3,7 @@ import * as types from '../constants';
 
 const initialState = {
   songId: '0f17d275-3dd7-4311-bba1-75918fc8f001',
-  playing: true,
+  isPlaying: false,
   time: 0,
 };
 

@@ -3,6 +3,7 @@ import Master from '../../components/layout/Master';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { logout } from '../../modules/user/actions';
+import { stopPlaying, startPlaying } from '../../modules/playing/actions';
 
 class MasterContainer extends Component {
 
@@ -24,6 +25,16 @@ class MasterContainer extends Component {
     browserHistory.push('/lobby');
   };
 
+  handlePlay = () => {
+    const { dispatch } = this.props;
+    dispatch(startPlaying());
+  };
+
+  handlePause = () => {
+    const { dispatch } = this.props;
+    dispatch(stopPlaying());
+  };
+
   render() {
     const { children, playing } = this.props;
     return (
@@ -32,6 +43,8 @@ class MasterContainer extends Component {
         onLogoutTouchTap={this.handleLogoutTouchTap}
         onLobbyTouchTap={this.handleLobbyTouchTap}
         playing={playing}
+        onPlay={this.handlePlay}
+        onPause={this.handlePause}
       >
         {children}
       </Master>
