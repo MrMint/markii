@@ -1,0 +1,6 @@
+{
+  "name": "Back",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Back.jsx"
+}
