@@ -4,6 +4,7 @@ import PlayPause from '../Controls/PlayPause';
 import Skip from '../Controls/Skip';
 import Back from '../Controls/Back';
 import styles from './MediaControl.css';
+import shallowCompare from 'react-addons-shallow-compare';
 
 export default class MediaControl extends Component {
   static propTypes = {
@@ -13,6 +14,8 @@ export default class MediaControl extends Component {
     onPlay: PropTypes.func.isRequired,
     onPause: PropTypes.func.isRequired,
   }
+
+  shouldComponentUpdate = (nextProps) => shallowCompare(this, nextProps);
 
   render() {
     const { playTime, duration, isPlaying, onPlay, onPause } = this.props;

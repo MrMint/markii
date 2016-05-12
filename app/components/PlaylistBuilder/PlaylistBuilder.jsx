@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { RaisedButton, TextField, Divider } from 'material-ui';
+import shallowCompare from 'react-addons-shallow-compare';
 import SongSearch from '../SongSearch';
 import PlaylistList from '../PlaylistList';
 import styles from './PlaylistBuilder.css';
@@ -26,6 +27,8 @@ export default class PlaylistBuilder extends Component {
       selectedPlaylist: null,
     };
   }
+
+  shouldComponentUpdate = (nextProps) => shallowCompare(this, nextProps);
 
   handleSearch = (query) => {
     const { onSearch } = this.props;

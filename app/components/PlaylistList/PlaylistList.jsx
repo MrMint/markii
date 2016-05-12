@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { } from 'material-ui';
+import shallowCompare from 'react-addons-shallow-compare';
 import PlaylistListItem from './PlaylistListItem';
 import styles from './PlaylistList.css';
 
@@ -9,6 +9,8 @@ export default class PlaylistList extends Component {
     canAddSong: React.PropTypes.func.isRequired,
     onPlaylistListItemSelected: React.PropTypes.func.isRequired,
   };
+
+  shouldComponentUpdate = (nextProps) => shallowCompare(this, nextProps);
 
   render() {
     const { playlists, canAddSong, onPlaylistListItemSelected } = this.props;

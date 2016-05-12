@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import shallowCompare from 'react-addons-shallow-compare';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
 import MediaPlayer from '../../../components/MediaPlayer';
@@ -28,6 +29,8 @@ class Room extends Component {
     songs: React.PropTypes.array.isRequired,
     playing: React.PropTypes.object,
   };
+
+  shouldComponentUpdate = (nextProps) => shallowCompare(this, nextProps);
 
   onPushSongToQueue = (songId) => {
     this.props.dispatch(queueActions.pushSong(songId));
