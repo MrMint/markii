@@ -1,14 +1,15 @@
 import React, { PropTypes } from 'react';
-import { FaArrowLeft } from 'react-icons/lib/fa';
+import { FaStepBackward } from 'react-icons/lib/fa';
 import styles from './Back.css';
 
-const Back = ({ onBack }) =>
-  <div className={styles.container}>
-    <FaArrowLeft onClick={onBack} />
+const Back = ({ onBack, className }) =>
+  <div className={`${styles.container} ${className}`}>
+    <FaStepBackward onClick={onBack} />
   </div>;
 
 Back.propTypes = {
   onBack: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
 export default Back;

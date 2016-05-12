@@ -88,8 +88,10 @@ class Room extends Component {
   };
 
   handleTimeUpdate = (time) => {
-    const { dispatch } = this.props;
-    dispatch(playingActions.setPlayTime(time));
+    const { dispatch, playing } = this.props;
+    if (!playing.isSeeking) {
+      dispatch(playingActions.setPlayTime(time));
+    }
   }
 
   handleDuration = (duration) => {
@@ -136,6 +138,9 @@ class Room extends Component {
             mediaSource={playingSong.source}
             url={playingSong.sourceId}
             isPlaying={playing.isPlaying}
+            isSeeking={playing.isSeeking}
+            time={playing.time}
+            volume={playing.volume}
             onTimeUpdate={this.handleTimeUpdate}
             onDuration={this.handleDuration}
           />

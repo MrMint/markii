@@ -4,8 +4,8 @@
   display: flex;
   height: 55px;
   overflow: hidden;
-  width:100%;
-  background-color: var(--color-background-dark)
+  width: 100%;
+  background-color: var(--color-background-dark);
 }
 
 .containerItemFlex {
@@ -18,12 +18,34 @@
 
 .seekbarContainer {
   composes: containerItemFlex;
+  padding-right: 25px;
 }
 
 .playControlsContainer {
   composes: containerItemFlex;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 115px;
+  padding-left: 25px;
 }
 
 .volumeContainer {
   composes: containerItemFlex;
+  flex-grow: 0;
+  width: 150px;
+  margin-right: 25px;
+}
+
+.playPause {
+  font-size: 28px;
+  margin-right: 10px;
+}
+
+.back {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.skip {
+  font-size: 18px;
 }

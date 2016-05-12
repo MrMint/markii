@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { RaisedButton, TextField, Divider } from 'material-ui';
 import shallowCompare from 'react-addons-shallow-compare';
+import { Divider } from 'material-ui';
 import SongSearch from '../SongSearch';
-import PlaylistList from '../PlaylistList';
 import styles from './PlaylistBuilder.css';
 import SongSearchListItem from '../SongSearchListItem';
 import { Scrollbars } from 'react-custom-scrollbars';
-import R from 'ramda';
 
 export default class PlaylistBuilder extends Component {
   static propTypes = {
@@ -98,10 +96,10 @@ export default class PlaylistBuilder extends Component {
       <div className={styles.container}>
         <div className={styles.searchContainer}>
           <SongSearch className={styles.searchBar} onSearch={this.handleSearch} />
-          <Divider style={{marginLeft: '10px', marginRight: '10px'}}/>
+          <Divider style={{ marginLeft: '10px', marginRight: '10px' }} />
         </div>
         <Scrollbars className={styles.songResults}>
-            { this.renderSongs() }
+            {this.renderSongs()}
         </Scrollbars>
       </div>
     );

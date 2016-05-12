@@ -7,6 +7,9 @@ export default class YoutubePlayer extends Component {
   static propTypes = {
     videoId: PropTypes.string.isRequired,
     isPlaying: PropTypes.bool.isRequired,
+    isSeeking: PropTypes.bool.isRequired,
+    time: PropTypes.number.isRequired,
+    volume: PropTypes.number.isRequired,
     onPlaying: PropTypes.func,
     onProgress: PropTypes.func,
     onDuration: PropTypes.func,
@@ -44,6 +47,18 @@ export default class YoutubePlayer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.isSeeking && (this.props.time !== nextProps.time)) {
+      //this.player.seekTo(nextProps.time, false);
+    }
+
+    if (this.props.isSeeking && !nextProps.isSeeking) {
+      this.player.seekTo(nextProps.time, true);
+    }
+
+    if (nextProps.volume !== this.props.volume) {
+      this.player.setVolume(nextProps.volume);
+    }
+
     if (nextProps.videoId !== this.props.videoId) {
       this.player.cueVideoById(nextProps.videoId);
       if (nextProps.isPlaying) this.player.playVideo();

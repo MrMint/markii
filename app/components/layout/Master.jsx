@@ -21,6 +21,10 @@ export default class Master extends Component {
     playing: React.PropTypes.object.isRequired,
     onPlay: React.PropTypes.func.isRequired,
     onPause: React.PropTypes.func.isRequired,
+    onVolumeChange: React.PropTypes.func.isRequired,
+    onSeekStart: React.PropTypes.func.isRequired,
+    onSeekStop: React.PropTypes.func.isRequired,
+    onSeekChange: React.PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -45,16 +49,15 @@ export default class Master extends Component {
       playing,
       onPlay,
       onPause,
+      onVolumeChange,
+      onSeekStart,
+      onSeekStop,
+      onSeekChange,
     } = this.props;
 
     return (
       <MuiThemeProvider muiTheme={darkMuiTheme}>
         <div className={styles.container}>
-          <AppBar
-            className={styles.appBar}
-            title="Mark II"
-            onLeftIconButtonTouchTap={this.handleToggle}
-          />
           <Drawer
             ref="leftNav"
             docked={false}
@@ -70,8 +73,13 @@ export default class Master extends Component {
             isPlaying={playing.isPlaying}
             playTime={playing.time}
             duration={playing.duration}
+            volume={playing.volume}
             onPlay={onPlay}
             onPause={onPause}
+            onVolumeChange={onVolumeChange}
+            onSeekStart={onSeekStart}
+            onSeekStop={onSeekStop}
+            onSeekChange={onSeekChange}
           />
         </div>
       </MuiThemeProvider>

@@ -3,7 +3,14 @@ import Master from '../../components/layout/Master';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { logout } from '../../modules/user/actions';
-import { stopPlaying, startPlaying } from '../../modules/playing/actions';
+import {
+  stopPlaying,
+  startPlaying,
+  setVolume,
+  startSeeking,
+  stopSeeking,
+  setPlayTime,
+} from '../../modules/playing/actions';
 
 class MasterContainer extends Component {
 
@@ -35,6 +42,26 @@ class MasterContainer extends Component {
     dispatch(stopPlaying());
   };
 
+  handleVolumeChange = (volume) => {
+    const { dispatch } = this.props;
+    dispatch(setVolume(volume));
+  }
+
+  handleSeekStart = () => {
+    const { dispatch } = this.props;
+    dispatch(startSeeking());
+  }
+
+  handleSeekStop = () => {
+    const { dispatch } = this.props;
+    dispatch(stopSeeking());
+  }
+
+  handleSeekChange = (seconds) => {
+    const { dispatch } = this.props;
+    dispatch(setPlayTime(seconds));
+  }
+
   render() {
     const { children, playing } = this.props;
     return (
@@ -45,6 +72,10 @@ class MasterContainer extends Component {
         playing={playing}
         onPlay={this.handlePlay}
         onPause={this.handlePause}
+        onVolumeChange={this.handleVolumeChange}
+        onSeekStart={this.handleSeekStart}
+        onSeekStop={this.handleSeekStop}
+        onSeekChange={this.handleSeekChange}
       >
         {children}
       </Master>

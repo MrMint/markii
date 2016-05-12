@@ -10,6 +10,9 @@ export default class MediaPlayer extends Component {
     mediaSource: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     isPlaying: PropTypes.bool.isRequired,
+    volume: PropTypes.number.isRequired,
+    time: PropTypes.number.isRequired,
+    isSeeking: PropTypes.bool.isRequired,
     onTimeUpdate: PropTypes.func.isRequired,
     onDuration: PropTypes.func.isRequired,
   };
@@ -35,6 +38,9 @@ export default class MediaPlayer extends Component {
           <YoutubePlayer
             videoId={url}
             isPlaying={this.props.isPlaying}
+            isSeeking={this.props.isSeeking}
+            time={this.props.time}
+            volume={this.props.volume}
             onPlaying={() => {}}
             onProgress={() => {}}
             onDuration={duration => this.props.onDuration(duration)}

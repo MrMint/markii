@@ -4,7 +4,9 @@ import * as types from '../constants';
 const initialState = {
   songId: '0f17d275-3dd7-4311-bba1-75918fc8f001',
   isPlaying: false,
+  isSeeking: false,
   time: 0,
+  volume: 75,
 };
 
 export default function playlists(state = initialState, action) {
@@ -19,6 +21,12 @@ export default function playlists(state = initialState, action) {
       return { ...state, time: action.payload.time };
     case types.PLAYING_SET_DURATION:
       return { ...state, duration: action.payload.duration };
+    case types.PLAYING_SET_VOLUME:
+      return { ...state, volume: action.payload.volume };
+    case types.PLAYING_START_SEEK:
+      return { ...state, isSeeking: true };
+    case types.PLAYING_STOP_SEEK:
+      return { ...state, isSeeking: false };
     default:
       return state;
   }
