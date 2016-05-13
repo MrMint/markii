@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MediaControl from '../MediaControl';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -17,6 +18,13 @@ export default class Master extends Component {
     onLogoutTouchTap: React.PropTypes.func.isRequired,
     onLobbyTouchTap: React.PropTypes.func.isRequired,
     title: React.PropTypes.string.isRequired,
+    playing: React.PropTypes.object.isRequired,
+    onPlay: React.PropTypes.func.isRequired,
+    onPause: React.PropTypes.func.isRequired,
+    onVolumeChange: React.PropTypes.func.isRequired,
+    onSeekStart: React.PropTypes.func.isRequired,
+    onSeekStop: React.PropTypes.func.isRequired,
+    onSeekChange: React.PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -38,26 +46,41 @@ export default class Master extends Component {
       onLoginTouchTap,
       onLogoutTouchTap,
       onLobbyTouchTap,
+      playing,
+      onPlay,
+      onPause,
+      onVolumeChange,
+      onSeekStart,
+      onSeekStop,
+      onSeekChange,
     } = this.props;
 
     return (
       <MuiThemeProvider muiTheme={darkMuiTheme}>
         <div className={styles.container}>
-        <AppBar
-          className={styles.appBar}
-          title="Mark II"
-          onLeftIconButtonTouchTap={this.handleToggle}
-        />
-        <Drawer ref="leftNav"
-          docked={false}
-          open={this.state.open}
-          onRequestChange={this.handleClose}
-        >
-          <MenuItem onTouchTap={this.closeNavWrapper(onLoginTouchTap)}>Login</MenuItem>
-          <MenuItem onTouchTap={this.closeNavWrapper(onLobbyTouchTap)}>Lobby</MenuItem>
-          <MenuItem onTouchTap={this.closeNavWrapper(onLogoutTouchTap)}>Logout</MenuItem>
-        </Drawer>
-        {this.props.children}
+          <Drawer
+            ref="leftNav"
+            docked={false}
+            open={this.state.open}
+            onRequestChange={this.handleClose}
+          >
+            <MenuItem onTouchTap={this.closeNavWrapper(onLoginTouchTap)}>Login</MenuItem>
+            <MenuItem onTouchTap={this.closeNavWrapper(onLobbyTouchTap)}>Lobby</MenuItem>
+            <MenuItem onTouchTap={this.closeNavWrapper(onLogoutTouchTap)}>Logout</MenuItem>
+          </Drawer>
+          {this.props.children}
+          <MediaControl
+            isPlaying={playing.isPlaying}
+            playTime={playing.time}
+            duration={playing.duration}
+            volume={playing.volume}
+            onPlay={onPlay}
+            onPause={onPause}
+            onVolumeChange={onVolumeChange}
+            onSeekStart={onSeekStart}
+            onSeekStop={onSeekStop}
+            onSeekChange={onSeekChange}
+          />
         </div>
       </MuiThemeProvider>
     );

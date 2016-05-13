@@ -1,0 +1,6 @@
+{
+  "name": "VolumeBar",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./VolumeBar.jsx"
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import shallowCompare from 'react-addons-shallow-compare';
 import MessageList from './MessageList';
 import { TextField, FlatButton, RaisedButton } from 'material-ui';
 import Divider from 'material-ui/Divider';
@@ -16,6 +17,9 @@ export default class Chat extends Component {
       messageInputValue: '',
     };
   }
+
+  shouldComponentUpdate = (nextProps, nextState) =>
+    shallowCompare(this, nextProps, nextState);
 
   internalOnSend = () => {
     const { onSend } = this.props;

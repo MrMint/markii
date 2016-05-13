@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
+import shallowCompare from 'react-addons-shallow-compare';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
+import R from 'ramda';
+
 import MediaPlayer from '../../../components/MediaPlayer';
-import Chat from '../../../components/chat';
+import Chat from '../../../components/Chat';
 import PlaylistBuilder from '../../../components/PlaylistBuilder';
 import RoomNav from '../components/RoomNav';
 import SongNav from '../components/SongNav';
+
 import { addSongToPlaylist, createPlaylist } from '../../../modules/playlists/actions';
 import * as chatActions from '../../../modules/chat/actions';
 import * as searchActions from '../../../modules/search/actions';
 import * as queueActions from '../../../modules/queue/actions';
-import * as MediaSources from '../../../components/MediaPlayer/constants';
+import * as playingActions from '../../../modules/playing/actions';
+
 import * as source from '../../../components/MediaPlayer/constants';
 import { playlistContainsMedia } from '../../../utilities/playlist';
-import R from 'ramda';
+
+import { getSearchResults } from '../../../modules/search/selectors';
 import styles from './room.css';
 
 class Room extends Component {
@@ -51,9 +57,9 @@ class Room extends Component {
     dispatch(searchActions.searchForMedia(query, [source.YOUTUBE]));
   };
 
-  onAddSongToPlaylist = (song, playlistId) => {
+  handleOnAddSongToPlaylist = (song, playlistId) => {
     const { dispatch } = this.props;
-    dispatch(addSongToPlaylist({ ...song, id: uuid.v4() }, playlistId));
+    dispatch(addSongToPlaylist(song, playlistId));
   };
 
   onCreatePlaylist = (playlistName) => {
@@ -66,8 +72,10 @@ class Room extends Component {
   }
 
   handleOnPreview = (songId) => {
-    const { dispatch } = this.props;
-    dispatch(queueActions.pushSong(songId));
+    const { dispatch, playing } = this.props;
+    dispatch(queueActions.pushSong(playing.songId));
+    dispatch(playingActions.setSong(songId));
+    dispatch(playingActions.startPlaying());
   }
 
   canAddSongToPlaylist = (mediaSource, sourceId, playlistOrId) => {
@@ -82,6 +90,18 @@ class Room extends Component {
     );
   };
 
+  handleTimeUpdate = (time) => {
+    const { dispatch, playing } = this.props;
+    if (!playing.isSeeking) {
+      dispatch(playingActions.setPlayTime(time));
+    }
+  }
+
+  handleDuration = (duration) => {
+    const { dispatch } = this.props;
+    dispatch(playingActions.setDuration(duration));
+  }
+
   // TODO Move room and chat getter logic into a selector using reselect lib
   get room() {
     const { rooms, params: { roomSlug } } = this.props;
@@ -95,11 +115,11 @@ class Room extends Component {
 
   get playingSong() {
     const { playing, songs } = this.props;
-    return songs[playing.song];
+    return songs.get(playing.songId);
   }
 
   render() {
-    const { search, playlists, songs } = this.props;
+    const { playlists, songs, playing, search } = this.props;
     const chat = this.chat;
     const playingSong = this.playingSong;
 
@@ -115,13 +135,19 @@ class Room extends Component {
           <MediaPlayer
             mediaSource={playingSong.source}
             url={playingSong.sourceId}
+            isPlaying={playing.isPlaying}
+            isSeeking={playing.isSeeking}
+            time={playing.time}
+            volume={playing.volume}
+            onTimeUpdate={this.handleTimeUpdate}
+            onDuration={this.handleDuration}
           />
           <PlaylistBuilder
             searchResults={search}
             onSearch={this.onSearch}
             playlists={playlists}
             songs={songs}
-            onAddSongToPlaylist={this.onAddSongToPlaylist}
+            onAddSongToPlaylist={this.handleOnAddSongToPlaylist}
             canAddSongToPlaylist={this.canAddSongToPlaylist}
             onCreatePlaylist={this.onCreatePlaylist}
             onPreview={this.handleOnPreview}
@@ -138,10 +164,12 @@ class Room extends Component {
   }
 }
 
+const searchResults = getSearchResults();
+
 export default connect((state) => ({
   rooms: state.rooms,
   chats: state.chats,
-  search: state.searchSongs,
+  search: searchResults(state),
   senderName: state.user.username,
   playlists: state.playlists,
   songs: state.songs,

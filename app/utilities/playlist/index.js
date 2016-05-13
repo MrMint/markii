@@ -5,6 +5,6 @@ export function playlistContainsMedia(mediaSource, sourceId, playlist, songs) {
   return songsContainMedia(
     mediaSource,
     sourceId,
-    R.map(songIndex => songs[songIndex])(playlist.songs)
+    R.map(id => songs.get(id))(playlist.songs)
   );
 }

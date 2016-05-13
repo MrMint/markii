@@ -8,3 +8,12 @@ export function addSong(song) {
     },
   };
 }
+
+export function addSongs(songs) {
+  return {
+    type: types.SONG_ADD_SONGS,
+    payload: {
+      songs,
+    },
+  };
+}

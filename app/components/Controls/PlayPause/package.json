@@ -1,0 +1,6 @@
+{
+  "name": "PlayPause",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./PlayPause.jsx"
+}

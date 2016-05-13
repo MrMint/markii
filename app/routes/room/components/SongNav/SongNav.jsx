@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import shallowCompare from 'react-addons-shallow-compare';
 import PlaylistList from '../../../../components/PlaylistList';
 import SongNavItem from '../../../../components/SongNavItem';
 import styles from './SongNav.css';
@@ -19,6 +20,9 @@ export default class SongNav extends Component {
       selectedPlaylist: null,
     };
   }
+
+  shouldComponentUpdate = (nextProps, nextState) =>
+    shallowCompare(this, nextProps, nextState);
 
   handlePlaylistNameInputChange = (event) => {
     this.setState({ playlistNameInputValue: event.target.value });
@@ -47,7 +51,6 @@ export default class SongNav extends Component {
     const { playlistNameInputValue, selectedPlaylist } = this.state;
 
     return (
-
       <div className={styles.playlistList}>
         <SongNavItem primaryText="Search" isActive />
         <SongNavItem primaryText="Queue" />
