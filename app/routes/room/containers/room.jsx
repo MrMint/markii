@@ -2,19 +2,24 @@ import React, { Component } from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
+import R from 'ramda';
+
 import MediaPlayer from '../../../components/MediaPlayer';
 import Chat from '../../../components/Chat';
 import PlaylistBuilder from '../../../components/PlaylistBuilder';
 import RoomNav from '../components/RoomNav';
 import SongNav from '../components/SongNav';
+
 import { addSongToPlaylist, createPlaylist } from '../../../modules/playlists/actions';
 import * as chatActions from '../../../modules/chat/actions';
 import * as searchActions from '../../../modules/search/actions';
 import * as queueActions from '../../../modules/queue/actions';
 import * as playingActions from '../../../modules/playing/actions';
+
 import * as source from '../../../components/MediaPlayer/constants';
 import { playlistContainsMedia } from '../../../utilities/playlist';
-import R from 'ramda';
+
+import { getSearchResults } from '../../../modules/search/selectors';
 import styles from './room.css';
 
 class Room extends Component {
@@ -29,8 +34,6 @@ class Room extends Component {
     songs: React.PropTypes.array.isRequired,
     playing: React.PropTypes.object,
   };
-
-  shouldComponentUpdate = (nextProps) => shallowCompare(this, nextProps);
 
   onPushSongToQueue = (songId) => {
     this.props.dispatch(queueActions.pushSong(songId));
@@ -115,13 +118,8 @@ class Room extends Component {
     return songs.get(playing.songId);
   }
 
-  get searchSongs() {
-    const { search, songs } = this.props;
-    return R.map(id => songs.get(id))(search);
-  }
-
   render() {
-    const { playlists, songs, playing } = this.props;
+    const { playlists, songs, playing, search } = this.props;
     const chat = this.chat;
     const playingSong = this.playingSong;
 
@@ -145,7 +143,7 @@ class Room extends Component {
             onDuration={this.handleDuration}
           />
           <PlaylistBuilder
-            searchResults={this.searchSongs}
+            searchResults={search}
             onSearch={this.onSearch}
             playlists={playlists}
             songs={songs}
@@ -166,10 +164,12 @@ class Room extends Component {
   }
 }
 
+const searchResults = getSearchResults();
+
 export default connect((state) => ({
   rooms: state.rooms,
   chats: state.chats,
-  search: state.searchSongs,
+  search: searchResults(state),
   senderName: state.user.username,
   playlists: state.playlists,
   songs: state.songs,

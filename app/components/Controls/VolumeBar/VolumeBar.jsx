@@ -16,6 +16,7 @@ const VolumeBar = ({ volume, onVolumeChange }) =>
       value={volume}
       min={0}
       max={100}
+      step={1}
     />
   </div>;
 

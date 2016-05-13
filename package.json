@@ -90,6 +90,7 @@
     "redux-saga": "^0.10.2",
     "redux-slider-monitor": "^1.0.5",
     "redux-thunk": "^2.0.1",
+    "reselect": "^2.5.1",
     "rxjs": "^5.0.0-beta.7",
     "sinon": "git+https://github.com/sinonjs/sinon.git",
     "socket.io-client": "^1.4.6",

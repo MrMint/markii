@@ -21,7 +21,7 @@ export default class MediaPlayer extends Component {
     super(props);
     this.onTimeUpdatedSubject = new Subject();
     this.onTimeUpdatedSubscription = this.onTimeUpdatedSubject
-                                      ::throttleTime(1000)
+                                      ::throttleTime(500)
                                       .subscribe(props.onTimeUpdate);
   }
 

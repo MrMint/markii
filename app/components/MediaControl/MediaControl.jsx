@@ -20,8 +20,38 @@ export default class MediaControl extends Component {
     onSeekStop: PropTypes.func.isRequired,
     onSeekChange: PropTypes.func.isRequired,
   }
+  constructor(props) {
+    super(props);
 
-  shouldComponentUpdate = (nextProps) => shallowCompare(this, nextProps);
+    this.state = {
+      seekTime: props.playTime || 0,
+      isSeeking: false,
+    };
+  }
+
+  shouldComponentUpdate = (nextProps, nextState) =>
+    shallowCompare(this, nextProps, nextState);
+
+  componentWillUnmount = () => {
+    this.onTimeUpdatedSubscription.unsubscribe();
+  }
+
+  handleSeekChange = (seekTime) => {
+    this.setState({ seekTime });
+  }
+
+  handleSeekStart = () => {
+    requestAnimationFrame(() => {
+      this.setState({ isSeeking: true });
+      this.props.onSeekStart();
+    });
+  }
+
+  handleSeekStop = () => {
+    this.setState({ isSeeking: false });
+    this.props.onSeekChange(this.state.seekTime);
+    this.props.onSeekStop();
+  }
 
   render() {
     const {
@@ -32,10 +62,9 @@ export default class MediaControl extends Component {
       onPause,
       volume,
       onVolumeChange,
-      onSeekStart,
-      onSeekStop,
-      onSeekChange,
     } = this.props;
+    const { seekTime, isSeeking } = this.state;
+
     return (
       <div className={styles.container}>
         <div className={styles.playControlsContainer}>
@@ -50,17 +79,22 @@ export default class MediaControl extends Component {
         </div>
         <div className={styles.seekbarContainer}>
           <SeekBar
-            playTime={playTime}
+            playTime={isSeeking ? seekTime : playTime}
             duration={duration}
-            onSeekStart={onSeekStart}
-            onSeekStop={onSeekStop}
-            onSeekChange={onSeekChange}
+            onSeekStart={this.handleSeekStart}
+            onSeekStop={this.handleSeekStop}
+            onSeekChange={this.handleSeekChange}
           />
         </div>
         <div className={styles.volumeContainer}>
-          <VolumeBar volume={volume} onVolumeChange={onVolumeChange} />
+          <VolumeBar
+            volume={volume}
+            onVolumeChange={onVolumeChange}
+          />
         </div>
       </div>
     );
   }
 }
+
+            // onVolumeChange={(volume) => requestAnimationFrame(() => onVolumeChange(volume))}

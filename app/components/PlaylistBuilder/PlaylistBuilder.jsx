@@ -11,9 +11,9 @@ export default class PlaylistBuilder extends Component {
     playlists: React.PropTypes.array.isRequired,
     songs: React.PropTypes.array.isRequired,
     searchResults: React.PropTypes.array.isRequired,
+    canAddSongToPlaylist: React.PropTypes.func.isRequired,
     onSearch: React.PropTypes.func.isRequired,
     onAddSongToPlaylist: React.PropTypes.func.isRequired,
-    canAddSongToPlaylist: React.PropTypes.func.isRequired,
     onCreatePlaylist: React.PropTypes.func.isRequired,
     onPreview: React.PropTypes.func.isRequired,
   };
@@ -26,7 +26,9 @@ export default class PlaylistBuilder extends Component {
     };
   }
 
-  shouldComponentUpdate = (nextProps) => shallowCompare(this, nextProps);
+  shouldComponentUpdate = (nextProps, nextState) => {
+    return shallowCompare(this, nextProps, nextState)
+  };
 
   handleSearch = (query) => {
     const { onSearch } = this.props;
