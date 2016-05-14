@@ -71,7 +71,8 @@ export default class Master extends Component {
           {this.props.children}
           <MediaControl
             isPlaying={playing.isPlaying}
-            playTime={playing.time}
+            isSeeking={playing.isSeeking}
+            playTime={playing.seek.time}
             duration={playing.duration}
             volume={playing.volume}
             onPlay={onPlay}

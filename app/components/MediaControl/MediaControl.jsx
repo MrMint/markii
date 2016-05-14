@@ -12,6 +12,7 @@ export default class MediaControl extends Component {
     playTime: PropTypes.number,
     duration: PropTypes.number,
     isPlaying: PropTypes.bool.isRequired,
+    isSeeking: PropTypes.bool.isRequired,
     volume: PropTypes.number.isRequired,
     onPlay: PropTypes.func.isRequired,
     onPause: PropTypes.func.isRequired,
@@ -25,31 +26,27 @@ export default class MediaControl extends Component {
 
     this.state = {
       seekTime: props.playTime || 0,
-      isSeeking: false,
     };
   }
 
   shouldComponentUpdate = (nextProps, nextState) =>
     shallowCompare(this, nextProps, nextState);
 
-  componentWillUnmount = () => {
-    this.onTimeUpdatedSubscription.unsubscribe();
-  }
-
   handleSeekChange = (seekTime) => {
     this.setState({ seekTime });
+    // TODO decide if we want to preview while seeking
+    //  this.props.onSeekChange(seekTime, Date.now());
   }
 
   handleSeekStart = () => {
     requestAnimationFrame(() => {
-      this.setState({ isSeeking: true });
       this.props.onSeekStart();
     });
   }
 
   handleSeekStop = () => {
-    this.setState({ isSeeking: false });
-    this.props.onSeekChange(this.state.seekTime);
+    if (!this.props.isSeeking) return;
+    this.props.onSeekChange(this.state.seekTime, Date.now());
     this.props.onSeekStop();
   }
 
@@ -62,8 +59,9 @@ export default class MediaControl extends Component {
       onPause,
       volume,
       onVolumeChange,
+      isSeeking,
     } = this.props;
-    const { seekTime, isSeeking } = this.state;
+    const { seekTime } = this.state;
 
     return (
       <div className={styles.container}>

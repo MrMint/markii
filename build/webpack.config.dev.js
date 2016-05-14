@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -19,9 +18,8 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.ProvidePlugin({
-      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
+      fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
     }),
-    // new ExtractTextPlugin('css/[name].bundle.[hash].css', { allChunks: true }),
   ],
   resolve: {
     extensions: ['', '.js', '.jsx'],

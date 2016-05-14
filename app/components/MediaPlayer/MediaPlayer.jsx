@@ -15,6 +15,7 @@ export default class MediaPlayer extends Component {
     isSeeking: PropTypes.bool.isRequired,
     onTimeUpdate: PropTypes.func.isRequired,
     onDuration: PropTypes.func.isRequired,
+    onPlayingChange: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -22,7 +23,8 @@ export default class MediaPlayer extends Component {
     this.onTimeUpdatedSubject = new Subject();
     this.onTimeUpdatedSubscription = this.onTimeUpdatedSubject
                                       ::throttleTime(500)
-                                      .subscribe(props.onTimeUpdate);
+                                      .subscribe(next =>
+                                        props.onTimeUpdate(next.time, next.timestamp));
   }
 
   shouldComponentUpdate = (nextProps) => shallowCompare(this, nextProps);
@@ -41,10 +43,10 @@ export default class MediaPlayer extends Component {
             isSeeking={this.props.isSeeking}
             time={this.props.time}
             volume={this.props.volume}
-            onPlaying={() => {}}
+            onPlaying={playing => this.props.onPlayingChange(playing)}
             onProgress={() => {}}
             onDuration={duration => this.props.onDuration(duration)}
-            onTimeUpdate={time => this.onTimeUpdatedSubject.next(time)}
+            onTimeUpdate={(time, timestamp) => this.onTimeUpdatedSubject.next({ time, timestamp })}
             onVolumeChange={() => {}}
             onReady={() => {}}
           />

@@ -30,11 +30,12 @@ export function stopPlaying() {
   };
 }
 
-export function setPlayTime(seconds) {
+export function setPlayTime(seconds, timestamp) {
   return {
     type: PLAYING_SET_TIME,
     payload: {
       time: seconds,
+      timestamp,
     },
   };
 }

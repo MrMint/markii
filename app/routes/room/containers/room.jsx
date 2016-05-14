@@ -90,16 +90,25 @@ class Room extends Component {
     );
   };
 
-  handleTimeUpdate = (time) => {
+  handleTimeUpdate = (time, timestamp) => {
     const { dispatch, playing } = this.props;
     if (!playing.isSeeking) {
-      dispatch(playingActions.setPlayTime(time));
+      dispatch(playingActions.setPlayTime(time, timestamp));
     }
   }
 
   handleDuration = (duration) => {
     const { dispatch } = this.props;
     dispatch(playingActions.setDuration(duration));
+  }
+
+  handlePlayingChange = (isPlaying) => {
+    const { dispatch } = this.props;
+    if (isPlaying) {
+      dispatch(playingActions.startPlaying());
+    } else {
+      dispatch(playingActions.stopPlaying());
+    }
   }
 
   // TODO Move room and chat getter logic into a selector using reselect lib
@@ -137,10 +146,11 @@ class Room extends Component {
             url={playingSong.sourceId}
             isPlaying={playing.isPlaying}
             isSeeking={playing.isSeeking}
-            time={playing.time}
+            time={playing.seek.time}
             volume={playing.volume}
             onTimeUpdate={this.handleTimeUpdate}
             onDuration={this.handleDuration}
+            onPlayingChange={this.handlePlayingChange}
           />
           <PlaylistBuilder
             searchResults={search}

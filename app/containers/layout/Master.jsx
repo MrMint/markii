@@ -57,10 +57,11 @@ class MasterContainer extends Component {
     dispatch(stopSeeking());
   }
 
-  handleSeekChange = (seconds) => {
+  handleSeekChange = (seconds, timestamp) => {
     const { dispatch } = this.props;
-    dispatch(setPlayTime(seconds));
+    dispatch(setPlayTime(seconds, timestamp));
   }
+
 
   render() {
     const { children, playing } = this.props;

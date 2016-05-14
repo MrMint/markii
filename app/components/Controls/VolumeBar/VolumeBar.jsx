@@ -6,7 +6,7 @@ import { FaVolumeOff, FaVolumeDown, FaVolumeUp } from 'react-icons/lib/fa';
 const VolumeBar = ({ volume, onVolumeChange }) =>
   <div className={styles.container}>
     <div className={styles.volumeIcon}>
-      {volume === 0 && <FaVolumeOff className={styles.volumeOffFix}/>}
+      {volume === 0 && <FaVolumeOff className={styles.volumeOffFix} />}
       {volume > 0 && volume <= 75 && <FaVolumeDown />}
       {volume > 75 && <FaVolumeUp />}
     </div>

@@ -47,10 +47,10 @@ export default class YoutubePlayer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isSeeking && (this.props.time !== nextProps.time)) {
-      //this.player.seekTo(nextProps.time, false);
-    }
-
+    // TODO Decide if we want to preview while seeking
+    // if (nextProps.isSeeking && (this.props.time !== nextProps.time)) {
+    //   this.player.seekTo(nextProps.time, true);
+    // }
     if (this.props.isSeeking && !nextProps.isSeeking) {
       this.player.seekTo(nextProps.time, true);
     }
@@ -110,9 +110,10 @@ export default class YoutubePlayer extends Component {
         onReady();
       },
       onStateChange: ({ data }) => {
-        const isPlaying = (data === 1);
+        const isPlayerPlaying = (data === 1);
+        const isPlayerPaused = (data === 2);
 
-        if (isPlaying) {
+        if (isPlayerPlaying) {
           onDuration(this.player.getDuration());
           this.timeUpdateId = requestAnimationFrame(this.handleTimeUpdate);
         } else {
@@ -124,7 +125,7 @@ export default class YoutubePlayer extends Component {
         }
 
         // start fetching progress when playing or buffering
-        if (isPlaying || data === 3) {
+        if (isPlayerPlaying || data === 3) {
           this.progressId = requestAnimationFrame(this.handleProgress);
         }
 
@@ -133,7 +134,9 @@ export default class YoutubePlayer extends Component {
           onDuration(0.1);
         }
 
-        onPlaying(isPlaying);
+        if (this.props.isPlaying !== isPlayerPlaying && (isPlayerPlaying || isPlayerPaused)) {
+          onPlaying(isPlayerPlaying);
+        }
       },
     };
   }
@@ -151,7 +154,8 @@ export default class YoutubePlayer extends Component {
 
   handleTimeUpdate = () => {
     if (!this.isMounted) return;
-    this.props.onTimeUpdate(this.player.getCurrentTime() || 0);
+    if (this.props.isSeeking) return;
+    this.props.onTimeUpdate(this.player.getCurrentTime() || 0, Date.now());
 
     if (this.timeUpdateId) {
       this.timeUpdateId = requestAnimationFrame(this.handleTimeUpdate);
