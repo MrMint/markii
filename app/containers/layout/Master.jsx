@@ -19,6 +19,7 @@ class MasterContainer extends Component {
     children: React.PropTypes.object.isRequired,
     playing: React.PropTypes.object.isRequired,
     rooms: React.PropTypes.array.isRequired,
+    params: React.PropTypes.object.isRequired,
   };
 
   handleLoginTouchTap = () => {
@@ -32,6 +33,10 @@ class MasterContainer extends Component {
   handleLobbyTouchTap = () => {
     browserHistory.push('/lobby');
   };
+
+  handleRoomNavItemTouchTap = (slug) => {
+    browserHistory.push(`/r/${slug}`);
+  }
 
   handlePlay = () => {
     const { dispatch } = this.props;
@@ -63,22 +68,25 @@ class MasterContainer extends Component {
     dispatch(setPlayTime(seconds, timestamp));
   }
 
-
   render() {
-    const { children, playing, rooms } = this.props;
+    const { children, playing, rooms, params: { roomSlug } } = this.props;
+
     return (
       <Master
         onLoginTouchTap={this.handleLoginTouchTap}
         onLogoutTouchTap={this.handleLogoutTouchTap}
         onLobbyTouchTap={this.handleLobbyTouchTap}
-        rooms={rooms}
+        favoriteRooms={rooms}
         playing={playing}
+        currentRoomSlug={roomSlug}
         onPlay={this.handlePlay}
         onPause={this.handlePause}
         onVolumeChange={this.handleVolumeChange}
         onSeekStart={this.handleSeekStart}
         onSeekStop={this.handleSeekStop}
         onSeekChange={this.handleSeekChange}
+        onRoomNavItemTouchTap={this.handleRoomNavItemTouchTap}
+        onLobbyTouchTap={this.handleLobbyTouchTap}
       >
         {children}
       </Master>

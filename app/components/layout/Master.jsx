@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MediaControl from '../MediaControl';
-import RoomNav from '../RoomNav';
+import Nav from '../Nav';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -10,20 +10,23 @@ import 'normalize.css';
 import styles from './Master.css';
 
 const darkMuiTheme = getMuiTheme({
-    ...darkBaseTheme,
-    palette: {
-      ...darkBaseTheme.palette,
-      primary1Color: '#673ab7',
-      accent1Color: '#cddc39',
-      accent2Color: '#cddc39',
-      accent3Color: '#cddc39',
-      alternateTextColor: '#fff',
-    }
+  ...darkBaseTheme,
+  palette: {
+    ...darkBaseTheme.palette,
+    primary1Color: '#673ab7',
+    accent1Color: '#cddc39',
+    accent2Color: '#cddc39',
+    accent3Color: '#cddc39',
+    alternateTextColor: '#fff',
+  },
 });
 
 export default class Master extends Component {
   static propTypes = {
     children: React.PropTypes.object.isRequired,
+    currentRoomSlug: React.PropTypes.string.isRequired,
+    favoriteRooms: React.PropTypes.array.isRequired,
+    recentRooms: React.PropTypes.array.isRequired,
     onLoginTouchTap: React.PropTypes.func.isRequired,
     onLogoutTouchTap: React.PropTypes.func.isRequired,
     onLobbyTouchTap: React.PropTypes.func.isRequired,
@@ -35,6 +38,7 @@ export default class Master extends Component {
     onSeekStart: React.PropTypes.func.isRequired,
     onSeekStop: React.PropTypes.func.isRequired,
     onSeekChange: React.PropTypes.func.isRequired,
+    onRoomNavItemTouchTap: React.PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -63,7 +67,9 @@ export default class Master extends Component {
       onSeekStart,
       onSeekStop,
       onSeekChange,
-      rooms,
+      onRoomNavItemTouchTap,
+      favoriteRooms,
+      currentRoomSlug,
     } = this.props;
 
     return (
@@ -80,8 +86,12 @@ export default class Master extends Component {
             <MenuItem onTouchTap={this.closeNavWrapper(onLogoutTouchTap)}>Logout</MenuItem>
           </Drawer>
           <div className={styles.mainContentContainer}>
-            <RoomNav
-              favoriteRooms={rooms}
+
+            <Nav
+              rooms={favoriteRooms}
+              currentRoomSlug={currentRoomSlug}
+              onLobbyTouchTap={onLobbyTouchTap}
+              onRoomNavItemTouchTap={onRoomNavItemTouchTap}
             />
             {this.props.children}
           </div>

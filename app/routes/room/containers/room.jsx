@@ -18,7 +18,7 @@ import * as playingActions from '../../../modules/playing/actions';
 import * as source from '../../../components/MediaPlayer/constants';
 import { playlistContainsMedia } from '../../../utilities/playlist';
 
-import { getSearchResults } from '../../../modules/search/selectors';
+import { getSearchResultsFactory } from '../../../modules/search/selectors';
 import styles from './room.css';
 
 class Room extends Component {
@@ -172,12 +172,12 @@ class Room extends Component {
   }
 }
 
-const searchResults = getSearchResults();
+const getSearchResults = getSearchResultsFactory();
 
 export default connect((state) => ({
   rooms: state.rooms,
   chats: state.chats,
-  search: searchResults(state),
+  search: getSearchResults(state),
   senderName: state.user.username,
   playlists: state.playlists,
   songs: state.songs,

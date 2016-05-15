@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import R from 'ramda';
 
-export const getSearchResults = () =>
+export const getSearchResultsFactory = () =>
   createSelector(
     [
       (state) => state.searchSongs,
