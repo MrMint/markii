@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
-import PlaylistList from '../../../../components/PlaylistList';
-import SongNavItem from '../../../../components/SongNavItem';
+import PlaylistList from '../PlaylistList';
+import SongNavItem from '../SongNavItem';
 import styles from './SongNav.css';
 import { TextField, FlatButton } from 'material-ui';
 import R from 'ramda';
@@ -48,7 +48,7 @@ export default class SongNav extends Component {
 
   render() {
     const { playlists, canAddSongToPlaylist } = this.props;
-    const { playlistNameInputValue, selectedPlaylist } = this.state;
+    const { playlistNameInputValue } = this.state;
 
     return (
       <div className={styles.playlistList}>
@@ -61,7 +61,7 @@ export default class SongNav extends Component {
         />
         <div className={styles.textInputWrapper}>
           <TextField
-            style={{width:'80%'}}
+            style={{ width: '80%' }}
             value={playlistNameInputValue}
             onChange={this.handlePlaylistNameInputChange}
             hintText="Playlist name..."
@@ -69,9 +69,9 @@ export default class SongNav extends Component {
 
           <FlatButton
             style={{
-              width:'20%',
+              width: '20%',
               minWidth: '0px',
-              height:'34px'
+              height: '34px',
             }}
             label="+"
             onTouchTap={this.handleCreatePlaylist}

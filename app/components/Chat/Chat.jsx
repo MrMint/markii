@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
-import MessageList from './MessageList';
-import { TextField, FlatButton, RaisedButton } from 'material-ui';
+import MessageList from './messageList';
+import { TextField, } from 'material-ui';
 import Divider from 'material-ui/Divider';
 import styles from './Chat.css';
 
@@ -34,25 +34,29 @@ export default class Chat extends Component {
     });
   }
 
+  handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.stopPropagation();
+      event.preventDefault();
+      this.internalOnSend();
+    }
+  }
+
   render() {
     const { messages } = this.props;
     const { messageInputValue } = this.state;
     return (
-      <div className={styles.container}>
+      <div className={styles.container} onKeyDown={this.handleKeyDown}>
         <MessageList messages={messages} />
         <div className={styles.bottomContainer}>
-          <Divider style={{marginLeft: '10px', marginRight: '10px'}}/>
-          <div className={styles.inputContainer}>
+          <Divider style={{ marginLeft: '10px', marginRight: '10px' }} />
+          <div className={styles.inputContainer} onkeyDown={this.handleKeyDown}>
             <TextField
+              fullWidth
               value={messageInputValue}
               onChange={this.handleMessageInputChange}
-              hintText="Get chatting..."
+              hintText="Say something..."
             />
-            <RaisedButton
-              style={{marginLeft: '2px', marginTop: '-3px'}}
-              primary
-              label="Send"
-              onTouchTap={this.internalOnSend} />
           </div>
         </div>
       </div>

@@ -1,0 +1,33 @@
+@import "../colors.css";
+
+.container {
+  width: 55px;
+  height: 55px;
+  background-color: var(--color-background);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.container:first-child {
+  margin-top: 10px;
+}
+
+.container:hover {
+  background-color: var(--color-primary);
+}
+
+.tooltip {
+  & > div > :first-child {
+    border-right-color: var(--color-primary);
+  }
+  & > div > :nth-child(2) {
+    background-color: var(--color-primary);
+    min-height: inherit;
+  }
+}

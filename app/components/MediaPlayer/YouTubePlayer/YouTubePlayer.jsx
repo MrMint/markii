@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { loadApi } from '../../../utilities/api/youtubeApi';
+import styles from './YouTube.css';
 
 let isApiLoaded = false;
 
@@ -164,7 +165,7 @@ export default class YoutubePlayer extends Component {
 
   render() {
     return (
-      <div ref={c => (this.node = c)}></div>
+      <div className={styles.container} ref={c => (this.node = c)}></div>
     );
   }
 }

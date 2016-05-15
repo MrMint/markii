@@ -7,8 +7,7 @@ import R from 'ramda';
 import MediaPlayer from '../../../components/MediaPlayer';
 import Chat from '../../../components/Chat';
 import PlaylistBuilder from '../../../components/PlaylistBuilder';
-import RoomNav from '../components/RoomNav';
-import SongNav from '../components/SongNav';
+import SongNav from '../../../components/SongNav';
 
 import { addSongToPlaylist, createPlaylist } from '../../../modules/playlists/actions';
 import * as chatActions from '../../../modules/chat/actions';
@@ -62,7 +61,7 @@ class Room extends Component {
     dispatch(addSongToPlaylist(song, playlistId));
   };
 
-  onCreatePlaylist = (playlistName) => {
+  handleCreatePlaylist = (playlistName) => {
     const { dispatch } = this.props;
     dispatch(createPlaylist({
       id: uuid.v4(),
@@ -134,7 +133,6 @@ class Room extends Component {
 
     return (
       <div className={styles.container}>
-        <RoomNav />
         <SongNav
           playlists={playlists}
           canAddSongToPlaylist={this.canAddSongToPlaylist}
@@ -159,7 +157,7 @@ class Room extends Component {
             songs={songs}
             onAddSongToPlaylist={this.handleOnAddSongToPlaylist}
             canAddSongToPlaylist={this.canAddSongToPlaylist}
-            onCreatePlaylist={this.onCreatePlaylist}
+            onCreatePlaylist={this.handleCreatePlaylist}
             onPreview={this.handleOnPreview}
           />
         </div>

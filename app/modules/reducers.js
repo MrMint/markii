@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 // Reducers
 import { routerReducer } from 'react-router-redux';
 import { formReducer } from './form/reducers';
+import { room } from './room/reducers';
 import { rooms } from './rooms/reducers';
 import { chat } from './chat/reducers';
 import { playlists } from './playlists/reducers';
@@ -14,6 +15,7 @@ import { playing } from './playing/reducers';
 
 const rootReducer = combineReducers({
   user,
+  room,
   rooms,
   chats: chat,
   playlists,

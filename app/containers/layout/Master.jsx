@@ -18,6 +18,7 @@ class MasterContainer extends Component {
     dispatch: React.PropTypes.func.isRequired,
     children: React.PropTypes.object.isRequired,
     playing: React.PropTypes.object.isRequired,
+    rooms: React.PropTypes.array.isRequired,
   };
 
   handleLoginTouchTap = () => {
@@ -64,12 +65,13 @@ class MasterContainer extends Component {
 
 
   render() {
-    const { children, playing } = this.props;
+    const { children, playing, rooms } = this.props;
     return (
       <Master
         onLoginTouchTap={this.handleLoginTouchTap}
         onLogoutTouchTap={this.handleLogoutTouchTap}
         onLobbyTouchTap={this.handleLobbyTouchTap}
+        rooms={rooms}
         playing={playing}
         onPlay={this.handlePlay}
         onPause={this.handlePause}
@@ -86,4 +88,5 @@ class MasterContainer extends Component {
 
 export default connect((state) => ({
   playing: state.playing,
+  rooms: state.rooms,
 }))(MasterContainer);

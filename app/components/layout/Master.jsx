@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import MediaControl from '../MediaControl';
+import RoomNav from '../RoomNav';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import 'normalize.css';
 import styles from './Master.css';
 
-const darkMuiTheme = getMuiTheme(darkBaseTheme);
+const darkMuiTheme = getMuiTheme({
+    ...darkBaseTheme,
+    palette: {
+      ...darkBaseTheme.palette,
+      primary1Color: '#673ab7',
+      accent1Color: '#cddc39',
+      accent2Color: '#cddc39',
+      accent3Color: '#cddc39',
+      alternateTextColor: '#fff',
+    }
+});
 
 export default class Master extends Component {
   static propTypes = {
@@ -53,6 +63,7 @@ export default class Master extends Component {
       onSeekStart,
       onSeekStop,
       onSeekChange,
+      rooms,
     } = this.props;
 
     return (
@@ -68,7 +79,12 @@ export default class Master extends Component {
             <MenuItem onTouchTap={this.closeNavWrapper(onLobbyTouchTap)}>Lobby</MenuItem>
             <MenuItem onTouchTap={this.closeNavWrapper(onLogoutTouchTap)}>Logout</MenuItem>
           </Drawer>
-          {this.props.children}
+          <div className={styles.mainContentContainer}>
+            <RoomNav
+              favoriteRooms={rooms}
+            />
+            {this.props.children}
+          </div>
           <MediaControl
             isPlaying={playing.isPlaying}
             isSeeking={playing.isSeeking}

@@ -1,0 +1,8 @@
+.container {
+  width: 100%;
+
+  & > first-child {
+    width: 100%;
+  }
+
+}

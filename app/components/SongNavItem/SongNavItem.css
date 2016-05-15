@@ -3,7 +3,7 @@
 .container {
   position: relative;
   display: flex;
-  color:#727272;
+  color: #727272;
   flex-shrink: 0;
   flex-direction: row;
   justify-content: space-between;
@@ -23,7 +23,7 @@
 
 .active::before {
   content: '';
-  width: 5px;
+  width: 3px;
   height: 100%;
   top: 0;
   left: 0;

@@ -16,7 +16,7 @@ const DevTools = createDevTools(
   >
     <MultipleMonitors>
       <Monitor />
-      <SliderMonitor styles={{ height: '150px' }} />
+      <SliderMonitor style={{ height: '150px' }} />
     </MultipleMonitors>
   </DockMonitor>
 );

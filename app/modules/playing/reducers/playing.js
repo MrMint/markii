@@ -1,4 +1,3 @@
-
 import * as types from '../constants';
 
 const initialState = {
