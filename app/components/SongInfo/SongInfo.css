@@ -1,0 +1,13 @@
+@import '../colors.css';
+
+.container {
+  height: 55px;
+  width: 200px;
+  background-color: var(--color-background);
+  overflow: hidden;
+}
+
+.thumbnail {
+  width: 55px;
+  height: 55px;
+}

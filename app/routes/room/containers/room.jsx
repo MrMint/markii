@@ -8,6 +8,7 @@ import MediaPlayer from '../../../components/MediaPlayer';
 import Chat from '../../../components/Chat';
 import PlaylistBuilder from '../../../components/PlaylistBuilder';
 import SongNav from '../../../components/SongNav';
+import SongInfo from '../../../components/SongInfo';
 
 import { addSongToPlaylist, createPlaylist } from '../../../modules/playlists/actions';
 import * as chatActions from '../../../modules/chat/actions';
@@ -133,11 +134,14 @@ class Room extends Component {
 
     return (
       <div className={styles.container}>
-        <SongNav
-          playlists={playlists}
-          canAddSongToPlaylist={this.canAddSongToPlaylist}
-          onCreatePlaylist={this.onCreatePlaylist}
-        />
+        <div className={styles.leftContent}>
+          <SongNav
+            playlists={playlists}
+            canAddSongToPlaylist={this.canAddSongToPlaylist}
+            onCreatePlaylist={this.onCreatePlaylist}
+          />
+        {playingSong && <SongInfo song={playingSong}/>}
+        </div>
         <div className={styles.mainContent}>
           <MediaPlayer
             mediaSource={playingSong.source}
