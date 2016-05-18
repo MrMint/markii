@@ -3,11 +3,43 @@
 .container {
   height: 55px;
   width: 200px;
+  display: flex;
+  color: var(--color-text-secondary);
   background-color: var(--color-background);
+  border-top: 1px solid var(--color-background-dark);
   overflow: hidden;
+  justify-content: center;
+  align-items: center;
 }
 
 .thumbnail {
   width: 55px;
-  height: 55px;
+  height: 100%;
+}
+
+/* TODO not happy with this code, revisit*/
+.nameContainer {
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  overflow-x: hidden;
+  flex-grow: 1;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-left: 5px;
+
+  & :first-child :first-child {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.name {
+  font-size: 12px;
+}
+
+.add {
+  font-size: 24px;
+  flex-shrink: 0;
+  padding-right: 3px;
 }

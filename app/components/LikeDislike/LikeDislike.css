@@ -1,0 +1,28 @@
+@import '../colors.css';
+
+.container {
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top: 1px solid var(--color-background-dark);
+  background-color: var(--color-background);
+}
+
+.like {
+  font-size: 36px;
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+.dislike {
+  font-size: 36px;
+
+  &:hover {
+    color: var(--color-red);
+  }
+}

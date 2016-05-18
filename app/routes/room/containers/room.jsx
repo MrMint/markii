@@ -9,6 +9,7 @@ import Chat from '../../../components/Chat';
 import PlaylistBuilder from '../../../components/PlaylistBuilder';
 import SongNav from '../../../components/SongNav';
 import SongInfo from '../../../components/SongInfo';
+import LikeDislike from '../../../components/LikeDislike';
 
 import { addSongToPlaylist, createPlaylist } from '../../../modules/playlists/actions';
 import * as chatActions from '../../../modules/chat/actions';
@@ -140,7 +141,8 @@ class Room extends Component {
             canAddSongToPlaylist={this.canAddSongToPlaylist}
             onCreatePlaylist={this.onCreatePlaylist}
           />
-        {playingSong && <SongInfo song={playingSong}/>}
+        <LikeDislike />
+        {playingSong && <SongInfo song={playingSong} />}
         </div>
         <div className={styles.mainContent}>
           <MediaPlayer

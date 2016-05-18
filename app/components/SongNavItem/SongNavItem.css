@@ -29,5 +29,5 @@
   left: 0;
   bottom: 0;
   position: absolute;
-  background-color: var(--color-accent);
+  background-color: var(--color-primary);
 }

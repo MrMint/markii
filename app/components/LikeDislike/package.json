@@ -1,0 +1,6 @@
+{
+  "name": "LikeDislike",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./LikeDislike.jsx"
+}

@@ -86,7 +86,6 @@ export default class Master extends Component {
             <MenuItem onTouchTap={this.closeNavWrapper(onLogoutTouchTap)}>Logout</MenuItem>
           </Drawer>
           <div className={styles.mainContentContainer}>
-
             <Nav
               rooms={favoriteRooms}
               currentRoomSlug={currentRoomSlug}
