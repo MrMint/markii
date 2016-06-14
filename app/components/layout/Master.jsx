@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import shallowCompare from 'react-addons-shallow-compare';
 import MediaControl from '../MediaControl';
 import Nav from '../Nav';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
@@ -41,9 +42,8 @@ export default class Master extends Component {
     onRoomNavItemTouchTap: React.PropTypes.func.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = { open: false };
+  shouldComponentUpdate = (nextProps) => {
+    return shallowCompare(this, nextProps);
   }
 
   handleToggle = () => this.setState({ open: !this.state.open });
@@ -75,16 +75,6 @@ export default class Master extends Component {
     return (
       <MuiThemeProvider muiTheme={darkMuiTheme}>
         <div className={styles.container}>
-          <Drawer
-            ref="leftNav"
-            docked={false}
-            open={this.state.open}
-            onRequestChange={this.handleClose}
-          >
-            <MenuItem onTouchTap={this.closeNavWrapper(onLoginTouchTap)}>Login</MenuItem>
-            <MenuItem onTouchTap={this.closeNavWrapper(onLobbyTouchTap)}>Lobby</MenuItem>
-            <MenuItem onTouchTap={this.closeNavWrapper(onLogoutTouchTap)}>Logout</MenuItem>
-          </Drawer>
           <div className={styles.mainContentContainer}>
             <Nav
               rooms={favoriteRooms}

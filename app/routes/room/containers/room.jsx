@@ -16,11 +16,13 @@ import * as chatActions from '../../../modules/chat/actions';
 import * as searchActions from '../../../modules/search/actions';
 import * as queueActions from '../../../modules/queue/actions';
 import * as playingActions from '../../../modules/playing/actions';
+import * as miscActions from '../../../modules/misc/actions';
 
 import * as source from '../../../components/MediaPlayer/constants';
 import { playlistContainsMedia } from '../../../utilities/playlist';
 
 import { getSearchResultsFactory } from '../../../modules/search/selectors';
+import { getActivePlaylistFactory } from '../../../modules/playlists/selectors';
 import styles from './room.css';
 
 class Room extends Component {
@@ -30,11 +32,16 @@ class Room extends Component {
     dispatch: React.PropTypes.func.isRequired,
     search: React.PropTypes.array.isRequired,
     senderName: React.PropTypes.string.isRequired,
+    songNavSelection: React.PropTypes.string.isRequired,
     params: React.PropTypes.object.isRequired,
     playlists: React.PropTypes.array.isRequired,
+    activePlaylist: React.PropTypes.object,
     songs: React.PropTypes.array.isRequired,
     playing: React.PropTypes.object,
   };
+
+  shouldComponentUpdate = (nextProps, nextState) =>
+    shallowCompare(this, nextProps, nextState)
 
   onPushSongToQueue = (songId) => {
     this.props.dispatch(queueActions.pushSong(songId));
@@ -112,6 +119,15 @@ class Room extends Component {
     }
   }
 
+  handleSelectPlaylist = (selectionType, playlistId) => {
+    const { dispatch } = this.props;
+
+    if (playlistId) {
+      dispatch(miscActions.setActivePlaylist(playlistId));
+    }
+    dispatch(miscActions.setSongNavSelectionType(selectionType));
+  }
+
   // TODO Move room and chat getter logic into a selector using reselect lib
   get room() {
     const { rooms, params: { roomSlug } } = this.props;
@@ -129,7 +145,7 @@ class Room extends Component {
   }
 
   render() {
-    const { playlists, songs, playing, search } = this.props;
+    const { playlists, songs, playing, search, activePlaylist, songNavSelection } = this.props;
     const chat = this.chat;
     const playingSong = this.playingSong;
 
@@ -138,11 +154,14 @@ class Room extends Component {
         <div className={styles.leftContent}>
           <SongNav
             playlists={playlists}
+            activePlaylist={activePlaylist}
             canAddSongToPlaylist={this.canAddSongToPlaylist}
+            songNavSelection={songNavSelection}
             onCreatePlaylist={this.onCreatePlaylist}
+            onSelectPlaylist={this.handleSelectPlaylist}
           />
-        <LikeDislike />
-        {playingSong && <SongInfo song={playingSong} />}
+          <LikeDislike />
+          {playingSong && <SongInfo song={playingSong} />}
         </div>
         <div className={styles.mainContent}>
           <MediaPlayer
@@ -160,7 +179,9 @@ class Room extends Component {
             searchResults={search}
             onSearch={this.onSearch}
             playlists={playlists}
+            activePlaylist={activePlaylist}
             songs={songs}
+            songNavSelection={songNavSelection}
             onAddSongToPlaylist={this.handleOnAddSongToPlaylist}
             canAddSongToPlaylist={this.canAddSongToPlaylist}
             onCreatePlaylist={this.handleCreatePlaylist}
@@ -179,13 +200,16 @@ class Room extends Component {
 }
 
 const getSearchResults = getSearchResultsFactory();
+const getActivePlaylist = getActivePlaylistFactory();
 
 export default connect((state) => ({
   rooms: state.rooms,
   chats: state.chats,
   search: getSearchResults(state),
+  activePlaylist: getActivePlaylist(state),
   senderName: state.user.username,
   playlists: state.playlists,
   songs: state.songs,
   playing: state.playing,
+  songNavSelection: state.misc.songNavSelection,
 }))(Room);

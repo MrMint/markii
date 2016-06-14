@@ -36,6 +36,7 @@
 
 .name {
   font-size: 12px;
+  max-height: 55px;
 }
 
 .add {

@@ -7,7 +7,7 @@ const initialState = new List([
   new Playlist({
     id: '0f17d275-3dd7-4311-bba1-75918fc8f001',
     name: 'Best of Miku 2015',
-    songs: new List(['0f17d275-3dd7-4311-bba1-75918fc8f001']),
+    // songs: new List(['0f17d275-3dd7-4311-bba1-75918fc8f001']),
   }),
   new Playlist({
     id: '0f17d275-3dd7-4311-bba1-7591f334f001',

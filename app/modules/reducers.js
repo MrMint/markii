@@ -12,6 +12,7 @@ import { searchSongs } from './search/reducers';
 import { user } from './user/reducers';
 import { queue } from './queue/reducers';
 import { playing } from './playing/reducers';
+import { misc } from './misc/reducers';
 
 const rootReducer = combineReducers({
   user,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   queue,
   songs,
   searchSongs,
+  misc,
   routing: routerReducer,
   form: formReducer,
 });

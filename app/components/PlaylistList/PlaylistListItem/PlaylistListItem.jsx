@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DropTarget } from 'react-dnd';
 import { SONG_SEARCH_LIST_ITEM } from '../../../utilities/constants/dragTypes';
-import MenuItem from 'material-ui/MenuItem';
+import { PLAYLIST } from '../../../modules/misc/constants';
 import styles from './PlaylistListItem.css';
 import SongNavItem from '../../SongNavItem';
 
@@ -10,6 +10,7 @@ class PlaylistListItem extends Component {
     id: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,
     songCount: React.PropTypes.number.isRequired,
+    isActive: React.PropTypes.bool.isRequired,
     isOver: React.PropTypes.bool.isRequired,
     canDrop: React.PropTypes.bool.isRequired,
     connectDropTarget: React.PropTypes.func.isRequired,
@@ -32,14 +33,20 @@ class PlaylistListItem extends Component {
 
   handleOnClick = () => {
     const { id, onPlaylistListItemSelected } = this.props;
-    onPlaylistListItemSelected(id);
+    onPlaylistListItemSelected(PLAYLIST, id);
   }
 
   render() {
-    const { name, songCount, connectDropTarget } = this.props;
+    const { name, songCount, connectDropTarget, isActive } = this.props;
     return connectDropTarget(
       <div onClick={this.handleOnClick}>
-        <SongNavItem className={this.class()} primaryText={name} rightBadge={songCount} />
+        <SongNavItem
+          className={this.class()}
+          primaryText={name}
+          rightBadge={songCount}
+          onTouchTap={this.handleOnClick}
+          isActive={isActive}
+        />
       </div>
     );
   }

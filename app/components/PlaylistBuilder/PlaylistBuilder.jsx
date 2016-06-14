@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
 import { Divider } from 'material-ui';
+import R from 'ramda';
 import SongSearch from '../SongSearch';
+import { PLAYLIST, SEARCH, QUEUE } from '../../modules/misc/constants';
 import styles from './PlaylistBuilder.css';
 import SongSearchListItem from '../SongSearchListItem';
 import { Scrollbars } from 'react-custom-scrollbars';
@@ -9,6 +11,8 @@ import { Scrollbars } from 'react-custom-scrollbars';
 export default class PlaylistBuilder extends Component {
   static propTypes = {
     playlists: React.PropTypes.array.isRequired,
+    songNavSelection: React.PropTypes.string.isRequired,
+    activePlaylist: React.PropTypes.array.isRequired,
     songs: React.PropTypes.array.isRequired,
     searchResults: React.PropTypes.array.isRequired,
     canAddSongToPlaylist: React.PropTypes.func.isRequired,
@@ -22,13 +26,11 @@ export default class PlaylistBuilder extends Component {
     super(props);
     this.state = {
       playlistNameInputValue: '',
-      selectedPlaylist: null,
     };
   }
 
-  shouldComponentUpdate = (nextProps, nextState) => {
-    return shallowCompare(this, nextProps, nextState)
-  };
+  shouldComponentUpdate = (nextProps, nextState) =>
+    shallowCompare(this, nextProps, nextState)
 
   handleSearch = (query) => {
     const { onSearch } = this.props;
@@ -51,17 +53,17 @@ export default class PlaylistBuilder extends Component {
   }
 
   renderPlaylistSongs = () => {
-    const { selectedPlaylist } = this.state;
     const {
       playlists,
       songs,
       canAddSongToPlaylist,
       onAddSongToPlaylist,
+      activePlaylist,
     } = this.props;
 
-    if (selectedPlaylist.songs.length) {
-      return selectedPlaylist.songs
-      .map(songIndex => songs[songIndex])
+    if (activePlaylist.songs.size) {
+      return activePlaylist.songs
+      .map(songId => R.find(song => song.id === songId)(songs))
       .map(song => this.renderSong(song, playlists, canAddSongToPlaylist, onAddSongToPlaylist));
     }
     return <div>No songs yet :(</div>;
@@ -84,12 +86,15 @@ export default class PlaylistBuilder extends Component {
   }
 
   renderSongs = () => {
-    const { selectedPlaylist } = this.state;
-
-    if (selectedPlaylist) {
-      return this.renderPlaylistSongs();
+    const { songNavSelection } = this.props;
+    switch (songNavSelection) {
+      case PLAYLIST:
+        return this.renderPlaylistSongs();
+      case SEARCH:
+        return this.renderSearchResults();
+      default:
+        return <div>Error</div>;
     }
-    return this.renderSearchResults();
   }
 
   render() {

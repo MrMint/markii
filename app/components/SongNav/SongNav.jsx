@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
 import { TextField, FlatButton } from 'material-ui';
 import { MdAdd } from 'react-icons/lib/md';
-import R from 'ramda';
+import { SEARCH, QUEUE } from '../../modules/misc/constants';
 import PlaylistList from '../PlaylistList';
 import SongNavItem from '../SongNavItem';
 import styles from './SongNav.css';
@@ -10,6 +10,8 @@ import styles from './SongNav.css';
 export default class SongNav extends Component {
   static propTypes = {
     playlists: React.PropTypes.array.isRequired,
+    activePlaylist: React.PropTypes.object,
+    songNavSelection: React.PropTypes.string.isRequired,
     onSelectPlaylist: React.PropTypes.func.isRequired,
     activeSongNavItem: React.PropTypes.string.isRequired,
     canAddSongToPlaylist: React.PropTypes.func.isRequired,
@@ -20,7 +22,6 @@ export default class SongNav extends Component {
     super(props);
     this.state = {
       playlistNameInputValue: '',
-      selectedPlaylist: null,
     };
   }
 
@@ -31,13 +32,6 @@ export default class SongNav extends Component {
     this.setState({ playlistNameInputValue: event.target.value });
   }
 
-  handlePlaylistListItemSelected = (playlistId) => {
-    const { playlists } = this.props;
-    this.setState({
-      selectedPlaylist: R.find(playlist => playlist.id === playlistId)(playlists),
-    });
-  }
-
   handleCreatePlaylist = () => {
     const { onCreatePlaylist } = this.props;
     const { playlistNameInputValue } = this.state;
@@ -45,12 +39,8 @@ export default class SongNav extends Component {
     this.setState({ playlistNameInputValue: '' });
   }
 
-  handleShowSearchResults = () => {
-    this.setState({ selectedPlaylist: null });
-  }
-
   render() {
-    const { playlists, canAddSongToPlaylist } = this.props;
+    const { playlists, canAddSongToPlaylist, onSelectPlaylist, activePlaylist, songNavSelection } = this.props;
     const { playlistNameInputValue } = this.state;
 
     return (
@@ -58,16 +48,25 @@ export default class SongNav extends Component {
         <SongNavItem
           className={styles.navHeader}
           primaryText="Search"
-          isActive />
-        <SongNavItem primaryText="Queue" />
+          onTouchTap={() => onSelectPlaylist(SEARCH)}
+          isActive={songNavSelection === SEARCH}
+        />
+        <SongNavItem
+          primaryText="Queue"
+          onTouchTap={() => onSelectPlaylist(QUEUE)}
+          isActive={songNavSelection === QUEUE}
+        />
         <SongNavItem
           className={styles.navHeader}
           primaryText="PLAYLISTS"
-          rightBadge={<MdAdd />} />
+          rightBadge={<MdAdd />}
+        />
         <PlaylistList
           playlists={playlists}
+          activePlaylist={activePlaylist}
+          songNavSelection={songNavSelection}
           canAddSong={canAddSongToPlaylist}
-          onPlaylistListItemSelected={this.handlePlaylistListItemSelected}
+          onPlaylistListItemSelected={onSelectPlaylist}
         />
         <div className={styles.textInputWrapper}>
           <TextField
