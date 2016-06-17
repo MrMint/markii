@@ -40,7 +40,13 @@ export default class SongNav extends Component {
   }
 
   render() {
-    const { playlists, canAddSongToPlaylist, onSelectPlaylist, activePlaylist, songNavSelection } = this.props;
+    const {
+      playlists,
+      canAddSongToPlaylist,
+      onSelectPlaylist,
+      activePlaylist,
+      songNavSelection,
+    } = this.props;
     const { playlistNameInputValue } = this.state;
 
     return (

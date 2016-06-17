@@ -14,10 +14,12 @@ export default class PlaylistBuilder extends Component {
     songNavSelection: React.PropTypes.string.isRequired,
     activePlaylist: React.PropTypes.array.isRequired,
     songs: React.PropTypes.array.isRequired,
+    songsInQueue: React.PropTypes.array.isRequired,
     searchResults: React.PropTypes.array.isRequired,
     canAddSongToPlaylist: React.PropTypes.func.isRequired,
     onSearch: React.PropTypes.func.isRequired,
     onAddSongToPlaylist: React.PropTypes.func.isRequired,
+    onAddSongToQueue: React.PropTypes.func.isRequired,
     onCreatePlaylist: React.PropTypes.func.isRequired,
     onPreview: React.PropTypes.func.isRequired,
   };
@@ -85,6 +87,22 @@ export default class PlaylistBuilder extends Component {
     return <div>No Results</div>;
   }
 
+  renderQueue = () => {
+    const {
+      songsInQueue,
+      playlists,
+      canAddSongToPlaylist,
+      onAddSongToQueue,
+    } = this.props;
+
+    if (songsInQueue && songsInQueue.length > 0) {
+      return songsInQueue.map(song =>
+        this.renderSong(song, playlists, canAddSongToPlaylist, onAddSongToQueue)
+      );
+    }
+    return <div>No Songs in Queue</div>;
+  };
+
   renderSongs = () => {
     const { songNavSelection } = this.props;
     switch (songNavSelection) {
@@ -92,6 +110,8 @@ export default class PlaylistBuilder extends Component {
         return this.renderPlaylistSongs();
       case SEARCH:
         return this.renderSearchResults();
+      case QUEUE:
+        return this.renderQueue();
       default:
         return <div>Error</div>;
     }

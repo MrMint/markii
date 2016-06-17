@@ -10,7 +10,7 @@ export default function playlists(state = initialState, action) {
     case types.QUEUE_POP:
       return R.remove(0, 1, state);
     case types.QUEUE_ENQUEUE:
-      return [...state, action.payload.songId]
+      return [...state, action.payload.songId];
     default:
       return state;
   }

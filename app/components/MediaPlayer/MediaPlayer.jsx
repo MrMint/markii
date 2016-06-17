@@ -21,10 +21,10 @@ export default class MediaPlayer extends Component {
   constructor(props) {
     super(props);
     this.onTimeUpdatedSubject = new Subject();
-    this.onTimeUpdatedSubscription = this.onTimeUpdatedSubject
-                                      ::throttleTime(500)
-                                      .subscribe(next =>
-                                        props.onTimeUpdate(next.time, next.timestamp));
+    this.onTimeUpdatedSubscription =
+      this.onTimeUpdatedSubject
+        ::throttleTime(500)
+        .subscribe(next => props.onTimeUpdate(next.time, next.timestamp));
   }
 
   shouldComponentUpdate = (nextProps) => shallowCompare(this, nextProps);
