@@ -9,6 +9,7 @@ import Chat from '../../../components/Chat';
 import PlaylistBuilder from '../../../components/PlaylistBuilder';
 import SongNav from '../../../components/SongNav';
 import SongInfo from '../../../components/SongInfo';
+import * as source from '../../../components/MediaPlayer/constants';
 import LikeDislike from '../../../components/LikeDislike';
 
 import { addSongToPlaylist, createPlaylist } from '../../../modules/playlists/actions';
@@ -18,11 +19,12 @@ import * as queueActions from '../../../modules/queue/actions';
 import * as playingActions from '../../../modules/playing/actions';
 import * as miscActions from '../../../modules/misc/actions';
 
-import * as source from '../../../components/MediaPlayer/constants';
-import { playlistContainsMedia } from '../../../utilities/playlist';
-
 import { getSearchResultsFactory } from '../../../modules/search/selectors';
 import { getActivePlaylistFactory } from '../../../modules/playlists/selectors';
+import { getSongsInQueueFactory } from '../../../modules/queue/selectors';
+
+import { playlistContainsMedia } from '../../../utilities/playlist';
+
 import styles from './room.css';
 
 class Room extends Component {
@@ -37,6 +39,7 @@ class Room extends Component {
     playlists: React.PropTypes.array.isRequired,
     activePlaylist: React.PropTypes.object,
     songs: React.PropTypes.array.isRequired,
+    songsInQueue: React.PropTypes.array.isRequired,
     playing: React.PropTypes.object,
   };
 
@@ -69,6 +72,11 @@ class Room extends Component {
     const { dispatch } = this.props;
     dispatch(addSongToPlaylist(song, playlistId));
   };
+
+  handleAddSongToQueue = (songId) => {
+    const { dispatch } = this.props;
+    dispatch(queueActions.enqueueSong(songId));
+  }
 
   handleCreatePlaylist = (playlistName) => {
     const { dispatch } = this.props;
@@ -145,7 +153,14 @@ class Room extends Component {
   }
 
   render() {
-    const { playlists, songs, playing, search, activePlaylist, songNavSelection } = this.props;
+    const { playlists,
+      songs,
+      playing,
+      search,
+      activePlaylist,
+      songNavSelection,
+      songsInQueue,
+    } = this.props;
     const chat = this.chat;
     const playingSong = this.playingSong;
 
@@ -181,8 +196,10 @@ class Room extends Component {
             playlists={playlists}
             activePlaylist={activePlaylist}
             songs={songs}
+            songsInQueue={songsInQueue}
             songNavSelection={songNavSelection}
             onAddSongToPlaylist={this.handleOnAddSongToPlaylist}
+            onAddSongToQueue={this.handleAddSongToQueue}
             canAddSongToPlaylist={this.canAddSongToPlaylist}
             onCreatePlaylist={this.handleCreatePlaylist}
             onPreview={this.handleOnPreview}
@@ -199,17 +216,19 @@ class Room extends Component {
   }
 }
 
-const getSearchResults = getSearchResultsFactory();
-const getActivePlaylist = getActivePlaylistFactory();
+const getSearchResultsSelector = getSearchResultsFactory();
+const getActivePlaylistSelector = getActivePlaylistFactory();
+const getSongsInQueueSelector = getSongsInQueueFactory();
 
 export default connect((state) => ({
   rooms: state.rooms,
   chats: state.chats,
-  search: getSearchResults(state),
-  activePlaylist: getActivePlaylist(state),
+  search: getSearchResultsSelector(state),
+  activePlaylist: getActivePlaylistSelector(state),
   senderName: state.user.username,
   playlists: state.playlists,
   songs: state.songs,
+  songsInQueue: getSongsInQueueSelector(state),
   playing: state.playing,
   songNavSelection: state.misc.songNavSelection,
 }))(Room);
