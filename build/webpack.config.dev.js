@@ -26,7 +26,7 @@ module.exports = {
   },
   module: {
     loaders: [{
-      test: /\.(js|jsx)$/,
+      test: /\.jsx?$/,
       loaders: ['babel'],
       include: path.join(__dirname, '../app'),
     }, {
@@ -55,17 +55,6 @@ module.exports = {
     },
     { test: require.resolve('react-addons-perf'), loader: 'expose?Perf' },
   ],
-  },
-  externals: {
-    'jsdom': 'window',
-    'cheerio': 'window',
-    'react/lib/ExecutionEnvironment': true,
-    'react/lib/ReactContext': true,
-  },
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
   },
   postcss: function () {
     return [

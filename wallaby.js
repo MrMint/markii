@@ -1,10 +1,45 @@
-var wallabyWebpack = require('wallaby-webpack');
-var webpackConfig = require('./build/webpack.config.dev');
+const babel = require('babel-core');
+const webpack = require('webpack');
+const wallabyWebpack = require('wallaby-webpack');
+const path = require('path');
 
-process.env.BABEL_ENV = 'test';
+process.env.BABEL_ENV = 'TEST';
 
 module.exports = function configWallaby(wallaby) {
-  var webpackPostprocessor = wallabyWebpack(webpackConfig);
+  const webpackPostprocessor = wallabyWebpack({
+    resolve: {
+      root: path.resolve(__dirname),
+      alias: {
+        'sinon': 'sinon/pkg/sinon',
+      },
+      extensions: ['', '.js', '.jsx'],
+    },
+    externals: {
+      'jsdom': 'window',
+      'cheerio': 'window',
+      'react/lib/ExecutionEnvironment': true,
+      'react/lib/ReactContext': true,
+      'react/addons': true,
+    },
+    node: {
+      net: 'empty',
+      tls: 'empty',
+      dns: 'empty'
+    },
+    module: {
+      noParse: [/node_modules\/sinon\//],
+      loaders: [
+        { test: /\.css$/, loader: 'null' },
+        { test: /\.json$/, loader: 'json' }
+      ]
+    },
+    plugins: [
+      new webpack.IgnorePlugin(/ReactContext/),
+      new webpack.DefinePlugin({
+        ENV: JSON.stringify('TEST')
+      })
+    ]
+  });
 
   return {
     files: [
@@ -20,9 +55,10 @@ module.exports = function configWallaby(wallaby) {
       { pattern: 'app/**/*spec.js*', load: false },
     ],
     compilers: {
-      '**/*.js*': wallaby.compilers.babel(),
+      'app/**/*.js': wallaby.compilers.babel(),
+      'app/**/*.jsx': wallaby.compilers.babel(),
     },
-    testFramework: 'mocha@2.0.1',
+    testFramework: 'mocha',
     postprocessor: webpackPostprocessor,
     bootstrap: function bootstrap() {
       // var mocha = wallaby.testFramework;

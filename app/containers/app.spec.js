@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import chai, { expect } from 'chai';
 import dirtyChai from 'dirty-chai';
 chai.use(dirtyChai);
@@ -11,19 +11,18 @@ import { Router } from 'react-router';
 
 describe('<App />', () => {
   it('renders the dev tools', () => {
-    const wrapper = shallow(<App />);
-
+    const wrapper = mount(<App />);
     expect(wrapper.contains(<DevTools />)).to.be.true();
   });
 
   it('renders the redux provider', () => {
-    const wrapper = shallow(<App />);
+    const wrapper = mount(<App />);
 
     expect(wrapper.find(Provider)).to.have.length(1);
   });
 
   it('renders the router', () => {
-    const wrapper = shallow(<App routes={null}/>);
+    const wrapper = mount(<App routes={null}/>);
 
     expect(wrapper.find(Router)).to.have.length(1);
   });
