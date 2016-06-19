@@ -128,12 +128,14 @@ class Room extends Component {
   }
 
   handleSelectPlaylist = (selectionType, playlistId) => {
-    const { dispatch } = this.props;
+    const { dispatch, songNavSelection } = this.props;
 
     if (playlistId) {
       dispatch(miscActions.setActivePlaylist(playlistId));
     }
-    dispatch(miscActions.setSongNavSelectionType(selectionType));
+    if (songNavSelection !== selectionType ) {
+      dispatch(miscActions.setSongNavSelectionType(selectionType));
+    }
   }
 
   // TODO Move room and chat getter logic into a selector using reselect lib

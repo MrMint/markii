@@ -39,7 +39,7 @@ class PlaylistListItem extends Component {
   render() {
     const { name, songCount, connectDropTarget, isActive } = this.props;
     return connectDropTarget(
-      <div onClick={this.handleOnClick}>
+      <div>
         <SongNavItem
           className={this.class()}
           primaryText={name}
