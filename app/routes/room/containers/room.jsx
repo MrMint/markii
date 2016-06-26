@@ -68,7 +68,7 @@ class Room extends Component {
     dispatch(searchActions.searchForMedia(query, [source.YOUTUBE]));
   };
 
-  handleOnAddSongToPlaylist = (song, playlistId) => {
+  handleAddSongToPlaylist = (song, playlistId) => {
     const { dispatch } = this.props;
     dispatch(addSongToPlaylist(song, playlistId));
   };
@@ -177,7 +177,9 @@ class Room extends Component {
             playlists={playlists}
             activePlaylist={activePlaylist}
             canAddSongToPlaylist={this.canAddSongToPlaylist}
+            onAddSongToPlaylist={this.handleAddSongToPlaylist}
             canAddSongToQueue={this.canAddSongToQueue}
+            onAddSongToQueue={this.handleAddSongToQueue}
             songNavSelection={songNavSelection}
             onCreatePlaylist={this.onCreatePlaylist}
             onSelectNavItem={this.handleSelectPlaylist}

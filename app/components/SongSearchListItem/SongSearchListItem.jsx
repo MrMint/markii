@@ -162,19 +162,6 @@ const songSearchListItemSource = {
     const item = { id, source, sourceId };
     return item;
   },
-
-  endDrag: (props, monitor) => {
-    if (!monitor.didDrop()) {
-      return;
-    }
-    const dropResult = monitor.getDropResult();
-
-    const {
-      song,
-      onAddSongToPlaylist,
-    } = props;
-    onAddSongToPlaylist(song, dropResult.id);
-  },
 };
 
 export default dragSource(

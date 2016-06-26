@@ -16,7 +16,9 @@ export default class SongNav extends Component {
     onSelectNavItem: React.PropTypes.func.isRequired,
     activeSongNavItem: React.PropTypes.string.isRequired,
     canAddSongToPlaylist: React.PropTypes.func.isRequired,
+    onAddSongToPlaylist: React.PropTypes.func.isRequired,
     canAddSongToQueue: React.PropTypes.func.isRequired,
+    onAddSongToQueue: React.PropTypes.func.isRequired,
     onCreatePlaylist: React.PropTypes.func.isRequired,
   };
 
@@ -45,10 +47,12 @@ export default class SongNav extends Component {
     const {
       playlists,
       canAddSongToPlaylist,
+      onAddSongToPlaylist,
       onSelectNavItem,
       activePlaylist,
       songNavSelection,
       canAddSongToQueue,
+      onAddSongToQueue,
     } = this.props;
     const { playlistNameInputValue } = this.state;
 
@@ -65,6 +69,7 @@ export default class SongNav extends Component {
           onTouchTap={() => onSelectNavItem(QUEUE)}
           isActive={songNavSelection === QUEUE}
           canAddSong={canAddSongToQueue}
+          onAddSong={onAddSongToQueue}
         />
         <SongNavItem
           className={styles.navHeader}
@@ -77,6 +82,7 @@ export default class SongNav extends Component {
           songNavSelection={songNavSelection}
           canAddSong={canAddSongToPlaylist}
           onPlaylistListItemSelected={onSelectNavItem}
+          onAddSong={onAddSongToPlaylist}
         />
         <div className={styles.textInputWrapper}>
           <TextField

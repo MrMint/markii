@@ -24,6 +24,7 @@ const QueueNavItem = ({
   isOver,
   canDrop,
   canAddSong,
+  onAddSong,
   connectDropTarget,
 }) =>
   connectDropTarget(
@@ -50,6 +51,11 @@ const queueNavItemTarget = {
   canDrop: (props, monitor) => {
     const song = monitor.getItem();
     return props.canAddSong(song.source, song.sourceId);
+  },
+  drop: (props, monitor) => {
+    const { onAddSong } = props;
+    const song = monitor.getItem();
+    onAddSong(song.id);
   },
 };
 

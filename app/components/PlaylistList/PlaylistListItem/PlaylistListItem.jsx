@@ -15,6 +15,7 @@ class PlaylistListItem extends Component {
     canDrop: React.PropTypes.bool.isRequired,
     connectDropTarget: React.PropTypes.func.isRequired,
     canAddSong: React.PropTypes.func.isRequired,
+    onAddSong: React.PropTypes.func.isRequired,
     onPlaylistListItemSelected: React.PropTypes.func.isRequired,
   };
 
@@ -72,10 +73,10 @@ const playlistListItemTarget = {
     const song = monitor.getItem();
     return props.canAddSong(song.source, song.sourceId, id);
   },
-  drop: (props) => {
-    return {
-      id: props.id,
-    };
+  drop: (props, monitor) => {
+    const { id, onAddSong } = props;
+    const song = monitor.getItem();
+    onAddSong(song, id);
   },
 };
 
