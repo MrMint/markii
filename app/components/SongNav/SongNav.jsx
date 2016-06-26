@@ -4,6 +4,7 @@ import { TextField, FlatButton } from 'material-ui';
 import { MdAdd } from 'react-icons/lib/md';
 import { SEARCH, QUEUE } from '../../modules/misc/constants';
 import PlaylistList from '../PlaylistList';
+import QueueNavItem from './QueueNavItem';
 import SongNavItem from '../SongNavItem';
 import styles from './SongNav.css';
 
@@ -12,9 +13,10 @@ export default class SongNav extends Component {
     playlists: React.PropTypes.array.isRequired,
     activePlaylist: React.PropTypes.object,
     songNavSelection: React.PropTypes.string.isRequired,
-    onSelectPlaylist: React.PropTypes.func.isRequired,
+    onSelectNavItem: React.PropTypes.func.isRequired,
     activeSongNavItem: React.PropTypes.string.isRequired,
     canAddSongToPlaylist: React.PropTypes.func.isRequired,
+    canAddSongToQueue: React.PropTypes.func.isRequired,
     onCreatePlaylist: React.PropTypes.func.isRequired,
   };
 
@@ -43,9 +45,10 @@ export default class SongNav extends Component {
     const {
       playlists,
       canAddSongToPlaylist,
-      onSelectPlaylist,
+      onSelectNavItem,
       activePlaylist,
       songNavSelection,
+      canAddSongToQueue,
     } = this.props;
     const { playlistNameInputValue } = this.state;
 
@@ -54,13 +57,14 @@ export default class SongNav extends Component {
         <SongNavItem
           className={styles.navHeader}
           primaryText="Search"
-          onTouchTap={() => onSelectPlaylist(SEARCH)}
+          onTouchTap={() => onSelectNavItem(SEARCH)}
           isActive={songNavSelection === SEARCH}
         />
-        <SongNavItem
+        <QueueNavItem
           primaryText="Queue"
-          onTouchTap={() => onSelectPlaylist(QUEUE)}
+          onTouchTap={() => onSelectNavItem(QUEUE)}
           isActive={songNavSelection === QUEUE}
+          canAddSong={canAddSongToQueue}
         />
         <SongNavItem
           className={styles.navHeader}
@@ -72,7 +76,7 @@ export default class SongNav extends Component {
           activePlaylist={activePlaylist}
           songNavSelection={songNavSelection}
           canAddSong={canAddSongToPlaylist}
-          onPlaylistListItemSelected={onSelectPlaylist}
+          onPlaylistListItemSelected={onSelectNavItem}
         />
         <div className={styles.textInputWrapper}>
           <TextField

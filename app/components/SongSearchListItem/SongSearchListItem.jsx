@@ -124,13 +124,13 @@ class SongSearchListItem extends Component {
         </div>
         {
           <div className={styles.right}>
-            <FlatButton label="Preview" onTouchTap={this.handleOnPreview}/>
-            <FlatButton label="Add" onTouchTap={this.handleTouchTap}/>
+            <FlatButton label="Preview" onTouchTap={this.handleOnPreview} />
+            <FlatButton label="Add" onTouchTap={this.handleTouchTap} />
             <Popover
               open={open}
               anchorEl={anchorEl}
-              anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-              targetOrigin={{horizontal: 'left', vertical: 'top'}}
+              anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+              targetOrigin={{ horizontal: 'left', vertical: 'top' }}
               onRequestClose={this.handleRequestClose}
             >
               <Menu

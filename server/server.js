@@ -24,7 +24,7 @@ app.get('/api/user', function(req, res) {
 app.get('/api/token', function(req, res) {
   const token = {
     token: 'asdfadfoweijfwq;oefin',
-    expires_in: 3000,
+    expires_in: 30000,
   };
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(token));

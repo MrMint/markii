@@ -1,0 +1,15 @@
+@import '../../colors.css';
+
+.canDrop {
+  background-color: var(--color-primary);
+  color: var(--color-text-primary);
+}
+
+.canDropIsOver {
+  background-color: var(--color-accent);
+  color: var(--color-text-tertiary);
+}
+
+.canNotDrop {
+  background-color: var(--color-red);
+}

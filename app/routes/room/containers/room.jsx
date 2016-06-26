@@ -106,6 +106,10 @@ class Room extends Component {
     );
   };
 
+  canAddSongToQueue = () => {
+    return true;
+  }
+
   handleTimeUpdate = (time, timestamp) => {
     const { dispatch, playing } = this.props;
     if (!playing.isSeeking) {
@@ -173,9 +177,10 @@ class Room extends Component {
             playlists={playlists}
             activePlaylist={activePlaylist}
             canAddSongToPlaylist={this.canAddSongToPlaylist}
+            canAddSongToQueue={this.canAddSongToQueue}
             songNavSelection={songNavSelection}
             onCreatePlaylist={this.onCreatePlaylist}
-            onSelectPlaylist={this.handleSelectPlaylist}
+            onSelectNavItem={this.handleSelectPlaylist}
           />
           <LikeDislike />
           {playingSong && <SongInfo song={playingSong} />}

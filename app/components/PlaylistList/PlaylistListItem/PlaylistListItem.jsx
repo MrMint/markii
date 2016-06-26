@@ -18,6 +18,13 @@ class PlaylistListItem extends Component {
     onPlaylistListItemSelected: React.PropTypes.func.isRequired,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayContextMenu: false,
+    };
+  }
+
   class = () => {
     const { isOver, canDrop } = this.props;
     if (canDrop) {
@@ -36,6 +43,12 @@ class PlaylistListItem extends Component {
     onPlaylistListItemSelected(PLAYLIST, id);
   }
 
+  handleContextMenu = (event) => {
+    event.preventDefault();
+    const { displayContextMenu } = this.state;
+    this.setState({ displayContextMenu: !displayContextMenu });
+  }
+
   render() {
     const { name, songCount, connectDropTarget, isActive } = this.props;
     return connectDropTarget(
@@ -46,6 +59,7 @@ class PlaylistListItem extends Component {
           rightBadge={songCount}
           onTouchTap={this.handleOnClick}
           isActive={isActive}
+          onContextMenu={this.handleContextMenu}
         />
       </div>
     );

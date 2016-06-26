@@ -1,0 +1,6 @@
+{
+  "name": "QueueNavItem",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./QueueNavItem.jsx"
+}

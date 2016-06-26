@@ -14,8 +14,11 @@ const DevTools = createDevTools(
     toggleVisibilityKey="ctrl-h"
     changePositionKey="ctrl-q"
   >
-      <Monitor />
+    <Monitor />
   </DockMonitor>
 );
 
+    // <MultipleMonitors>
+    //   <SliderMonitor style={{ height: '150px' }} />
+    // </MultipleMonitors>
 export default DevTools;
