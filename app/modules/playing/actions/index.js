@@ -1,5 +1,6 @@
 import {
   PLAYING_START,
+  PLAYING_PAUSE,
   PLAYING_END,
   PLAYING_SET_SONG,
   PLAYING_SET_TIME,
@@ -7,6 +8,7 @@ import {
   PLAYING_SET_VOLUME,
   PLAYING_START_SEEK,
   PLAYING_STOP_SEEK,
+  PLAYIND_FINISH
 } from '../constants';
 
 export function setSong(songId) {
@@ -25,6 +27,12 @@ export function startPlaying() {
 }
 
 export function stopPlaying() {
+  return {
+    type: PLAYING_PAUSE,
+  };
+}
+
+export function ended() {
   return {
     type: PLAYING_END,
   };

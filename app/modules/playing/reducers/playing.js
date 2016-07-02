@@ -25,7 +25,7 @@ export default function playing(state = initialState, action) {
       return { ...state, songId: action.payload.songId };
     case types.PLAYING_START:
       return { ...state, isPlaying: true };
-    case types.PLAYING_END:
+    case types.PLAYING_PAUSE:
       return { ...state, isPlaying: false };
     case types.PLAYING_SET_TIME:
       return updateSeek(state, action.payload.time, action.payload.timestamp);
