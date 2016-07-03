@@ -8,7 +8,6 @@ import {
   PLAYING_SET_VOLUME,
   PLAYING_START_SEEK,
   PLAYING_STOP_SEEK,
-  PLAYIND_FINISH
 } from '../constants';
 
 export function setSong(songId) {

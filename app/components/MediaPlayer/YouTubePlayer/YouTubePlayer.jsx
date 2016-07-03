@@ -14,6 +14,7 @@ export default class YoutubePlayer extends Component {
     onPlaying: PropTypes.func,
     onProgress: PropTypes.func,
     onDuration: PropTypes.func,
+    onEnd: PropTypes.func,
     onTimeUpdate: PropTypes.func,
     onVolumeChange: PropTypes.func,
     onReady: PropTypes.func,
@@ -104,15 +105,20 @@ export default class YoutubePlayer extends Component {
   }
 
   events() {
-    const { onDuration, onReady, onPlaying } = this.props;
+    const { onDuration, onReady, onPlaying, onEnd } = this.props;
     return {
       onReady: () => {
         onDuration(this.player.getDuration());
         onReady();
       },
       onStateChange: ({ data }) => {
+        const isEnded = (data === 0);
         const isPlayerPlaying = (data === 1);
         const isPlayerPaused = (data === 2);
+
+        if (isEnded) {
+          onEnd();
+        }
 
         if (isPlayerPlaying) {
           onDuration(this.player.getDuration());

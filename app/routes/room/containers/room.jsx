@@ -87,6 +87,11 @@ class Room extends Component {
     }));
   }
 
+  handleSongEnd = () => {
+    const { dispatch } = this.props;
+    dispatch(playingActions.ended());
+  }
+
   handleOnPreview = (songId) => {
     const { dispatch, playing } = this.props;
     dispatch(queueActions.pushSong(playing.songId));
@@ -197,6 +202,7 @@ class Room extends Component {
             volume={playing.volume}
             onTimeUpdate={this.handleTimeUpdate}
             onDuration={this.handleDuration}
+            onEnd={this.handleSongEnd}
             onPlayingChange={this.handlePlayingChange}
           />
           <PlaylistBuilder

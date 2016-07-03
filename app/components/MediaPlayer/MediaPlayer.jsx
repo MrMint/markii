@@ -15,6 +15,7 @@ export default class MediaPlayer extends Component {
     isSeeking: PropTypes.bool.isRequired,
     onTimeUpdate: PropTypes.func.isRequired,
     onDuration: PropTypes.func.isRequired,
+    onEnd: PropTypes.func.isRequired,
     onPlayingChange: PropTypes.func.isRequired,
   };
 
@@ -45,6 +46,7 @@ export default class MediaPlayer extends Component {
             volume={this.props.volume}
             onPlaying={playing => this.props.onPlayingChange(playing)}
             onProgress={() => {}}
+            onEnd={this.props.onEnd}
             onDuration={duration => this.props.onDuration(duration)}
             onTimeUpdate={(time, timestamp) => this.onTimeUpdatedSubject.next({ time, timestamp })}
             onVolumeChange={() => {}}
