@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { pure } from 'recompose';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { MdAdd } from 'react-icons/lib/md';
 import styles from './SongInfo.css';
@@ -18,4 +19,4 @@ SongInfo.propTypes = {
   song: PropTypes.object.isRequired,
 };
 
-export default SongInfo;
+export default pure(SongInfo);

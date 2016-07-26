@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { pure } from 'recompose';
 import Divider from 'material-ui/Divider';
 import { MdApps } from 'react-icons/lib/md';
 import R from 'ramda';
@@ -40,4 +41,4 @@ Nav.propTypes = {
   onRoomNavItemTouchTap: PropTypes.func.isRequired,
 };
 
-export default Nav;
+export default pure(Nav);

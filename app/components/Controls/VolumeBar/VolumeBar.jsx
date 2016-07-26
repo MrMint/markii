@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { pure } from 'recompose';
 import Slider from 'material-ui/Slider';
 import styles from './VolumeBar.css';
 import { FaVolumeOff, FaVolumeDown, FaVolumeUp } from 'react-icons/lib/fa';
@@ -25,4 +26,4 @@ VolumeBar.propTypes = {
   onVolumeChange: PropTypes.func.isRequired,
 };
 
-export default VolumeBar;
+export default pure(VolumeBar);
