@@ -88,8 +88,16 @@ class Room extends Component {
   }
 
   handleSongEnd = () => {
-    const { dispatch } = this.props;
+    const { dispatch, songsInQueue } = this.props;
     dispatch(playingActions.ended());
+
+    const song = songsInQueue[0];
+    if (song) {
+      dispatch(queueActions.popSong());
+      dispatch(playingActions.setSong(song.id));
+      dispatch(playingActions.startPlaying());
+    }
+
   }
 
   handleOnPreview = (songId) => {
