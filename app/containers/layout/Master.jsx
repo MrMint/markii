@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Master from '../../components/layout/Master';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
@@ -12,7 +12,7 @@ import {
   setPlayTime,
 } from '../../modules/playing/actions';
 
-class MasterContainer extends Component {
+class MasterContainer extends PureComponent {
 
   static propTypes = {
     dispatch: React.PropTypes.func.isRequired,

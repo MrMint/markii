@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import shallowCompare from 'react-addons-shallow-compare';
+import React, { PureComponent } from 'react';
 import MessageList from './messageList';
 import { TextField, } from 'material-ui';
 import Divider from 'material-ui/Divider';
 import styles from './Chat.css';
 
-export default class Chat extends Component {
+export default class Chat extends PureComponent {
   static propTypes = {
     messages: React.PropTypes.array.isRequired,
     onSend: React.PropTypes.func.isRequired,
@@ -17,9 +16,6 @@ export default class Chat extends Component {
       messageInputValue: '',
     };
   }
-
-  shouldComponentUpdate = (nextProps, nextState) =>
-    shallowCompare(this, nextProps, nextState);
 
   internalOnSend = () => {
     const { onSend } = this.props;

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { TextField, FlatButton } from 'material-ui';
 
-export default class SongSearch extends Component {
+export default class SongSearch extends PureComponent {
   static propTypes = {
     onSearch: React.PropTypes.func.isRequired,
     className: React.PropTypes.string,

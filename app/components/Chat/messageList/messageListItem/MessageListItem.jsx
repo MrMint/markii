@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import style from './MessageListItem.css';
 import { format } from 'date-fns';
 
-export default class MessageListItem extends Component {
+export default class MessageListItem extends PureComponent {
   static propTypes = {
     message: React.PropTypes.object.isRequired,
   };
-
-  shouldComponentUpdate = (nextProps) => nextProps.message !== this.props.message;
 
   render() {
     const { message } = this.props;

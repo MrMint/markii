@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import shallowCompare from 'react-addons-shallow-compare';
+import React, { PureComponent } from 'react';
 import { PLAYLIST } from '../../modules/misc/constants';
 import PlaylistListItem from './PlaylistListItem';
 import styles from './PlaylistList.css';
 
-export default class PlaylistList extends Component {
+export default class PlaylistList extends PureComponent {
   static propTypes = {
     playlists: React.PropTypes.array.isRequired,
     activePlaylist: React.PropTypes.object,
@@ -13,8 +12,6 @@ export default class PlaylistList extends Component {
     songNavSelection: React.PropTypes.string.isRequired,
     onPlaylistListItemSelected: React.PropTypes.func.isRequired,
   };
-
-  shouldComponentUpdate = (nextProps) => shallowCompare(this, nextProps);
 
   render() {
     const {

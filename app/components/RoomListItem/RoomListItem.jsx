@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { ListItem } from 'material-ui';
 
-export default class RoomListItem extends Component {
+export default class RoomListItem extends PureComponent {
   static propTypes = {
     roomId: React.PropTypes.string.isRequired,
     slug: React.PropTypes.string.isRequired,

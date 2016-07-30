@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import shallowCompare from 'react-addons-shallow-compare';
+import React, { PureComponent } from 'react';
 import { TextField, FlatButton } from 'material-ui';
 import { MdAdd } from 'react-icons/lib/md';
 import { SEARCH, QUEUE } from '../../modules/misc/constants';
@@ -8,7 +7,7 @@ import QueueNavItem from './QueueNavItem';
 import SongNavItem from '../SongNavItem';
 import styles from './SongNav.css';
 
-export default class SongNav extends Component {
+export default class SongNav extends PureComponent {
   static propTypes = {
     playlists: React.PropTypes.array.isRequired,
     activePlaylist: React.PropTypes.object,
@@ -28,9 +27,6 @@ export default class SongNav extends Component {
       playlistNameInputValue: '',
     };
   }
-
-  shouldComponentUpdate = (nextProps, nextState) =>
-    shallowCompare(this, nextProps, nextState);
 
   handlePlaylistNameInputChange = (event) => {
     this.setState({ playlistNameInputValue: event.target.value });

@@ -2,6 +2,7 @@ import * as types from '../constants';
 
 const initialState = {
   selectedPlaylist: null,
+  songNavSelection: types.SEARCH,
 };
 
 export default function room(state = initialState, action) {
@@ -11,7 +12,7 @@ export default function room(state = initialState, action) {
     case types.MISC_SELECTEDPLAYLIST_CLEAR:
       return { ...state, selectedPlaylist: null };
     case types.MISC_SONGNAVSELECTION_SET:
-      return {...state, songNavSelection: action.payload.songNavSelection}
+      return { ...state, songNavSelection: action.payload.songNavSelection };
     default:
       return state;
   }

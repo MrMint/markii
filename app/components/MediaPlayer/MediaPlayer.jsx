@@ -1,11 +1,10 @@
-import React, { Component, PropTypes } from 'react';
-import shallowCompare from 'react-addons-shallow-compare';
+import React, { PureComponent, PropTypes } from 'react';
 import * as mediaSources from './constants';
 import YoutubePlayer from './YouTubePlayer';
 import { Subject } from 'rxjs/Subject';
 import { throttleTime } from 'rxjs/operator/throttleTime';
 
-export default class MediaPlayer extends Component {
+export default class MediaPlayer extends PureComponent {
   static propTypes = {
     mediaSource: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
@@ -27,8 +26,6 @@ export default class MediaPlayer extends Component {
         ::throttleTime(500)
         .subscribe(next => props.onTimeUpdate(next.time, next.timestamp));
   }
-
-  shouldComponentUpdate = (nextProps) => shallowCompare(this, nextProps);
 
   componentWillUnmount = () => {
     this.onTimeUpdatedSubscription.unsubscribe();

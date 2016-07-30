@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import shallowCompare from 'react-addons-shallow-compare';
+import React, { PureComponent } from 'react';
 import { Divider } from 'material-ui';
 import R from 'ramda';
 import SongSearch from '../SongSearch';
@@ -8,7 +7,7 @@ import styles from './PlaylistBuilder.css';
 import SongSearchListItem from '../SongSearchListItem';
 import { Scrollbars } from 'react-custom-scrollbars';
 
-export default class PlaylistBuilder extends Component {
+export default class PlaylistBuilder extends PureComponent {
   static propTypes = {
     playlists: React.PropTypes.array.isRequired,
     songNavSelection: React.PropTypes.string.isRequired,
@@ -30,9 +29,6 @@ export default class PlaylistBuilder extends Component {
       playlistNameInputValue: '',
     };
   }
-
-  shouldComponentUpdate = (nextProps, nextState) =>
-    shallowCompare(this, nextProps, nextState)
 
   handleSearch = (query) => {
     const { onSearch } = this.props;

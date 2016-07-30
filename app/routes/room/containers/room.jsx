@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import shallowCompare from 'react-addons-shallow-compare';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
 import R from 'ramda';
@@ -27,7 +26,7 @@ import { playlistContainsMedia } from '../../../utilities/playlist';
 
 import styles from './room.css';
 
-class Room extends Component {
+class Room extends PureComponent {
   static propTypes = {
     rooms: React.PropTypes.array.isRequired,
     chats: React.PropTypes.array.isRequired,
@@ -42,9 +41,6 @@ class Room extends Component {
     songsInQueue: React.PropTypes.array.isRequired,
     playing: React.PropTypes.object,
   };
-
-  shouldComponentUpdate = (nextProps, nextState) =>
-    shallowCompare(this, nextProps, nextState)
 
   onPushSongToQueue = (songId) => {
     this.props.dispatch(queueActions.pushSong(songId));
@@ -119,9 +115,7 @@ class Room extends Component {
     );
   };
 
-  canAddSongToQueue = () => {
-    return true;
-  }
+  canAddSongToQueue = () => true;
 
   handleTimeUpdate = (time, timestamp) => {
     const { dispatch, playing } = this.props;
@@ -150,7 +144,7 @@ class Room extends Component {
     if (playlistId) {
       dispatch(miscActions.setActivePlaylist(playlistId));
     }
-    if (songNavSelection !== selectionType ) {
+    if (songNavSelection !== selectionType) {
       dispatch(miscActions.setSongNavSelectionType(selectionType));
     }
   }

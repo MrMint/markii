@@ -1,13 +1,12 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import SeekBar from '../Controls/SeekBar';
 import PlayPause from '../Controls/PlayPause';
 import Skip from '../Controls/Skip';
 import Back from '../Controls/Back';
 import VolumeBar from '../Controls/VolumeBar';
 import styles from './MediaControl.css';
-import shallowCompare from 'react-addons-shallow-compare';
 
-export default class MediaControl extends Component {
+export default class MediaControl extends PureComponent {
   static propTypes = {
     playTime: PropTypes.number,
     duration: PropTypes.number,
@@ -28,9 +27,6 @@ export default class MediaControl extends Component {
       seekTime: props.playTime || 0,
     };
   }
-
-  shouldComponentUpdate = (nextProps, nextState) =>
-    shallowCompare(this, nextProps, nextState);
 
   handleSeekChange = (seekTime) => {
     this.setState({ seekTime });

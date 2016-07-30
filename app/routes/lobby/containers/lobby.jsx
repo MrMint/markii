@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { List } from 'material-ui';
 import RoomListItem from '../../../components/RoomListItem';
 import { browserHistory } from 'react-router';
 
-class Lobby extends Component {
+class Lobby extends PureComponent {
   static propTypes = {
     rooms: React.PropTypes.array.isRequired,
     children: React.PropTypes.object,
@@ -19,17 +19,17 @@ class Lobby extends Component {
     const { rooms, children } = this.props;
     return (
       children ||
-      <List>
+        <List>
         {rooms.map(room =>
-            <RoomListItem
-              roomId={room.id}
-              name={room.name}
-              slug={room.slug}
-              currentlyPlaying={room.currentlyPlaying}
-              onClick={this.handleListItemTouchTap}
-            />
+          <RoomListItem
+            roomId={room.id}
+            name={room.name}
+            slug={room.slug}
+            currentlyPlaying={room.currentlyPlaying}
+            onClick={this.handleListItemTouchTap}
+          />
           )}
-      </List>
+        </List>
     );
   }
 }

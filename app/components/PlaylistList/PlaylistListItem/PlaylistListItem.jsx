@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { DropTarget } from 'react-dnd';
 import { SONG_SEARCH_LIST_ITEM } from '../../../utilities/constants/dragTypes';
 import { PLAYLIST } from '../../../modules/misc/constants';
 import styles from './PlaylistListItem.css';
 import SongNavItem from '../../SongNavItem';
 
-class PlaylistListItem extends Component {
+class PlaylistListItem extends PureComponent {
   static propTypes = {
     id: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,

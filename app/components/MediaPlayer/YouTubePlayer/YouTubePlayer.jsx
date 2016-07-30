@@ -1,10 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { loadApi } from '../../../utilities/api/youtubeApi';
 import styles from './YouTube.css';
 
 let isApiLoaded = false;
 
-export default class YoutubePlayer extends Component {
+export default class YoutubePlayer extends PureComponent {
   static propTypes = {
     videoId: PropTypes.string.isRequired,
     isPlaying: PropTypes.bool.isRequired,

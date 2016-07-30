@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import shallowCompare from 'react-addons-shallow-compare';
+import React, { PureComponent } from 'react';
 import MediaControl from '../MediaControl';
 import Nav from '../Nav';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
@@ -22,7 +21,7 @@ const darkMuiTheme = getMuiTheme({
   },
 });
 
-export default class Master extends Component {
+export default class Master extends PureComponent {
   static propTypes = {
     children: React.PropTypes.object.isRequired,
     currentRoomSlug: React.PropTypes.string.isRequired,
@@ -41,10 +40,6 @@ export default class Master extends Component {
     onSeekChange: React.PropTypes.func.isRequired,
     onRoomNavItemTouchTap: React.PropTypes.func.isRequired,
   };
-
-  shouldComponentUpdate = (nextProps) => {
-    return shallowCompare(this, nextProps);
-  }
 
   handleToggle = () => this.setState({ open: !this.state.open });
 
