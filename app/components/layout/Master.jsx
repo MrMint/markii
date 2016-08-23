@@ -5,8 +5,6 @@ import Nav from '../Nav';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
 import 'normalize.css';
 import styles from './Master.css';
 
@@ -28,8 +26,6 @@ class Master extends Component {
     currentRoomSlug: React.PropTypes.string.isRequired,
     favoriteRooms: React.PropTypes.array.isRequired,
     recentRooms: React.PropTypes.array.isRequired,
-    onLoginTouchTap: React.PropTypes.func.isRequired,
-    onLogoutTouchTap: React.PropTypes.func.isRequired,
     onLobbyTouchTap: React.PropTypes.func.isRequired,
     title: React.PropTypes.string.isRequired,
     playing: React.PropTypes.object.isRequired,
@@ -53,8 +49,6 @@ class Master extends Component {
 
   render() {
     const {
-      onLoginTouchTap,
-      onLogoutTouchTap,
       onLobbyTouchTap,
       playing,
       onPlay,

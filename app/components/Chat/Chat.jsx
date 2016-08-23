@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MessageList from './messageList';
-import { TextField, } from 'material-ui';
+import { TextField } from 'material-ui';
 import Divider from 'material-ui/Divider';
 import styles from './Chat.css';
 import { pure } from 'recompose';

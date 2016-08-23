@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { List } from 'material-ui';
 import RoomListItem from '../../../components/RoomListItem';
 import { browserHistory } from 'react-router';
+import styles from './Lobby.css';
 
 class Lobby extends Component {
   static propTypes = {
@@ -20,7 +21,7 @@ class Lobby extends Component {
     const { rooms, children } = this.props;
     return (
       children ||
-        <List>
+        <div>
         {rooms.map(room =>
           <RoomListItem
             roomId={room.id}
@@ -30,7 +31,7 @@ class Lobby extends Component {
             onClick={this.handleListItemTouchTap}
           />
           )}
-        </List>
+        </div>
     );
   }
 }

@@ -8,7 +8,13 @@ const NavItem = ({ children, name, slug, onNavigate, isActive }) =>
     <div className={isActive ? styles.active : styles.container} onClick={() => onNavigate(slug)}>
       {!children &&
         <div>
-          {name.match(/\b(\w)/g).join('').substring(0, 3).toUpperCase()}
+          {
+            name
+              .match(/\b(\w)/g)
+              .join('')
+              .substring(0, 3)
+              .toUpperCase()
+          }
         </div>
       }
       {children &&
