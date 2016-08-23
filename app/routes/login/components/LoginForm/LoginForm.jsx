@@ -37,8 +37,9 @@ export default class LoginForm extends Component {
     } = this.props;
 
     return (
+        <div className={style.container}>
           <Paper
-            className={style.container}
+            className={style.formContainer}
             onKeyDown={handleKeyDown}
           >
             {header}
@@ -70,6 +71,7 @@ export default class LoginForm extends Component {
               />
             </div>
           </Paper>
+        </div>
       );
   }
 }

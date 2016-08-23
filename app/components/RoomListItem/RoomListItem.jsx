@@ -1,7 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { pure } from 'recompose';
 import { ListItem } from 'material-ui';
 
-export default class RoomListItem extends PureComponent {
+class RoomListItem extends Component {
   static propTypes = {
     roomId: React.PropTypes.string.isRequired,
     slug: React.PropTypes.string.isRequired,
@@ -27,3 +28,5 @@ export default class RoomListItem extends PureComponent {
     );
   }
 }
+
+export default pure(RoomListItem);

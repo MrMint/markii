@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { pure } from 'recompose';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
 import R from 'ramda';
@@ -26,7 +27,7 @@ import { playlistContainsMedia } from '../../../utilities/playlist';
 
 import styles from './room.css';
 
-class Room extends PureComponent {
+class Room extends Component {
   static propTypes = {
     rooms: React.PropTypes.array.isRequired,
     chats: React.PropTypes.array.isRequired,
@@ -248,4 +249,4 @@ export default connect((state) => ({
   songsInQueue: getSongsInQueueSelector(state),
   playing: state.playing,
   songNavSelection: state.misc.songNavSelection,
-}))(Room);
+}))(pure(Room));

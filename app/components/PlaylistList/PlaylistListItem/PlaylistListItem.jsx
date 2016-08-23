@@ -1,11 +1,12 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { pure } from 'recompose';
 import { DropTarget } from 'react-dnd';
 import { SONG_SEARCH_LIST_ITEM } from '../../../utilities/constants/dragTypes';
 import { PLAYLIST } from '../../../modules/misc/constants';
 import styles from './PlaylistListItem.css';
 import SongNavItem from '../../SongNavItem';
 
-class PlaylistListItem extends PureComponent {
+class PlaylistListItem extends Component {
   static propTypes = {
     id: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,
@@ -88,4 +89,4 @@ export default DropTarget(
     isOver: monitor.isOver(),
     canDrop: monitor.canDrop(),
   })
-)(PlaylistListItem);
+)(pure(PlaylistListItem));

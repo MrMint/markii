@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { pure } from 'recompose';
 import Master from '../../components/layout/Master';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
@@ -12,7 +13,7 @@ import {
   setPlayTime,
 } from '../../modules/playing/actions';
 
-class MasterContainer extends PureComponent {
+class MasterContainer extends Component {
 
   static propTypes = {
     dispatch: React.PropTypes.func.isRequired,
@@ -97,4 +98,4 @@ class MasterContainer extends PureComponent {
 export default connect((state) => ({
   playing: state.playing,
   rooms: state.rooms,
-}))(MasterContainer);
+}))(pure(MasterContainer));

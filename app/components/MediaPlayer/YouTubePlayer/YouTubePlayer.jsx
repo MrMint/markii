@@ -1,10 +1,11 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { pure } from 'recompose';
 import { loadApi } from '../../../utilities/api/youtubeApi';
 import styles from './YouTube.css';
 
 let isApiLoaded = false;
 
-export default class YoutubePlayer extends PureComponent {
+class YoutubePlayer extends Component {
   static propTypes = {
     videoId: PropTypes.string.isRequired,
     isPlaying: PropTypes.bool.isRequired,
@@ -26,7 +27,7 @@ export default class YoutubePlayer extends PureComponent {
     this._isMounted = false;
   }
 
-  get isMounted(){
+  get isMounted() {
     return this._isMounted;
   }
 
@@ -175,3 +176,5 @@ export default class YoutubePlayer extends PureComponent {
     );
   }
 }
+
+export default pure(YoutubePlayer);

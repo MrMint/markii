@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { pure } from 'recompose';
 import MediaControl from '../MediaControl';
 import Nav from '../Nav';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
@@ -21,7 +22,7 @@ const darkMuiTheme = getMuiTheme({
   },
 });
 
-export default class Master extends PureComponent {
+class Master extends Component {
   static propTypes = {
     children: React.PropTypes.object.isRequired,
     currentRoomSlug: React.PropTypes.string.isRequired,
@@ -97,3 +98,5 @@ export default class Master extends PureComponent {
     );
   }
 }
+
+export default pure(Master);

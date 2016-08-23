@@ -40,11 +40,11 @@ class App extends Component {
       <Provider store={store}>
         <div>
           {this.renderRouter()}
-          {this.renderPerfTools()}
         </div>
       </Provider>
     );
   }
 }
           // {this.renderDevTools()}
+          // {this.renderPerfTools()}
 export default dragDropContext(HTML5Backend)(App);

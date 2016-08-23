@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { pure } from 'recompose';
 import SeekBar from '../Controls/SeekBar';
 import PlayPause from '../Controls/PlayPause';
 import Skip from '../Controls/Skip';
@@ -6,7 +7,7 @@ import Back from '../Controls/Back';
 import VolumeBar from '../Controls/VolumeBar';
 import styles from './MediaControl.css';
 
-export default class MediaControl extends PureComponent {
+class MediaControl extends Component {
   static propTypes = {
     playTime: PropTypes.number,
     duration: PropTypes.number,
@@ -91,4 +92,4 @@ export default class MediaControl extends PureComponent {
   }
 }
 
-            // onVolumeChange={(volume) => requestAnimationFrame(() => onVolumeChange(volume))}
+export default pure(MediaControl);

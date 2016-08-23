@@ -1,7 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { pure } from 'recompose';
 import { TextField, FlatButton } from 'material-ui';
 
-export default class SongSearch extends PureComponent {
+class SongSearch extends Component {
   static propTypes = {
     onSearch: React.PropTypes.func.isRequired,
     className: React.PropTypes.string,
@@ -51,3 +52,5 @@ export default class SongSearch extends PureComponent {
     );
   }
 }
+
+export default pure(SongSearch);

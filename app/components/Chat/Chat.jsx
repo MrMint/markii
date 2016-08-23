@@ -1,10 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import MessageList from './messageList';
 import { TextField, } from 'material-ui';
 import Divider from 'material-ui/Divider';
 import styles from './Chat.css';
+import { pure } from 'recompose';
 
-export default class Chat extends PureComponent {
+class Chat extends Component {
   static propTypes = {
     messages: React.PropTypes.array.isRequired,
     onSend: React.PropTypes.func.isRequired,
@@ -59,3 +60,5 @@ export default class Chat extends PureComponent {
     );
   }
 }
+
+export default pure(Chat);

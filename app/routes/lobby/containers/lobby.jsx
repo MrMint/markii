@@ -1,10 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { pure } from 'recompose';
 import { connect } from 'react-redux';
 import { List } from 'material-ui';
 import RoomListItem from '../../../components/RoomListItem';
 import { browserHistory } from 'react-router';
 
-class Lobby extends PureComponent {
+class Lobby extends Component {
   static propTypes = {
     rooms: React.PropTypes.array.isRequired,
     children: React.PropTypes.object,
@@ -36,4 +37,4 @@ class Lobby extends PureComponent {
 
 export default connect(state => ({
   rooms: state.rooms,
-}))(Lobby);
+}))(pure(Lobby));

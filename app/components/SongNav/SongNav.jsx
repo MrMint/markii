@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { pure } from 'recompose';
 import { TextField, FlatButton } from 'material-ui';
 import { MdAdd } from 'react-icons/lib/md';
 import { SEARCH, QUEUE } from '../../modules/misc/constants';
@@ -7,7 +8,7 @@ import QueueNavItem from './QueueNavItem';
 import SongNavItem from '../SongNavItem';
 import styles from './SongNav.css';
 
-export default class SongNav extends PureComponent {
+class SongNav extends Component {
   static propTypes = {
     playlists: React.PropTypes.array.isRequired,
     activePlaylist: React.PropTypes.object,
@@ -102,3 +103,5 @@ export default class SongNav extends PureComponent {
     );
   }
 }
+
+export default pure(SongNav);

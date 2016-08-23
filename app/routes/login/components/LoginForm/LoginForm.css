@@ -1,7 +1,18 @@
+@import "../../../../components/colors.css";
+
 .container {
-  width: 500px;
+  width: 100%;
   text-align: center;
   padding: 25px;
+  background-color: var(--color-background-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formContainer {
+  padding: 25px;
+  background-color: var(--color-background) !important;
 }
 
 .submitButton {

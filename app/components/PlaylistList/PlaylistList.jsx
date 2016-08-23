@@ -1,9 +1,10 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { pure } from 'recompose';
 import { PLAYLIST } from '../../modules/misc/constants';
 import PlaylistListItem from './PlaylistListItem';
 import styles from './PlaylistList.css';
 
-export default class PlaylistList extends PureComponent {
+class PlaylistList extends Component {
   static propTypes = {
     playlists: React.PropTypes.array.isRequired,
     activePlaylist: React.PropTypes.object,
@@ -43,3 +44,5 @@ export default class PlaylistList extends PureComponent {
     );
   }
 }
+
+export default pure(PlaylistList);

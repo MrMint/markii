@@ -1,8 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import style from './MessageListItem.css';
 import { format } from 'date-fns';
+import { pure } from 'recompose';
 
-export default class MessageListItem extends PureComponent {
+class MessageListItem extends Component {
   static propTypes = {
     message: React.PropTypes.object.isRequired,
   };
@@ -19,3 +20,5 @@ export default class MessageListItem extends PureComponent {
     );
   }
 }
+
+export default pure(MessageListItem);

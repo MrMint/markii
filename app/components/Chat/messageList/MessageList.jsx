@@ -1,23 +1,23 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import MessageListItem from './messageListItem';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { pure } from 'recompose';
 import style from './MessageList.css';
 
-export default class MessageList extends PureComponent {
+class MessageList extends Component {
   static propTypes = {
     messages: React.PropTypes.array.isRequired,
   };
 
   componentWillUpdate = () => {
-    var node = this.refs.messageList;
     this.shouldScrollBottom =
-      node.getScrollTop() + node.getValues().clientHeight === node.getValues().scrollHeight;
+      this.node.getScrollTop() + this.node.getValues().clientHeight
+      === this.node.getValues().scrollHeight;
   };
 
   componentDidUpdate = () => {
     if (this.shouldScrollBottom) {
-      var node = this.refs.messageList;
-      node.scrollToBottom();
+      this.node.scrollToBottom();
     }
   };
 
@@ -25,7 +25,7 @@ export default class MessageList extends PureComponent {
     const { messages } = this.props;
 
     return (
-      <Scrollbars ref="messageList" className={style.container}>
+      <Scrollbars ref={c => { this.node = c; }} className={style.container}>
       {
         messages.map(message =>
           <MessageListItem key={message.id} message={message} />
@@ -35,3 +35,5 @@ export default class MessageList extends PureComponent {
     );
   }
 }
+
+export default pure(MessageList);
