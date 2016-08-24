@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { pure } from 'recompose';
-import { Card, CardHeader } from 'material-ui/Card';
+import { Card, CardTitle } from 'material-ui/Card';
 import styles from './RoomListItem.css';
 
 class RoomListItem extends Component {
@@ -27,8 +27,9 @@ class RoomListItem extends Component {
         secondaryText={currentlyPlaying}
         onTouchTap={this.handleTouchTap}
       >
-        <CardHeader
+        <CardTitle
           title={name}
+          subtitle={currentlyPlaying}
         />
       </Card>
     );

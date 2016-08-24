@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { pure } from 'recompose';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
@@ -29,18 +29,19 @@ import styles from './room.css';
 
 class Room extends Component {
   static propTypes = {
-    rooms: React.PropTypes.array.isRequired,
-    chats: React.PropTypes.array.isRequired,
-    dispatch: React.PropTypes.func.isRequired,
-    search: React.PropTypes.array.isRequired,
-    senderName: React.PropTypes.string.isRequired,
-    songNavSelection: React.PropTypes.string.isRequired,
-    params: React.PropTypes.object.isRequired,
-    playlists: React.PropTypes.array.isRequired,
-    activePlaylist: React.PropTypes.object,
-    songs: React.PropTypes.array.isRequired,
-    songsInQueue: React.PropTypes.array.isRequired,
-    playing: React.PropTypes.object,
+    rooms: PropTypes.array.isRequired,
+    chats: PropTypes.array.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    search: PropTypes.array.isRequired,
+    isSearching: PropTypes.bool.isRequired,
+    senderName: PropTypes.string.isRequired,
+    songNavSelection: PropTypes.string.isRequired,
+    params: PropTypes.object.isRequired,
+    playlists: PropTypes.array.isRequired,
+    activePlaylist: PropTypes.object,
+    songs: PropTypes.array.isRequired,
+    songsInQueue: PropTypes.array.isRequired,
+    playing: PropTypes.object,
   };
 
   onPushSongToQueue = (songId) => {
@@ -174,6 +175,7 @@ class Room extends Component {
       activePlaylist,
       songNavSelection,
       songsInQueue,
+      isSearching,
     } = this.props;
     const chat = this.chat;
     const playingSong = this.playingSong;
@@ -213,10 +215,11 @@ class Room extends Component {
             onSearch={this.onSearch}
             playlists={playlists}
             activePlaylist={activePlaylist}
+            isSearching={isSearching}
             songs={songs}
             songsInQueue={songsInQueue}
             songNavSelection={songNavSelection}
-            onAddSongToPlaylist={this.handleOnAddSongToPlaylist}
+            onAddSongToPlaylist={this.handleAddSongToPlaylist}
             onAddSongToQueue={this.handleAddSongToQueue}
             canAddSongToPlaylist={this.canAddSongToPlaylist}
             onCreatePlaylist={this.handleCreatePlaylist}
@@ -241,6 +244,7 @@ const getSongsInQueueSelector = getSongsInQueueFactory();
 export default connect((state) => ({
   rooms: state.rooms,
   chats: state.chats,
+  isSearching: state.searchSongs.isSearching,
   search: getSearchResultsSelector(state),
   activePlaylist: getActivePlaylistSelector(state),
   senderName: state.user.username,

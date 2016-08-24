@@ -1,4 +1,10 @@
+@import "../colors.css";
+
 .container {
-  height: 150px;
-  width: 150px;
+  height: 250px;
+  width: 250px;
+  display: flex;
+  flex-shrink: 0;
+  margin-bottom: 25px;
+  background-color: var(--color-background-dark) !important;
 }

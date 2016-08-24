@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { pure } from 'recompose';
-import { Divider } from 'material-ui';
+import Divider from 'material-ui/Divider';
+import CircularProgress from 'material-ui/CircularProgress';
 import R from 'ramda';
 import SongSearch from '../SongSearch';
 import { PLAYLIST, SEARCH, QUEUE } from '../../modules/misc/constants';
@@ -10,18 +11,19 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 class PlaylistBuilder extends Component {
   static propTypes = {
-    playlists: React.PropTypes.array.isRequired,
-    songNavSelection: React.PropTypes.string.isRequired,
-    activePlaylist: React.PropTypes.array.isRequired,
-    songs: React.PropTypes.array.isRequired,
-    songsInQueue: React.PropTypes.array.isRequired,
-    searchResults: React.PropTypes.array.isRequired,
-    canAddSongToPlaylist: React.PropTypes.func.isRequired,
-    onSearch: React.PropTypes.func.isRequired,
-    onAddSongToPlaylist: React.PropTypes.func.isRequired,
-    onAddSongToQueue: React.PropTypes.func.isRequired,
-    onCreatePlaylist: React.PropTypes.func.isRequired,
-    onPreview: React.PropTypes.func.isRequired,
+    isSearching: PropTypes.bool.isRequired,
+    playlists: PropTypes.array.isRequired,
+    songNavSelection: PropTypes.string.isRequired,
+    activePlaylist: PropTypes.array.isRequired,
+    songs: PropTypes.array.isRequired,
+    songsInQueue: PropTypes.array.isRequired,
+    searchResults: PropTypes.array.isRequired,
+    canAddSongToPlaylist: PropTypes.func.isRequired,
+    onSearch: PropTypes.func.isRequired,
+    onAddSongToPlaylist: PropTypes.func.isRequired,
+    onAddSongToQueue: PropTypes.func.isRequired,
+    onCreatePlaylist: PropTypes.func.isRequired,
+    onPreview: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -81,7 +83,7 @@ class PlaylistBuilder extends Component {
         this.renderSong(song, playlists, canAddSongToPlaylist, onAddSongToPlaylist)
       );
     }
-    return <div>No Results</div>;
+    return <div/>;
   }
 
   renderQueue = () => {
@@ -115,7 +117,7 @@ class PlaylistBuilder extends Component {
   }
 
   render() {
-
+    const { isSearching } = this.props;
     return (
       <div className={styles.container}>
         <div className={styles.searchContainer}>
@@ -123,7 +125,11 @@ class PlaylistBuilder extends Component {
           <Divider style={{ marginLeft: '10px', marginRight: '10px' }} />
         </div>
         <Scrollbars className={styles.songResults}>
-            {this.renderSongs()}
+          {
+            isSearching
+            ? <div className={styles.spinnerContainer}><CircularProgress /></div>
+            : this.renderSongs()
+          }
         </Scrollbars>
       </div>
     );

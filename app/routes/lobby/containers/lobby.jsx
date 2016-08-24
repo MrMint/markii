@@ -21,7 +21,7 @@ class Lobby extends Component {
     const { rooms, children } = this.props;
     return (
       children ||
-        <div>
+        <div className={styles.container}>
         {rooms.map(room =>
           <RoomListItem
             roomId={room.id}
